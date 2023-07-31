@@ -26,9 +26,9 @@ const siteMetadata = {
   comment: {
     giscusConfig: {
       repo: 'backluejapanit/blog2023',
-      repositoryId: '',
+      repositoryId: 'R_kgDOKB1NGA',
       category: 'General',
-      categoryId: '',
+      categoryId: 'DIC_kwDOKB1NGM4CYQPS',
       mapping: 'pathname',
       reactions: '1',
       metadata: '0',
