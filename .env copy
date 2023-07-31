@@ -1,0 +1,5 @@
+DATABASE_URL="mysql://07balt4eb4dnydqul95o:pscale_pw_BjoO1wYTrChu3IECZ4ELrRHXSmT0n1HN9tK2g28U8is@aws.connect.psdb.cloud/blogdb?sslaccept=strict"
+// For showing now playing song from Spotify
+SPOTIFY_CLIENT_ID="0b31b565a1494679a4d9818e360e234f"
+SPOTIFY_CLIENT_SECRET="d0c331b8c9f94178b88533f9914fa8b7"
+SPOTIFY_REFRESH_TOKEN="AQAKDHXV-9H_MFPy5dsmwRnyzJa1MzzsNLfYtW_1txR_7t7TlFKoqpgJWSqG082A2EvyYfDaorD4uBX8mGDzdXFJmedpgxwA8U_ZnLzvBjja36YtQJSdUfrUnP5BUBQVsQI"
