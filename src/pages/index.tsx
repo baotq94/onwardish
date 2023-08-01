@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { allPosts, Post } from 'contentlayer/generated';
 import { pick } from 'contentlayer/utils';
 import moment from 'moment';
+import viLocale from 'src/lib/vilocale';
 import Link from 'next/link';
 import GoodRead from 'src/components/Goodread';
 import TopTrackSpotify from 'src/components/TopTrackSpotify';
@@ -9,18 +10,19 @@ import ViewCounter from 'src/components/ViewCounter';
 import useSWR from 'swr';
 
 export default function Home({ posts }: { posts: Post[] }) {
+  // Set the custom Vietnamese locale
+  moment.updateLocale('vi', viLocale);
+
   return (
     <div className='space-y-10'>
       <div className='border-b-[1px] pb-5 border-muted'>
         <h1 className='text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14'>
-          Hi mí bạn, mình là{' '}
           <Link href='/about' className='hover-underline-animation text-rose'>
-            Bảo
+            Bài viết của tháng
           </Link>
         </h1>
         <h2 className='mt-3 font-mono md:text-lg text-subtle'>
-          mình viết blog chia sẻ tips cuộc sống Nhật Bản, hy vọng sẽ hữu ích với
-          bạn
+          blog chia sẻ về cuộc sống Nhật Bản, hy vọng sẽ hữu ích với bạn
         </h2>
       </div>
       <p className='px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50'>
@@ -69,7 +71,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
                 <div className='text-subtle'>
                   <ViewCounter slug={post.slug} />
                 </div>
-                <div>{moment(post.date).format('LL')}</div>
+                <div>{moment(post.date).locale('vi').format('LL')}</div>
               </div>
             </div>
           </Link>
