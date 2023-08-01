@@ -1,5 +1,5 @@
 import { Post } from 'contentlayer/generated';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useViewportScroll } from 'framer-motion';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 import Comment from 'src/components/Comment';
@@ -16,7 +16,7 @@ export default function PostLayout({
 }) {
   const [percent, setpercent] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
+  const { scrollY } = useViewportScroll();
 
   useEffect(() => {
     const unsub = scrollY.onChange((value) => {
