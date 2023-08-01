@@ -3,8 +3,10 @@ title: '[Giải ngố IT] Dựng blog đơn giản với Nextjs'
 date: '2022-06-01'
 summary: 'dựng blog với vài đoạn code đơn giản'
 tags: ['IT']
-image: '/static/images/2022/firstSample.png'
+image: '/static/images/2022/newblog.png'
 ---
+
+_Written by ThinhNgow_
 
 Tại sao lại _đập đi xây mới_?
 
@@ -49,7 +51,7 @@ Mình chả biết gì về designer nên có vẻ đi trộm giao diện là gi
 
 Tiếp theo là chọn màu phù hợp, [Rosé Pine](https://rosepinetheme.com/) bảng màu mình nhặt được trong 1 group chat IT. Bảng màu này tạo một cảm giác dễ chịu cho người dùng.
 
-![Rosé Pine](/static/images/2022/firstSample.png)
+![Rosé Pine](/static/images/2022/rosepine.png)
 
 Cuối cùng là chọn font:
 
@@ -181,7 +183,7 @@ Layout của web có 3 phần:
 
 ## Kết quả:
 
-![Rosé Pine](/static/images/2022/dbce1b04c4add58504b9788fee9e3f8415a62ab9.gif)
+![Rosé Pine](/static/images/2022/blogexample.png)
 
 Khá cool đúng không :3
 
@@ -299,6 +301,26 @@ export default MDXComponents;
 ```
 
 # Setup prisma, và planetscale để đếm số lượng view
+
+> Bổ sung
+
+- B1: Cài đặt pscale và client-sql thông qua brew (Terminal)
+- B2: Access vào pscale shell với các câu lệnh sau
+
+  - pscale login
+
+  - pscale shell &lt;tên database&gt;
+
+  - sau đó câu lệnh tạo table đếm view
+
+  ```
+  CREATE TABLE views (
+  slug VARCHAR(128) PRIMARY KEY,
+  count BIGINT DEFAULT 1
+  );
+  ```
+
+### Cách tạo database và connect prisma đến planetscale
 
 Sau khi setup prisma vào project theo hướng dẫn [ở đây](https://www.prisma.io/nextjs). Và lấy `DATABASE_URL` dùng để connect tới database từ [planetscale](https://planetscale.com/) .Ta edit file `prisma/schema.prisma` lại như sau:
 

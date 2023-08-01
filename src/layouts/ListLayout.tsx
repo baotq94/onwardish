@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
+import viLocale from 'src/lib/vilocale';
 
 export default function ListLayout({
   posts,
@@ -63,7 +64,7 @@ export default function ListLayout({
                 <dt className='sr-only'>Published on</dt>
                 <dd className='font-medium leading-6 text-subtle'>
                   <time dateTime={post.date}>
-                    {moment(post.date).format('LL')}
+                    {moment(post.date).locale('vi').format('LL')}
                   </time>
                 </dd>
                 <div className='font-medium leading-6 text-muted'>

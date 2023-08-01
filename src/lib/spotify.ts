@@ -27,7 +27,6 @@ const getAccessToken = async () => {
 const getNowPlaying = async () => {
   const { access_token } = await getAccessToken();
 
-  console.log('accplaying:', access_token);
   return fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -38,7 +37,6 @@ const getNowPlaying = async () => {
 const getTopTracks = async () => {
   const { access_token } = await getAccessToken();
 
-  console.log('acctoptrack:', access_token);
   return fetch(TOP_TRACKS_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,

@@ -8,7 +8,7 @@ const siteMetadata = {
     gender: 'male',
   },
   headerTitle: 'kysunhatban',
-  description: ' chia sẻ kinh nghiệm sống Nhật Bản',
+  description: 'kysunhatban',
   siteUrl: 'https://kysunhatban.org',
   siteRepo: 'https://github.com/backluejapanit',
   siteLogo: '/static/images/logo.png',
@@ -21,7 +21,7 @@ const siteMetadata = {
   linkedin: 'https://www.linkedin.com/in/backlueinJP/',
 
   analytics: {
-    googleAnalyticsId: 'G-P4B7XCWCYP',
+    googleAnalyticsId: '',
   },
   comment: {
     giscusConfig: {
