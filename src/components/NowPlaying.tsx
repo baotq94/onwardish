@@ -65,9 +65,7 @@ export default function NowPlaying() {
             Mình đang nghe bài&nbsp;{data.title}
           </a>
         ) : (
-          <p className='font-medium capsize '>
-            chắc là đang đi làm rồi.. &#x1F605;
-          </p>
+          ''
         )}
         <span className='hidden mx-2 capsize sm:block'>{' – '}</span>
         <p className='truncate capsize max-w-max text-subtle'>
