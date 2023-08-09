@@ -24,10 +24,7 @@ export default function TopTrackSpotify() {
   return (
     <div>
       <div className='mb-6 '>
-        <h3 className='text-2xl font-bold'>Danh sách nhạc yêu thích</h3>
-        <p className='text-lg text-subtle'>
-          Mấy bài nhạc mình hơi nghiện gần đây 🎧
-        </p>
+        <h3 className='text-2xl font-bold'>Spotify 🎧</h3>
       </div>
       <div className='space-y-3'>
         {data?.tracks.map((track, index) => (
@@ -213,14 +210,14 @@ function Track({
         </AnimatePresence>
       </div>
       <div className='relative flex-1 truncate'>
-        {/* <a
+        <a
           rel='noopener noreferrer'
           href={track.songUrl}
           target='_blank'
           className='text-lg font-bold'
-        > */}
-        <div className='text-lg font-bold'>{track.title}</div>
-        {/* </a> */}
+        >
+          <span className='text-lg font-bold'>{track.title}</span>
+        </a>
         <p className='text-subtle'>{track.artist}</p>
       </div>
     </div>

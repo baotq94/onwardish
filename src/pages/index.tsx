@@ -17,13 +17,13 @@ export default function Home({ posts }: { posts: Post[] }) {
     <div className='space-y-10'>
       <div className='border-b-[1px] pb-5 border-muted'>
         <h1 className='text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14'>
-          <Link href='/about' className='hover-underline-animation text-rose'>
-            Bài viết của tháng
-          </Link>
+          blog chia sẻ về công việc và cuộc sống ở Nhật Bản
         </h1>
-        <h2 className='mt-3 font-mono md:text-lg text-subtle'>
-          blog chia sẻ về cuộc sống Nhật Bản, hy vọng sẽ hữu ích với bạn
-        </h2>
+        <div className='mt-3 font-mono md:text-lg text-subtle'>
+          <Link href='/about' className='hover-underline-animation text-rose'>
+            Một chút về bản thân mình
+          </Link>
+        </div>
       </div>
       <p className='px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50'>
         <b>Tips chuyển việc trái ngành sang IT:&nbsp;&nbsp; </b>{' '}
