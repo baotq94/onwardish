@@ -1,22 +1,31 @@
-import { GetServerSideProps } from "next";
-import { allPosts, allPages, Post, Page } from "contentlayer/generated";
-import siteMetadata from "data/siteMetadata";
-import { allTags, Tag } from "src/lib/tags";
-import moment from "moment";
+import { GetServerSideProps } from 'next';
+import {
+  allPosts,
+  allPages,
+  allProjects,
+  Post,
+  Page,
+  Project,
+} from 'contentlayer/generated';
+import siteMetadata from 'data/siteMetadata';
+import { allTags, Tag } from 'src/lib/tags';
+import moment from 'moment';
 
 function generateSiteMap(
   host_url: string | undefined,
   {
     posts,
+    projects,
     pages,
     tags,
   }: {
     posts: Post[];
+    projects: Project[];
     pages: Page[];
     tags: Tag[];
   }
 ) {
-  const date = moment().format("YYYY-MM-DD");
+  const date = moment().format('YYYY-MM-DD');
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -27,6 +36,12 @@ function generateSiteMap(
       </url>
     <url>
       <loc>${host_url}/blog</loc>
+      <lastmod>${date}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+      </url>
+    <url>
+      <loc>${host_url}/pet</loc>
       <lastmod>${date}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.9</priority>
@@ -49,7 +64,7 @@ function generateSiteMap(
       </url>
     `;
          })
-         .join("")}
+         .join('')}
 
          ${posts
            .map(({ slug, date }) => {
@@ -60,7 +75,18 @@ function generateSiteMap(
           </url>
         `;
            })
-           .join("")}
+           .join('')}
+
+          ${projects
+            .map(({ slug, date }) => {
+              return `
+          <url>
+              <loc>${`${host_url}/pet/${slug}`}</loc>
+              <lastmod>${date}</lastmod>
+          </url>
+        `;
+            })
+            .join('')}
        
          ${tags
            .map(({ name }) => {
@@ -73,7 +99,7 @@ function generateSiteMap(
             </url>
                `;
            })
-           .join("")}
+           .join('')}
         
    </urlset>
  `;
@@ -87,15 +113,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { res } = context;
   // full host url
   const posts = allPosts.filter((post) => post.draft !== true);
+  const projects = allProjects.filter((project) => project.draft !== true);
   const tags = allTags();
   const pages = allPages;
 
   const sitemap = generateSiteMap(siteMetadata.siteUrl, {
     posts,
+    projects,
     tags,
     pages,
   });
-  res.setHeader("Content-Type", "text/xml");
+  res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser
   res.write(sitemap);
   res.end();

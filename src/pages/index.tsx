@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { allPosts, Post } from 'contentlayer/generated';
+import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
 import { pick } from 'contentlayer/utils';
 import moment from 'moment';
 import viLocale from 'src/lib/vilocale';
@@ -8,8 +8,16 @@ import GoodRead from 'src/components/Goodread';
 import TopTrackSpotify from 'src/components/TopTrackSpotify';
 import ViewCounter from 'src/components/ViewCounter';
 import useSWR from 'swr';
+import getIconByName from 'src/lib/get-icon-by-name';
+import { IconArrowRight } from '@tabler/icons-react';
 
-export default function Home({ posts }: { posts: Post[] }) {
+export default function Home({
+  posts,
+  projects,
+}: {
+  posts: Post[];
+  projects: Project[];
+}) {
   // Set the custom Vietnamese locale
   moment.updateLocale('vi', viLocale);
 
@@ -34,7 +42,8 @@ export default function Home({ posts }: { posts: Post[] }) {
         <span className='mx-auto whitespace-nowrap'>☆(❁´◡`❁)☆</span>
       </p>
       <NewestPost posts={posts} />
-      <GoodRead />
+      {/* <GoodRead /> */}
+      <NewestProject projects={projects} />
       <TopTrackSpotify />
     </div>
   );
@@ -99,11 +108,51 @@ function NewestPost({ posts }: { posts: Post[] }) {
   );
 }
 
+function NewestProject({ projects }: { projects: Project[] }) {
+  const Icon = getIconByName('Typescript');
+  return (
+    <div className='my-16 flex flex-col'>
+      <h2 className='mb-8 text-3xl font-bold'>Dự án cá nhân</h2>
+      <div className='flex flex-col gap-8'>
+        {projects.map((project, i) => (
+          <Link
+            href={`/pet/${project.slug}`}
+            className='flex w-full flex-1 items-center justify-start rounded-lg border border-accent-2 p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
+          >
+            <Icon />
+            <div className='px-4'>
+              <div>{project.title}</div>
+              <p className='text-subtle'>{project.summary}</p>
+              <div className='text-subtle'>
+                <ViewCounter slug={project.slug} />
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className='flex'>
+        <Link
+          href='/pet'
+          className='group my-8 flex items-center gap-4 text-lg font-medium'
+        >
+          <span>Xem tất cả</span>
+          <IconArrowRight className='h-4 w-4 transition duration-200 group-hover:translate-x-1' />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export async function getStaticProps() {
   const posts = allPosts
     .filter((post) => post.draft !== true)
     .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 6);
-  return { props: { posts } };
+  const projects = allProjects
+    .filter((project) => project.draft !== true)
+    .map((project) => pick(project, ['slug', 'title', 'summary', 'date']))
+    .sort((a, b) => moment(b.date).diff(moment(a.date)))
+    .slice(0, 2);
+  return { props: { posts, projects } };
 }

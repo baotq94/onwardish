@@ -7,7 +7,7 @@ import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
 import viLocale from 'src/lib/vilocale';
 
-export default function ListLayout({
+export default function ListPostLayout({
   posts,
   name,
 }: {
@@ -18,6 +18,7 @@ export default function ListLayout({
   const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(search.toLowerCase())
   );
+  moment.updateLocale('vi', viLocale);
 
   return (
     <div>
@@ -36,7 +37,7 @@ export default function ListLayout({
               value={search}
               onChange={(e) => setsearch(e.target.value)}
               type='text'
-              placeholder='chủ đề bạn đang tìm kiếm là gì &#x1F617;'
+              placeholder='Tìm kiếm'
               className='block w-full px-4 py-2 border rounded-md border-hightlight-med bg-surface focus:ring-rose focus:border-rose'
             />
             <svg
@@ -61,7 +62,7 @@ export default function ListLayout({
           <motion.li layout='position' key={post.slug} className='py-4'>
             <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
               <dl>
-                <dt className='sr-only'>Published on</dt>
+                <dt className='sr-only'>Được viết vào ngày</dt>
                 <dd className='font-medium leading-6 text-subtle'>
                   <time dateTime={post.date}>
                     {moment(post.date).locale('vi').format('LL')}

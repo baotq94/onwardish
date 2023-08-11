@@ -1,13 +1,14 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from 'next';
 import {
   allPosts,
+  allProjects,
   allPages,
   Post,
   Page,
-} from "contentlayer/generated";
-import siteMetadata from "data/siteMetadata";
-import { allTags, Tag } from "src/lib/tags";
-import { Feed } from "feed";
+} from 'contentlayer/generated';
+import siteMetadata from 'data/siteMetadata';
+import { allTags, Tag } from 'src/lib/tags';
+import { Feed } from 'feed';
 
 export default function SiteMap() {
   // getServerSideProps will do the heavy lifting
@@ -18,6 +19,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // full host url
   const posts = allPosts
     .filter((post) => post.draft !== true)
+    .sort((a, b) => b.date.localeCompare(a.date));
+  const projects = allProjects
+    .filter((project) => project.draft !== true)
     .sort((a, b) => b.date.localeCompare(a.date));
   const siteURL = siteMetadata.siteUrl;
   const author = {
@@ -36,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       siteMetadata.author
     }`,
     updated: new Date(),
-    generator: "Feed for Node.js",
+    generator: 'Feed for Node.js',
     author: author,
   });
   posts.forEach((post) => {
@@ -53,7 +57,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       date: new Date(post.date),
     });
   });
-  res.setHeader("Content-Type", "text/xml");
+  projects.forEach((project) => {
+    const url = `${siteURL}/pet/${project.slug}`;
+    feed.addItem({
+      title: project.title,
+      id: url,
+      link: url,
+      description: project.summary,
+      content: project.summary,
+      image: project.image ? `${siteURL}${project.image}` : undefined,
+      author: [author],
+      contributor: [author],
+      date: new Date(project.date),
+    });
+  });
+  res.setHeader('Content-Type', 'text/xml');
   res.write(feed.rss2());
   res.end();
 

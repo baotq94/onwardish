@@ -2,43 +2,66 @@ import {
   ComputedFields,
   defineDocumentType,
   makeSource,
-} from "contentlayer/source-files";
+} from 'contentlayer/source-files';
 
-import readingTime from "reading-time";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrism from "rehype-prism-plus";
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
-import remarkImgToJsx from "./src/lib/remark-img-to-jsx";
+import readingTime from 'reading-time';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
+import remarkImgToJsx from './src/lib/remark-img-to-jsx';
 
 const computedFields: ComputedFields = {
-  readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
+  readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
-    type: "string",
-    resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+    type: 'string',
+    resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
   },
 };
 
 const Post = defineDocumentType(() => ({
-  name: "Post",
-  filePathPattern: "post/**/*.mdx",
-  contentType: "mdx",
+  name: 'Post',
+  filePathPattern: 'post/**/*.mdx',
+  contentType: 'mdx',
   fields: {
-    title: { type: "string", required: true },
-    date: { type: "string", required: true },
-    summary: { type: "string", required: true },
-    image: { type: "string", required: false },
-    draft: { type: "boolean", required: false },
+    title: { type: 'string', required: true },
+    date: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    image: { type: 'string', required: false },
+    draft: { type: 'boolean', required: false },
     tags: {
-      type: "list",
+      type: 'list',
       of: {
-        type: "string",
+        type: 'string',
       },
-      default: ["linh tinh"],
-      description: "Tags for the post",
+      default: ['linh tinh'],
+      description: 'Tags for the post',
+      required: false,
+    },
+  },
+  computedFields,
+}));
+
+const Project = defineDocumentType(() => ({
+  name: 'Project',
+  filePathPattern: 'project/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    image: { type: 'string', required: false },
+    draft: { type: 'boolean', required: false },
+    tags: {
+      type: 'list',
+      of: {
+        type: 'string',
+      },
+      default: ['linh tinh'],
+      description: 'Tags for the project',
       required: false,
     },
   },
@@ -46,19 +69,19 @@ const Post = defineDocumentType(() => ({
 }));
 
 const Page = defineDocumentType(() => ({
-  name: "Page",
-  filePathPattern: "pages/*.mdx",
-  contentType: "mdx",
+  name: 'Page',
+  filePathPattern: 'pages/*.mdx',
+  contentType: 'mdx',
   fields: {
-    title: { type: "string", required: true },
-    description: { type: "string", required: true },
+    title: { type: 'string', required: true },
+    description: { type: 'string', required: true },
   },
   computedFields,
 }));
 
 const contentLayerConfig = makeSource({
-  contentDirPath: "data",
-  documentTypes: [Post, Page],
+  contentDirPath: 'data',
+  documentTypes: [Post, Project, Page],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath, remarkImgToJsx],
     rehypePlugins: [
@@ -70,7 +93,7 @@ const contentLayerConfig = makeSource({
         rehypeAutolinkHeadings,
         {
           properties: {
-            className: ["anchor"],
+            className: ['anchor'],
           },
         },
       ],
