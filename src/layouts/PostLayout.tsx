@@ -6,6 +6,7 @@ import Comment from 'src/components/Comment';
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
+import viLocale from 'src/lib/vilocale';
 
 export default function PostLayout({
   children,
@@ -17,6 +18,7 @@ export default function PostLayout({
   const [percent, setpercent] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useViewportScroll();
+  moment.updateLocale('vi', viLocale);
 
   useEffect(() => {
     const unsub = scrollY.onChange((value) => {
@@ -55,7 +57,9 @@ export default function PostLayout({
         <div className=' border-b-[1px] pb-4 border-muted '>
           <div className='flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center'>
             <div className='flex items-center'>
-              <p className='text-subtle'>{moment(post.date).format('LL')}</p>
+              <p className='text-subtle'>
+                {moment(post.date).locale('vi').format('LL')}
+              </p>
             </div>
             <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
               {post.readingTime.text}

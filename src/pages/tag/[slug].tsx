@@ -1,16 +1,16 @@
-import { allPosts, Post } from "contentlayer/generated";
-import { pick } from "contentlayer/utils";
-import moment from "moment";
-import { NextSeo } from "next-seo";
-import React from "react";
-import ListLayout from "src/layouts/ListLayout";
-import { allTags } from "src/lib/tags";
+import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
+import { pick } from 'contentlayer/utils';
+import moment from 'moment';
+import { NextSeo } from 'next-seo';
+import React from 'react';
+import ListTagLayout from 'src/layouts/ListTagLayout';
+import { allTags } from 'src/lib/tags';
 
 export default function TagViewPage({
-  posts,
+  postnprojects,
   tagName,
 }: {
-  posts: Post[];
+  postnprojects: Post[];
   tagName: string;
 }) {
   return (
@@ -19,7 +19,7 @@ export default function TagViewPage({
         title={tagName.toUpperCase()}
         description={`All the blog with ${tagName} tag`}
       />
-      <ListLayout posts={posts} name={tagName} />
+      <ListTagLayout postnprojects={postnprojects} name={tagName} />
     </>
   );
 }
@@ -37,7 +37,12 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const posts = allPosts
     .filter((post) => post.draft !== true && post.tags.includes(slug))
-    .map((blog) => pick(blog, ["slug", "title", "summary", "date", "tags"]))
+    .map((blog) => pick(blog, ['slug', 'title', 'summary', 'date', 'tags']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
-  return { props: { posts, tagName: slug } };
+  const projects = allProjects
+    .filter((project) => project.draft !== true && project.tags.includes(slug))
+    .map((pet) => pick(pet, ['slug', 'title', 'summary', 'date', 'tags']))
+    .sort((a, b) => moment(b.date).diff(moment(a.date)));
+  const postnprojects = [...posts, ...projects];
+  return { props: { postnprojects, tagName: slug } };
 }

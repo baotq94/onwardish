@@ -1,4 +1,4 @@
-import { allPosts } from "contentlayer/generated";
+import { allPosts, allProjects } from 'contentlayer/generated';
 
 export type Tag = {
   name: string;
@@ -7,10 +7,22 @@ export type Tag = {
 
 export function allTags() {
   const posts = allPosts;
+  const projects = allProjects;
   const tags: Tag[] = [];
   for (const post of posts) {
     if (post.draft == true) continue;
     for (const tag of post.tags) {
+      const existingTag = tags.find((t) => t.name === tag);
+      if (existingTag) {
+        existingTag.count++;
+      } else {
+        tags.push({ name: tag, count: 1 });
+      }
+    }
+  }
+  for (const project of projects) {
+    if (project.draft == true) continue;
+    for (const tag of project.tags) {
       const existingTag = tags.find((t) => t.name === tag);
       if (existingTag) {
         existingTag.count++;
