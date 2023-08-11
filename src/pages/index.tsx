@@ -109,26 +109,29 @@ function NewestPost({ posts }: { posts: Post[] }) {
 }
 
 function NewestProject({ projects }: { projects: Project[] }) {
-  const Icon = getIconByName('Typescript');
   return (
     <div className='my-16 flex flex-col'>
       <h2 className='mb-8 text-3xl font-bold'>Dự án cá nhân</h2>
       <div className='flex flex-col gap-8'>
-        {projects.map((project, i) => (
-          <Link
-            href={`/pet/${project.slug}`}
-            className='flex w-full flex-1 items-center justify-start rounded-lg border border-accent-2 p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
-          >
-            <Icon />
-            <div className='px-4'>
-              <div>{project.title}</div>
-              <p className='text-subtle'>{project.summary}</p>
-              <div className='text-subtle'>
-                <ViewCounter slug={project.slug} />
+        {projects.map((project) => {
+          const Icon = getIconByName(project.icon);
+          return (
+            <Link
+              key={project.slug}
+              href={`/pet/${project.slug}`}
+              className='flex w-full flex-1 items-center justify-start rounded-lg border p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
+            >
+              <Icon />
+              <div className='px-4'>
+                <div>{project.title}</div>
+                <p className='text-subtle'>{project.summary}</p>
+                <div className='text-subtle'>
+                  <ViewCounter slug={project.slug} />
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
       <div className='flex'>
         <Link
@@ -151,7 +154,9 @@ export async function getStaticProps() {
     .slice(0, 6);
   const projects = allProjects
     .filter((project) => project.draft !== true)
-    .map((project) => pick(project, ['slug', 'title', 'summary', 'date']))
+    .map((project) =>
+      pick(project, ['slug', 'title', 'summary', 'date', 'icon'])
+    )
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 2);
   return { props: { posts, projects } };

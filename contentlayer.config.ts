@@ -51,6 +51,7 @@ const Project = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    icon: { type: 'string', required: true },
     date: { type: 'string', required: true },
     summary: { type: 'string', required: true },
     image: { type: 'string', required: false },

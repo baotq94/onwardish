@@ -1,5 +1,5 @@
 import { Project } from 'contentlayer/generated';
-import { motion, useViewportScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 import Comment from 'src/components/Comment';
@@ -15,21 +15,24 @@ export default function ProjectLayout({
   children: React.ReactNode;
   project: Project;
 }) {
-  const [percent, setpercent] = useState(0);
+  const [percent, setPercent] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useViewportScroll();
 
   useEffect(() => {
-    const unsub = scrollY.onChange((value) => {
+    const handleScroll = () => {
       if (ref.current != null) {
         const height = ref.current.clientHeight;
-        setpercent(Math.min(value / height, 1));
+        const currentScrollY = window.scrollY || window.pageYOffset;
+        setPercent(Math.min(currentScrollY / height, 1));
       }
-    });
-    return () => {
-      unsub();
     };
-  }, [scrollY]);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   moment.updateLocale('vi', viLocale);
 
   return (
