@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
+import { BsFillMoonStarsFill } from 'react-icons/bs';
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
@@ -21,7 +21,7 @@ export default function ThemeSwitch() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            key='theme1'
+            key='theme'
           >
             <BsFillMoonStarsFill />
           </motion.div>

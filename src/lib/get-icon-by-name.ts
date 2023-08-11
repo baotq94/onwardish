@@ -19,6 +19,12 @@ import {
 
 const getIconByName = (name: string) => {
   switch (name) {
+    case 'Pencil': {
+      return IconPencil;
+    }
+    case 'Photo': {
+      return IconPhoto;
+    }
     case 'Typescript': {
       return IconBrandTypescript;
     }
@@ -48,12 +54,6 @@ const getIconByName = (name: string) => {
     }
     case 'Link': {
       return IconLink;
-    }
-    case 'Pencil': {
-      return IconPencil;
-    }
-    case 'Photo': {
-      return IconPhoto;
     }
     case 'Friends': {
       return IconFriends;
