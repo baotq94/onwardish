@@ -16,7 +16,6 @@ export default function ViewCounter({
 
   useEffect(() => {
     if (isMounted.current && update) {
-      console.log('bug to reload twice?? count not true');
       fetch(`/api/views/${slug}`, {
         method: 'POST',
       });
