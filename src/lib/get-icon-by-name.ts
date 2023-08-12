@@ -19,10 +19,10 @@ import {
 
 const getIconByName = (name: string) => {
   switch (name) {
-    case 'Pencil': {
+    case 'IconPencil': {
       return IconPencil;
     }
-    case 'Photo': {
+    case 'IconPhoto': {
       return IconPhoto;
     }
     case 'Typescript': {
