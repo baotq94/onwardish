@@ -4,12 +4,12 @@ generator client {
 }
 
 datasource db {
-  provider             = "mysql"
+  provider             = "postgresql"
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
 model views {
-  slug  String @id @db.VarChar(128)
-  count BigInt @default(1)
+  slug  String @id @db.VarChar(255)
+  count Int @default(1)
 }
