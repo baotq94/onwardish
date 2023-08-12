@@ -12,16 +12,12 @@ export default function ViewCounter({
 }) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
   const views = new Number(data?.total);
-  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current && update) {
+    if (update)
       fetch(`/api/views/${slug}`, {
         method: 'POST',
       });
-    } else {
-      isMounted.current = true;
-    }
   }, [slug, update]);
 
   return (
