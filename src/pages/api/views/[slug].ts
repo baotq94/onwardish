@@ -21,7 +21,6 @@ export default async function handler(
         },
       });
 
-      console.log('viewPost', slug, newOrUpdatedViews?.count.toString());
       return res.status(200).json({
         total: newOrUpdatedViews.count.toString(),
       });
@@ -34,7 +33,6 @@ export default async function handler(
         },
       });
 
-      console.log('viewGet', slug, views?.count.toString());
       return res.status(200).json({ total: views?.count.toString() });
     }
   } catch (e: any) {
