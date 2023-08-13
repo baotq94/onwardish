@@ -1,15 +1,15 @@
 const siteMetadata = {
-  title: 'kysunhatban',
-  author: 'Bao Tran',
+  title: 'blognhatban',
+  author: 'backlue',
   SEO_author: {
-    first_name: 'Bao',
-    last_name: 'Tran',
+    first_name: 'backlue',
+    last_name: 'backlue',
     username: 'backlue',
     gender: 'male',
   },
-  headerTitle: 'kysunhatban',
-  description: 'kysunhatban',
-  siteUrl: 'https://kysunhatban.org',
+  headerTitle: 'blognhatban',
+  description: 'blognhatban',
+  siteUrl: 'https://blognhatban.com',
   siteRepo: 'https://github.com/backluejapanit',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
@@ -17,7 +17,6 @@ const siteMetadata = {
 
   email: 'tranquocbao031094@gmail.com',
   github: 'https://github.com/backluejapanit',
-  facebook: 'https://www.facebook.com/backlueJP/',
   linkedin: 'https://www.linkedin.com/in/backlueinJP/',
 
   analytics: {
