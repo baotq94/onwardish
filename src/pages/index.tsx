@@ -44,7 +44,7 @@ export default function Home({
       <NewestPost posts={posts} />
       {/* <GoodRead /> */}
       <NewestProject projects={projects} />
-      <TopTrackSpotify />
+      {/* <TopTrackSpotify /> */}
     </div>
   );
 }
