@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const author = {
     name: siteMetadata.author,
     email: siteMetadata.email,
-    link: siteMetadata.github,
+    linkedin: siteMetadata.linkedin,
   };
   const feed = new Feed({
     title: siteMetadata.title,

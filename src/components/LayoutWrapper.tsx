@@ -189,10 +189,6 @@ function Footer() {
             RSS
           </a>{' '}
           •{' '}
-          <a target='_blank' href={siteMetadata.github} rel='noreferrer'>
-            Github
-          </a>{' '}
-          •{' '}
           <a target='_blank' href={siteMetadata.linkedin} rel='noreferrer'>
             Linkedin
           </a>
