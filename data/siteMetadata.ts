@@ -16,7 +16,6 @@ const siteMetadata = {
   socialBanner: '/static/images/socialbg.png',
 
   email: 'tranquocbao031094@gmail.com',
-  github: 'https://github.com/backluejapanit',
   linkedin: 'https://www.linkedin.com/in/backlueinJP/',
 
   analytics: {
