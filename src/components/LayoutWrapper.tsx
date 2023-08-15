@@ -45,7 +45,6 @@ function Header() {
 
   return (
     <header className='flex items-center justify-between py-10'>
-      <MobileNav />
       <div>
         <Link
           href='/'
@@ -55,13 +54,13 @@ function Header() {
           <span className='relative z-10 wave'>
             <Logo />
           </span>
-          <span className='relative z-10 hidden md:block'>
+          <span className='relative z-10 hidden sm:block'>
             {siteMetadata.headerTitle}
           </span>
         </Link>
       </div>
       <div className='flex items-center justify-center text-base leading-5 '>
-        <div className='hidden md:block'>
+        <div className='hidden sm:block'>
           {headerNavLinks.map((link) => (
             <Link key={link.title} href={link.href} legacyBehavior>
               <motion.span
@@ -90,6 +89,7 @@ function Header() {
         </div>
         <LanguageChange />
         <ThemeSwitch />
+        <MobileNav />
       </div>
     </header>
   );
@@ -140,7 +140,7 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed   w-full h-full top-24 right-0 bg-base z-10 transform ease-in-out duration-300 ${
+        className={`fixed w-full h-full top-24 left-0 bg-base z-10 transform ease-in-out duration-300 ${
           navShow
             ? 'opacity-95 backdrop-blur-lg visible'
             : 'opacity-0 invisible'
@@ -152,13 +152,13 @@ const MobileNav = () => {
           className='fixed w-full h-full cursor-auto focus:outline-none'
           onClick={onToggleNav}
         ></button>
-        <nav className='fixed h-full mt-8'>
+        <nav className='fixed h-full mt-8 right-0'>
           {headerNavLinks.map((link, i) => (
             <div
               key={link.title}
               className={classNames(
                 'px-12 py-4 transform ease-in-out duration-300',
-                navShow ? 'translate-x-0' : '-translate-x-full'
+                navShow ? 'translate-x-0' : 'translate-x-full'
               )}
               style={{
                 transitionDelay: `${(i + 1) * 100}ms`,
