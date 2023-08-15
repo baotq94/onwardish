@@ -8,6 +8,7 @@ import siteMetadata from '../../data/siteMetadata';
 import Logo from './logo';
 import NowPlaying from './NowPlaying';
 import ThemeSwitch from './ThemeSwitch';
+import LanguageChange from './LanguageChange';
 
 export default function LayoutWrapper({
   children,
@@ -41,6 +42,7 @@ export default function LayoutWrapper({
 function Header() {
   const router = useRouter();
   const [hovered, sethovered] = useState<string | null>(null);
+
   return (
     <header className='flex items-center justify-between py-10'>
       <MobileNav />
@@ -86,11 +88,13 @@ function Header() {
             </Link>
           ))}
         </div>
+        <LanguageChange />
         <ThemeSwitch />
       </div>
     </header>
   );
 }
+
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
 
