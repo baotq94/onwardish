@@ -33,6 +33,19 @@ export default function PostLayout({
     };
   }, []);
 
+  function formatTime(minutes: number) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours === 0) {
+      return `${remainingMinutes} phút đọc`;
+    } else if (remainingMinutes === 0) {
+      return `${hours} giờ đọc`;
+    } else {
+      return `${hours} giờ ${remainingMinutes} phút đọc`;
+    }
+  }
+
   moment.updateLocale('vi', viLocale);
 
   return (
@@ -65,7 +78,7 @@ export default function PostLayout({
               </p>
             </div>
             <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
-              {post.readingTime.text}
+              {formatTime(Math.ceil(post.readingTime.minutes))}
               {` • `}
               <ViewCounter slug={post.slug} update />
             </p>

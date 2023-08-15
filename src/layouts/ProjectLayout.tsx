@@ -35,6 +35,19 @@ export default function ProjectLayout({
 
   moment.updateLocale('vi', viLocale);
 
+  function formatTime(minutes: number) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours === 0) {
+      return `${remainingMinutes} phút đọc`;
+    } else if (remainingMinutes === 0) {
+      return `${hours} giờ đọc`;
+    } else {
+      return `${hours} giờ ${remainingMinutes} phút đọc`;
+    }
+  }
+
   return (
     <div>
       <div className='fixed top-0 left-0 z-50 w-full'>
@@ -65,7 +78,7 @@ export default function ProjectLayout({
               </p>
             </div>
             <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
-              {project.readingTime.text}
+              {formatTime(Math.ceil(project.readingTime.minutes))}
               {` • `}
               <ViewCounter slug={project.slug} update />
             </p>
