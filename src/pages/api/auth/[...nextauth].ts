@@ -15,23 +15,23 @@ export const authOptions: NextAuthOptions = {
     //   clientSecret: process.env.AUTH0_SECRET as string,
     //   issuer: process.env.AUTH0_ISSUER,
     // }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID as string,
-      clientSecret: process.env.FACEBOOK_SECRET as string,
-    }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_ID as string,
+    //   clientSecret: process.env.FACEBOOK_SECRET as string,
+    // }),
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET as string,
-    }),
-    TwitterProvider({
-      clientId: process.env.TWITTER_ID as string,
-      clientSecret: process.env.TWITTER_SECRET as string,
-      version: '2.0',
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_ID as string,
+    //   clientSecret: process.env.GOOGLE_SECRET as string,
+    // }),
+    // TwitterProvider({
+    //   clientId: process.env.TWITTER_ID as string,
+    //   clientSecret: process.env.TWITTER_SECRET as string,
+    //   version: '2.0',
+    // }),
   ],
   callbacks: {
     async jwt({ token }) {
