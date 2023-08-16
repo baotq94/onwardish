@@ -2,7 +2,7 @@ import { Post } from 'contentlayer/generated';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
-import Comment from 'src/components/Comment';
+import AuthComment from 'src/components/authcomment';
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
@@ -94,7 +94,7 @@ export default function PostLayout({
         </div>
       </article>
       <div className='mt-10'>
-        <Comment />
+        <AuthComment />
       </div>
     </div>
   );
