@@ -8,26 +8,33 @@ import seo from 'src/seo.config';
 import 'src/styles/globals.css';
 import 'src/styles/prism.css';
 import LayoutWrapper from '../components/LayoutWrapper';
+import { SessionProvider } from 'next-auth/react';
+import type { Session } from 'next-auth';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
-    <ThemeProvider
-      attribute='class'
-      defaultTheme='theme-first'
-      themes={['theme-first', 'theme-second']}
-    >
-      <LayoutWrapper>
-        <DefaultSeo {...seo} />
-        <Component {...pageProps} />
-        <Analytics />
-        <SocialProfileJsonLd
-          type='Person'
-          name={siteMetadata.author}
-          url={siteMetadata.siteUrl}
-          sameAs={[siteMetadata.linkedin]}
-        />
-      </LayoutWrapper>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider
+        attribute='class'
+        defaultTheme='theme-first'
+        themes={['theme-first', 'theme-second']}
+      >
+        <LayoutWrapper>
+          <DefaultSeo {...seo} />
+          <Component {...pageProps} />
+          <Analytics />
+          <SocialProfileJsonLd
+            type='Person'
+            name={siteMetadata.author}
+            url={siteMetadata.siteUrl}
+            sameAs={[siteMetadata.linkedin]}
+          />
+        </LayoutWrapper>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
 
