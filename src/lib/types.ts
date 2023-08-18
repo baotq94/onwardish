@@ -3,16 +3,24 @@ export type Views = {
 };
 
 export type User = {
+  user_id: string;
   name: string;
-  picture: string;
-  sub: string;
-  email?: string;
+  email: string;
+  image: string;
 };
 
 export type Comment = {
-  id: string;
+  comment_id: string;
   created_at: number;
   url: string;
   text: string;
   user: User;
+};
+
+export type CommentWithUserId = {
+  comment_id: string;
+  created_at: number;
+  url: string;
+  text: string;
+  user_id: string;
 };

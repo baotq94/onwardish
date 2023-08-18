@@ -9,6 +9,21 @@ datasource db {
 }
 
 model views {
-  slug  String @id @db.VarChar(255)
+  slug String @id @db.VarChar(255)
   count Int @default(1)
+}
+
+model comments {
+  comment_id String @id @db.VarChar(255)
+  created_at Int @db.Integer
+  url String @db.VarChar(255)
+  text String @db.VarChar(255)
+  user_id String @db.VarChar(255)
+}
+
+model users {
+  user_id  String @id @db.VarChar(255)
+  name String @db.VarChar(255)
+  email String @db.VarChar(255)
+  image String @db.VarChar(255)
 }

@@ -9,7 +9,7 @@ export default function useComments() {
   const [text, setText] = useState('');
 
   const { data: comments, mutate } = useSWR<Comment[]>(
-    '/api/comment',
+    '/api/comment/comment/',
     fetcher,
     { fallbackData: [] }
   );
@@ -18,8 +18,10 @@ export default function useComments() {
     e.preventDefault();
     const token = '';
 
+    console.log(text);
+
     try {
-      await fetch('/api/comment', {
+      await fetch('/api/comment/comment/', {
         method: 'POST',
         body: JSON.stringify({ text }),
         headers: {
@@ -38,7 +40,7 @@ export default function useComments() {
     const token = '';
 
     try {
-      await fetch('/api/comment', {
+      await fetch('/api/comment/comment/', {
         method: 'DELETE',
         body: JSON.stringify({ comment }),
         headers: {
