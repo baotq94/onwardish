@@ -4,10 +4,7 @@ import { pick } from 'contentlayer/utils';
 import moment from 'moment';
 import viLocale from 'src/lib/vilocale';
 import Link from 'next/link';
-import GoodRead from 'src/components/Goodread';
-import TopTrackSpotify from 'src/components/TopTrackSpotify';
 import ViewCounter from 'src/components/ViewCounter';
-import useSWR from 'swr';
 import getIconByName from 'src/lib/get-icon-by-name';
 import { IconArrowRight } from '@tabler/icons-react';
 
@@ -42,9 +39,7 @@ export default function Home({
         <span className='mx-auto whitespace-nowrap'>☆(❁´◡`❁)☆</span>
       </p>
       <NewestPost posts={posts} />
-      {/* <GoodRead /> */}
       <NewestProject projects={projects} />
-      {/* <TopTrackSpotify /> */}
     </div>
   );
 }
