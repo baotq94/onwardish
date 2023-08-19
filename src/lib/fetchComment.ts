@@ -25,12 +25,6 @@ export default async function fetchComment(
     // Fetch user information based on user_id
     const commentsWithUserInfo = await Promise.all(
       rawComments.map(async (rawComment) => {
-        // const user = await prisma.user.findUnique({
-        //   where: {
-        //     email: rawComment.user_email,
-        //   },
-        // });
-
         let user = await prisma.user.findUnique({
           where: {
             email: rawComment.user_email,
@@ -58,7 +52,7 @@ export default async function fetchComment(
       })
     );
 
-    return res.status(200).json(commentsWithUserInfo);
+    return res.status(200).json(commentsWithUserInfo.reverse());
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: 'Unexpected error occurred.' });
