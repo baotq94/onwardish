@@ -11,6 +11,7 @@ export default async function handler(
     case 'GET':
       return fetchComment(req, res);
     case 'POST':
+      console.log('POST');
       return createComments(req, res);
     case 'DELETE':
       return deleteComments(req, res);

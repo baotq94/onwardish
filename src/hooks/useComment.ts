@@ -17,9 +17,20 @@ export default function useComments() {
   );
 
   const onSubmit = async (e: React.FormEvent) => {
+    console.log('123');
+
+    let user_email;
+    if (
+      session?.user?.email == null ||
+      session?.user?.email === undefined ||
+      session?.user?.email === ''
+    ) {
+      user_email = 'errorAuthor';
+    }
+
     const requestBody = {
       text,
-      user_email: session?.user?.email, // Replace with the actual userId value
+      user_email: user_email, // Replace with the actual userId value
     };
 
     console.log(requestBody);
