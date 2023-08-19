@@ -16,7 +16,9 @@ export default async function createComments(
     throw new Error('Referer header is missing or not a valid string.');
   }
 
-  const { text, user_email } = req.body;
+  console.log('req.body', req.body);
+
+  const { text, user_email, user_name } = req.body;
 
   if (!text) {
     return res.status(400).json({ message: 'Missing text parameter.' });
@@ -29,21 +31,30 @@ export default async function createComments(
       url,
       text,
       user_email: user_email,
+      user_name: user_name,
     };
 
     // Use Prisma to create the comment in the database
     const createdComment = await prisma.comment.create({
+      // await prisma.comment.create({
       data: {
         comment_id: comment.comment_id,
         created_at: comment.created_at,
         url: comment.url,
         text: comment.text,
         user_email: comment.user_email,
+        user_name: comment.user_name,
       },
     });
 
-    // return res.status(200).json(createdComment);
-    return res.status(200);
+    // Convert bigint property to string in a new object
+    const serializedComment = {
+      ...createdComment,
+      created_at: createdComment.created_at.toString(),
+    };
+
+    return res.status(200).json(serializedComment);
+    // return res.status(200);
   } catch (error) {
     console.log(error);
     return res
