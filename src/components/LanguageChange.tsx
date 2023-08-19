@@ -62,13 +62,13 @@ export default function LanguageChange() {
             <div className='dialog-box rounded-lg p-4 shadow-xl'>
               <div className='space-y-2'>
                 <button
-                  className='dialog-box-option hover:bg-orange-400 py-2 px-4 rounded w-full transition duration-200 ease-in-out'
+                  className='dialog-box-option hover:bg-orange-400 py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
                   onClick={() => handleOptionClick('option1')}
                 >
                   Tiếng Việt
                 </button>
                 <button
-                  className='dialog-box-option hover:bg-orange-400 py-2 px-4 rounded w-full transition duration-200 ease-in-out'
+                  className='dialog-box-option hover:bg-orange-400 py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
                   onClick={() => handleOptionClick('option2')}
                 >
                   日本語

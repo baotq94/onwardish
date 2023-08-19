@@ -18,17 +18,19 @@ export default function useComments() {
 
   const onSubmit = async (e: React.FormEvent) => {
     try {
+      e.preventDefault();
+
+      if (text === '') return;
+
       const user_email = session?.user?.email || '';
       const user_name = session?.user?.name || '';
+      const token = '';
 
       const requestBody = {
         text,
         user_email,
         user_name,
       };
-
-      e.preventDefault();
-      const token = '';
 
       await fetch('/api/comment/', {
         method: 'POST',
