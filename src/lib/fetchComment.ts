@@ -25,11 +25,26 @@ export default async function fetchComment(
     // Fetch user information based on user_id
     const commentsWithUserInfo = await Promise.all(
       rawComments.map(async (rawComment) => {
-        const user = await prisma.user.findUnique({
+        // const user = await prisma.user.findUnique({
+        //   where: {
+        //     email: rawComment.user_email,
+        //   },
+        // });
+
+        let user = await prisma.user.findUnique({
           where: {
             email: rawComment.user_email,
           },
         });
+
+        // If user is not found by email, try finding by name
+        if (!user && rawComment.user_name) {
+          user = await prisma.user.findFirst({
+            where: {
+              name: rawComment.user_name,
+            },
+          });
+        }
 
         const comment: CommentWithStringSCreatedAt = {
           comment_id: rawComment.comment_id,

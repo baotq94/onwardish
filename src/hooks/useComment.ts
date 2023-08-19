@@ -17,28 +17,23 @@ export default function useComments() {
   );
 
   const onSubmit = async (e: React.FormEvent) => {
-    console.log('123');
-
-    let user_email;
-    if (
-      session?.user?.email == null ||
-      session?.user?.email === undefined ||
-      session?.user?.email === ''
-    ) {
-      user_email = 'errorAuthor';
-    }
-
-    const requestBody = {
-      text,
-      user_email: user_email, // Replace with the actual userId value
-    };
-
-    console.log(requestBody);
-
-    e.preventDefault();
-    const token = '';
-
     try {
+      console.log('123');
+
+      const user_email = session?.user?.email || '';
+      const user_name = session?.user?.name || '';
+
+      const requestBody = {
+        text,
+        user_email,
+        user_name,
+      };
+
+      console.log('requestBody', requestBody);
+
+      e.preventDefault();
+      const token = '';
+
       await fetch('/api/comment/', {
         method: 'POST',
         body: JSON.stringify(requestBody),
@@ -50,7 +45,7 @@ export default function useComments() {
       setText('');
       await mutate();
     } catch (err) {
-      console.log(err);
+      console.log('onSubmit', err);
     }
   };
 

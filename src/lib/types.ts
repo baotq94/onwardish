@@ -16,6 +16,7 @@ export type CommentWithUserEmail = {
   url: string;
   text: string;
   user_email: string;
+  user_name: string;
 };
 
 export type CommentWithStringSCreatedAt = {
