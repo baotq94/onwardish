@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 type CommentFormProps = {
   text: string;
@@ -30,7 +31,7 @@ export default function CommentForm({
       <div className='flex items-center justify-end mt-4'>
         {session ? (
           <div className='flex items-center space-x-6'>
-            <a
+            <Link
               href='/api/auth/signout'
               className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
               style={{
@@ -43,7 +44,7 @@ export default function CommentForm({
               }}
             >
               Đăng xuất
-            </a>
+            </Link>
             <button
               className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
               style={{
@@ -55,7 +56,7 @@ export default function CommentForm({
             </button>
           </div>
         ) : (
-          <a
+          <Link
             href='/api/auth/signin'
             type='button'
             className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
@@ -69,7 +70,7 @@ export default function CommentForm({
             }}
           >
             Đăng nhập
-          </a>
+          </Link>
         )}
       </div>
     </form>
