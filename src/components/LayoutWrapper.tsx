@@ -71,6 +71,7 @@ function Header() {
                   {
                     'text-subtle font-medium': link.href != router.asPath,
                     'text-text  font-bold ': link.href == router.asPath,
+                    'sm:hidden': link.id === 4 || link.id === 5,
                   }
                 )}
               >
