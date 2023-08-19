@@ -1,37 +1,30 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { User, Comment } from './types';
 import clearUrl from './clearUrl';
+import prisma from './prisma';
 
 export default async function deleteComments(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = req.headers.referer ? clearUrl(req.headers.referer) : undefined;
-  const { comment }: { url: string; comment: Comment } = req.body;
-  const { authorization } = req.headers;
+  let url;
+  if (req.headers.referer) {
+    url = clearUrl(req.headers.referer);
+  } else {
+    throw new Error('Referer header is missing or not a valid string.');
+  }
 
-  // verify user token
-  const user: User = {
-    user_id: '1',
-    name: 'bao',
-    email: 'tranquocbao031094@gmail.com',
-    image: '',
-  };
+  const { comment_id } = req.body;
 
-  if (!comment || !authorization) {
-    return res.status(400).json({ message: 'Missing parameter.' });
+  if (!comment_id) {
+    return res.status(400).json({ message: 'Missing comment parameter.' });
   }
 
   try {
-    comment.user.email = user.email;
-    const isAuthor = user.user_id === comment.user.user_id;
-
-    if (!isAuthor) {
-      return res.status(400).json({ message: 'Need authorization.' });
-    }
-
-    // delete
-    // await redis.lrem(url, 0, JSON.stringify(comment));
+    await prisma.comment.delete({
+      where: {
+        comment_id,
+      },
+    });
 
     return res.status(200).end();
   } catch (err) {

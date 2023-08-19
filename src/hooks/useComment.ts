@@ -1,29 +1,36 @@
-import type { Comment } from '../lib/types';
+import type { Comment, CommentWithStringSCreatedAt } from '../lib/types';
 import React, { useState } from 'react';
 import useSWR from 'swr';
+import { useSession } from 'next-auth/react';
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
 export default function useComments() {
   const [text, setText] = useState('');
+  const { data: session } = useSession();
 
-  const { data: comments, mutate } = useSWR<Comment[]>(
-    '/api/comment/comment/',
+  const { data: comments, mutate } = useSWR<CommentWithStringSCreatedAt[]>(
+    '/api/comment/',
     fetcher,
     { fallbackData: [] }
   );
 
   const onSubmit = async (e: React.FormEvent) => {
+    const requestBody = {
+      text,
+      user_email: session?.user?.email, // Replace with the actual userId value
+    };
+
+    console.log(requestBody);
+
     e.preventDefault();
     const token = '';
 
-    console.log(text);
-
     try {
-      await fetch('/api/comment/comment/', {
+      await fetch('/api/comment/', {
         method: 'POST',
-        body: JSON.stringify({ text }),
+        body: JSON.stringify(requestBody),
         headers: {
           Authorization: token,
           'Content-Type': 'application/json',
@@ -36,13 +43,13 @@ export default function useComments() {
     }
   };
 
-  const onDelete = async (comment: Comment) => {
+  const onDelete = async (comment_id: string) => {
     const token = '';
 
     try {
-      await fetch('/api/comment/comment/', {
+      await fetch('/api/comment/', {
         method: 'DELETE',
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({ comment_id }),
         headers: {
           Authorization: token,
           'Content-Type': 'application/json',
