@@ -1,5 +1,5 @@
 import distanceToNow from 'src/lib/dateRelative';
-import { Comment, CommentWithStringSCreatedAt, User } from '../../lib/types';
+import { CommentWithStringSCreatedAt } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 
 type CommentListProps = {
@@ -13,10 +13,9 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
   return (
     <div className='space-y-6 mt-10'>
       {comments &&
-        comments.reverse().map((comment) => {
+        comments.map((comment) => {
           const isAuthor =
             session?.user && session.user.email === comment.user?.email;
-
           return (
             <div key={comment.created_at} className='flex space-x-4'>
               <div className='flex-shrink-0'>
