@@ -27,7 +27,6 @@ export default function CommentForm({
         value={text}
         disabled={!session}
       />
-
       <div className='flex items-center justify-end mt-4'>
         {session ? (
           <div className='flex items-center space-x-6'>
