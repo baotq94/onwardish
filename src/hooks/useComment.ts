@@ -18,8 +18,6 @@ export default function useComments() {
 
   const onSubmit = async (e: React.FormEvent) => {
     try {
-      console.log('123');
-
       const user_email = session?.user?.email || '';
       const user_name = session?.user?.name || '';
 
@@ -28,8 +26,6 @@ export default function useComments() {
         user_email,
         user_name,
       };
-
-      console.log('requestBody', requestBody);
 
       e.preventDefault();
       const token = '';
