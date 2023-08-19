@@ -16,8 +16,6 @@ export default async function createComments(
     throw new Error('Referer header is missing or not a valid string.');
   }
 
-  console.log('req.body', req.body);
-
   const { text, user_email, user_name } = req.body;
 
   if (!text) {
