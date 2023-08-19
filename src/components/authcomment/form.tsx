@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 type CommentFormProps = {
   text: string;
@@ -14,8 +15,20 @@ export default function CommentForm({
 }: CommentFormProps) {
   const { data: session } = useSession();
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return; // Prevent multiple submissions
+
+    setIsSubmitting(true); // Disable the submit button
+    await onSubmit(e); // Call the onSubmit function
+
+    setIsSubmitting(false); // Enable the submit button after request is complete
+  };
+
   return (
-    <form onSubmit={onSubmit} className='bg-opacity-80'>
+    <form onSubmit={handleSubmit} className='bg-opacity-80'>
       <textarea
         className='flex w-full max-h-40 p-3 border border-gray-400 rounded resize-y bg-gray-200 bg-opacity-0 text-900 placeholder-gray-500 focus:outline-none focus:border-gray-600'
         rows={2}
@@ -26,7 +39,7 @@ export default function CommentForm({
         }
         onChange={(e) => setText(e.target.value)}
         value={text}
-        disabled={!session}
+        disabled={!session && isSubmitting}
       />
       <div className='flex items-center justify-end mt-4'>
         {session ? (

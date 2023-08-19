@@ -9,13 +9,10 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'GET':
-      console.log('GET');
       return fetchComment(req, res);
     case 'POST':
-      console.log('POST');
       return createComments(req, res);
     case 'DELETE':
-      console.log('DELETE');
       return deleteComments(req, res);
     default:
       return res.status(400).json({ message: 'Invalid method.' });
