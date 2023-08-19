@@ -14,48 +14,62 @@ export default function CommentForm({
   const { data: session } = useSession();
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className='bg-opacity-80'>
       <textarea
-        className='flex w-full max-h-40 p-3 rounded resize-y bg-gray-200 text-gray-900 placeholder-gray-500'
+        className='flex w-full max-h-40 p-3 border border-600 rounded resize-y bg-gray-200 bg-opacity-0 text-900 placeholder-gray-500 focus:outline-none focus:border-gray-600'
         rows={2}
         placeholder={
           session
-            ? `What are your thoughts?`
-            : 'Please login to leave a comment'
+            ? 'Để lại bình luận cho bài viết này nhé'
+            : 'Bạn cần đăng nhập để bình luận bài viết này'
         }
         onChange={(e) => setText(e.target.value)}
         value={text}
         disabled={!session}
       />
 
-      <div className='flex items-center mt-4'>
+      <div className='flex items-center justify-end mt-4'>
         {session ? (
           <div className='flex items-center space-x-6'>
-            <button className='py-2 px-4 rounded bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-700'>
-              Send ne
-            </button>
             <a
-              href={`/api/auth/signout`}
-              className='text-gray-500'
+              href='/api/auth/signout'
+              className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
+              style={{
+                minWidth: '5rem',
+                transition: 'border-color 0.3s, color 0.3s',
+              }}
               onClick={(e) => {
                 e.preventDefault();
                 signOut();
               }}
             >
-              Log Out
+              Đăng xuất
             </a>
+            <button
+              className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
+              style={{
+                minWidth: '5rem',
+                transition: 'border-color 0.3s, color 0.3s',
+              }}
+            >
+              Bình luận
+            </button>
           </div>
         ) : (
           <a
-            href={`/api/auth/signin`}
+            href='/api/auth/signin'
             type='button'
-            className='py-2 px-4 rounded bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-700'
+            className='py-2 px-4 rounded border border-600 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800'
+            style={{
+              minWidth: '5rem',
+              transition: 'border-color 0.3s, color 0.3s',
+            }}
             onClick={(e) => {
               e.preventDefault();
               signIn();
             }}
           >
-            Log In
+            Đăng nhập
           </a>
         )}
       </div>

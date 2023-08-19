@@ -10,7 +10,6 @@ type CommentListProps = {
 export default function CommentList({ comments, onDelete }: CommentListProps) {
   const { data: session } = useSession();
 
-  console.log(session?.user?.email);
   return (
     <div className='space-y-6 mt-10'>
       {comments &&
