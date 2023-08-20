@@ -14,7 +14,7 @@ export default function ThemeSwitch() {
         aria-label='Switch theme'
         type='button'
         onClick={onThemeChange}
-        className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay'
+        className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
       >
         <AnimatePresence>
           <motion.div
