@@ -9,7 +9,7 @@ import Logo from './logo';
 import NowPlaying from './NowPlaying';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageChange from './LanguageChange';
-
+import { useTranslation } from 'next-i18next';
 export default function LayoutWrapper({
   children,
 }: {
@@ -181,6 +181,7 @@ const MobileNav = () => {
 };
 
 function Footer() {
+  const { t } = useTranslation('common');
   return (
     <footer className='mt-10 '>
       <NowPlaying />
@@ -195,7 +196,7 @@ function Footer() {
           </a>{' '}
           •{' '}
           <a target='_blank' href={siteMetadata.linkedin} rel='noreferrer'>
-            Linkedin
+            {t('Linkedin')}
           </a>
         </div>
       </div>
