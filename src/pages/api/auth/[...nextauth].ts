@@ -12,10 +12,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_ID,
-    //   clientSecret: process.env.FACEBOOK_SECRET,
-    // }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID as string,
+      clientSecret: process.env.FACEBOOK_SECRET as string,
+    }),
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
@@ -24,11 +24,11 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
-    // TwitterProvider({
-    //   clientId: process.env.TWITTER_ID as string,
-    //   clientSecret: process.env.TWITTER_SECRET as string,
-    //   version: '2.0',
-    // }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_ID as string,
+      clientSecret: process.env.TWITTER_SECRET as string,
+      version: '2.0',
+    }),
   ],
   callbacks: {
     async jwt({ token }) {
