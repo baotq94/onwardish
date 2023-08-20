@@ -114,7 +114,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
             <Link
               key={project.slug}
               href={`/pet/${project.slug}`}
-              className='flex w-full flex-1 items-center justify-start rounded-lg border p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
+              className='flex w-full flex-1 items-center justify-start rounded-lg border border-gray-600 p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
             >
               <Icon />
               <div className='px-4'>
