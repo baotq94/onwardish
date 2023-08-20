@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next';
 import siteMetadata from 'data/siteMetadata';
 import 'katex/dist/katex.css';
 import { DefaultSeo, SocialProfileJsonLd } from 'next-seo';
@@ -38,4 +39,4 @@ function MyApp({
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

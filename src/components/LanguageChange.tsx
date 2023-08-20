@@ -2,10 +2,23 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import { IoLanguage } from 'react-icons/io5';
 import { Dialog, Transition } from '@headlessui/react';
+import Link from 'next/link';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+
+type Props = {
+  // Add custom props here
+};
 
 export default function LanguageChange() {
+  const router = useRouter();
+  const { t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+
+  const changeTo = router.locale === 'vi' ? 'jp' : 'vi';
 
   const openModal = () => {
     setIsOpen(true);
@@ -26,7 +39,7 @@ export default function LanguageChange() {
         aria-label='Switch language'
         type='button'
         onClick={openModal}
-        className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay'
+        className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
       >
         <AnimatePresence>
           <motion.div
@@ -87,13 +100,14 @@ export default function LanguageChange() {
                   className='dialog-box-option border border-gray-400 hover:bg-overlay py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
                   onClick={() => handleOptionClick('option1')}
                 >
-                  Tiếng Việt
+                  {t('VN')}
                 </button>
+
                 <button
                   className='dialog-box-option border border-gray-400 hover:bg-overlay py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
                   onClick={() => handleOptionClick('option2')}
                 >
-                  日本語
+                  {t('JP')}
                 </button>
               </div>
             </div>
@@ -103,3 +117,9 @@ export default function LanguageChange() {
     </div>
   );
 }
+
+// export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
+//   props: {
+//     ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+//   },
+// });
