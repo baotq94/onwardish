@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 type CommentFormProps = {
   text: string;
@@ -14,8 +14,14 @@ export default function CommentForm({
   onSubmit,
 }: CommentFormProps) {
   const { data: session } = useSession();
-
   const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= 255) {
+      setText(inputValue);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +43,7 @@ export default function CommentForm({
             ? 'Để lại bình luận cho bài viết này nhé'
             : 'Bạn cần đăng nhập để bình luận bài viết này'
         }
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => handleChange(e)}
         value={text}
         disabled={!session}
       />

@@ -62,7 +62,11 @@ export default function LanguageChange() {
             <div className='dialog-box rounded-lg p-4 shadow-xl'>
               <div className='w-full flex justify-between items-center pb-4 border-b'>
                 <h3 className='text-lg font-medium leading-6'>Ngôn ngữ</h3>
-                <button aria-label='close' onClick={closeModal}>
+                <button
+                  className='focus:outline-none'
+                  aria-label='close'
+                  onClick={closeModal}
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'

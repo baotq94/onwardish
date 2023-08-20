@@ -45,7 +45,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                   )}
                 </div>
 
-                <div>{comment.text}</div>
+                <div className='break-all'>{comment.text}</div>
               </div>
             </div>
           );
