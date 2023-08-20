@@ -39,7 +39,7 @@ export default function CommentForm({
         }
         onChange={(e) => setText(e.target.value)}
         value={text}
-        disabled={!session && isSubmitting}
+        disabled={!session}
       />
       <div className='flex items-center justify-end mt-4'>
         {session ? (
@@ -64,6 +64,7 @@ export default function CommentForm({
                 minWidth: '5rem',
                 transition: 'border-color 0.3s, color 0.3s',
               }}
+              disabled={isSubmitting}
             >
               Bình luận
             </button>
