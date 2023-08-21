@@ -1,13 +1,23 @@
-import { allPosts, Post } from "contentlayer/generated";
-import siteMetadata from "data/siteMetadata";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import moment from "moment";
-import { NewsArticleJsonLd, NextSeo } from "next-seo";
-import { pick } from "contentlayer/utils";
-import PostLayout from "src/layouts/PostLayout";
-import components from "../../components/MDXComponents";
+import { allPosts, Post } from 'contentlayer/generated';
+import siteMetadata from 'data/siteMetadata';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import { NewsArticleJsonLd, NextSeo } from 'next-seo';
+import PostLayout from 'src/layouts/PostLayout';
+import components from '../../components/MDXComponents';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
-export default function BlogDetailPage({ post }: { post: Post }) {
+type Props = {
+  // Add custom props here
+};
+
+export default function BlogDetailPage({
+  post,
+  locale,
+}: {
+  post: Post;
+  locale: InferGetServerSidePropsType<typeof getStaticProps>;
+}) {
   const Component = useMDXComponent(post.body.code);
   return (
     <PostLayout post={post}>
@@ -29,7 +39,7 @@ function SEO({ post }: { post: Post }) {
         title={post.title}
         description={post.summary}
         openGraph={{
-          type: "article",
+          type: 'article',
           images: post.image
             ? [
                 {
@@ -49,7 +59,7 @@ function SEO({ post }: { post: Post }) {
         title={post.title}
         images={post.image ? [image_url] : []}
         section={post.tags[0]}
-        keywords={post.tags.join(",")}
+        keywords={post.tags.join(',')}
         authorName={siteMetadata.author}
         description={post.summary}
         body={post.body.raw.slice(0, 200)}
@@ -69,7 +79,18 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }: { params: { slug: string } }) {
+export async function getStaticProps({
+  params,
+  locale,
+}: {
+  params: { slug: string };
+  locale: string;
+}) {
   const post = allPosts.find((post) => post.slug === params.slug);
-  return { props: { post } };
+  return {
+    props: {
+      post,
+      ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+    },
+  };
 }
