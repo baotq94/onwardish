@@ -7,6 +7,9 @@ import Link from 'next/link';
 import ViewCounter from 'src/components/ViewCounter';
 import getIconByName from 'src/lib/get-icon-by-name';
 import { IconArrowRight } from '@tabler/icons-react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { LocaleType } from 'src/lib/types';
+import { useTranslation } from 'next-i18next';
 
 export default function Home({
   posts,
@@ -17,24 +20,25 @@ export default function Home({
 }) {
   // Set the custom Vietnamese locale
   moment.updateLocale('vi', viLocale);
+  const { t } = useTranslation('common');
 
   return (
     <div className='space-y-10'>
       <div className='border-b-[1px] pb-5 border-muted'>
         <h1 className='text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14'>
-          blog chia sẻ về cuộc sống và công việc ở Nhật Bản
+          {t('h1')}
         </h1>
         <div className='mt-3 font-mono md:text-lg text-subtle'>
           <Link href='/about' className='hover-underline-animation text-rose'>
-            mình là
+            {t('author')}
           </Link>
         </div>
       </div>
       <p className='px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50'>
-        <b>Tips chuyển việc trái ngành ở Nhật:&nbsp;&nbsp; </b>{' '}
+        <b>{t('tips')}&nbsp;&nbsp; </b>{' '}
         <Link href='/roadmap' className='hover-underline-animation text-rose'>
           {' '}
-          Roadmap &nbsp; &nbsp;
+          {t('Roadmap')} &nbsp; &nbsp;
         </Link>
         <span className='mx-auto whitespace-nowrap'>☆(❁´◡`❁)☆</span>
       </p>
@@ -45,9 +49,10 @@ export default function Home({
 }
 
 function NewestPost({ posts }: { posts: Post[] }) {
+  const { t } = useTranslation('common');
   return (
     <div>
-      <h3 className='mb-6 text-2xl font-bold'>Bài viết mới nhất</h3>
+      <h3 className='mb-6 text-2xl font-bold'>{t('newestblog')}</h3>
       <div className='flex flex-wrap justify-between'>
         {posts.map((post, i) => (
           <Link
@@ -85,7 +90,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
         href='/blog'
         className='flex items-center mt-5 transition-all hover:text-text text-subtle'
       >
-        Xem tất cả
+        {t('viewAll')}
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='w-5 h-5'
@@ -104,9 +109,10 @@ function NewestPost({ posts }: { posts: Post[] }) {
 }
 
 function NewestProject({ projects }: { projects: Project[] }) {
+  const { t } = useTranslation('common');
   return (
     <div className='my-16 flex flex-col'>
-      <h2 className='mb-8 text-3xl font-bold'>Dự án cá nhân</h2>
+      <h2 className='mb-8 text-3xl font-bold'>{t('newestproject')}</h2>
       <div className='flex flex-col gap-8'>
         {projects.map((project) => {
           const Icon = getIconByName(project.icon);
@@ -133,7 +139,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
           href='/pet'
           className='group my-8 flex items-center gap-4 text-lg font-medium'
         >
-          <span>Xem tất cả</span>
+          {t('viewAll')}
           <IconArrowRight className='h-4 w-4 transition duration-200 group-hover:translate-x-1' />
         </Link>
       </div>
@@ -141,7 +147,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }: LocaleType) {
   const posts = allPosts
     .filter((post) => post.draft !== true)
     .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))
@@ -154,5 +160,11 @@ export async function getStaticProps() {
     )
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 2);
-  return { props: { posts, projects } };
+  return {
+    props: {
+      posts,
+      projects,
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

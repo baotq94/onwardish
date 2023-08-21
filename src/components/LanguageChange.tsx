@@ -3,22 +3,11 @@ import { Fragment, useState } from 'react';
 import { IoLanguage } from 'react-icons/io5';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
-type Props = {
-  // Add custom props here
-};
-
 export default function LanguageChange() {
-  const router = useRouter();
   const { t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const changeTo = router.locale === 'vi' ? 'jp' : 'vi';
 
   const openModal = () => {
     setIsOpen(true);
@@ -26,11 +15,6 @@ export default function LanguageChange() {
 
   const closeModal = () => {
     setIsOpen(false);
-  };
-
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
-    closeModal();
   };
 
   return (
@@ -74,7 +58,9 @@ export default function LanguageChange() {
           >
             <div className='dialog-box rounded-lg p-4 shadow-xl'>
               <div className='w-full flex justify-between items-center pb-4 border-b'>
-                <h3 className='text-lg font-medium leading-6'>Ngôn ngữ</h3>
+                <h3 className='text-lg font-medium leading-6'>
+                  {t('language')}
+                </h3>
                 <button
                   className='focus:outline-none'
                   aria-label='close'
@@ -95,20 +81,31 @@ export default function LanguageChange() {
                   </svg>
                 </button>
               </div>
-              <div className='space-y-2'>
-                <button
-                  className='dialog-box-option border border-gray-400 hover:bg-overlay py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
-                  onClick={() => handleOptionClick('option1')}
-                >
-                  {t('VN')}
-                </button>
+              <div
+                className='flex justify-center text-center pt-4 pb-2'
+                style={{ minWidth: '300px' }}
+              >
+                <div className='flex-1'>
+                  <Link
+                    href='/'
+                    locale='vi'
+                    onClick={closeModal}
+                    className='inline-block w-3/4 py-2 px-4 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                  >
+                    {t('VN')}
+                  </Link>
+                </div>
 
-                <button
-                  className='dialog-box-option border border-gray-400 hover:bg-overlay py-2 px-4 rounded w-full transition duration-200 ease-in-out focus:outline-none'
-                  onClick={() => handleOptionClick('option2')}
-                >
-                  {t('JP')}
-                </button>
+                <div className='flex-1'>
+                  <Link
+                    href='/'
+                    locale='ja'
+                    onClick={closeModal}
+                    className='inline-block w-3/4 py-2 px-4 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                  >
+                    {t('JP')}
+                  </Link>
+                </div>
               </div>
             </div>
           </Transition.Child>
@@ -117,9 +114,3 @@ export default function LanguageChange() {
     </div>
   );
 }
-
-// export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
-//   props: {
-//     ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
-//   },
-// });

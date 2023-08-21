@@ -65,3 +65,7 @@ export type VerificationToken = {
   token: string;
   expires: number;
 };
+
+export type LocaleType = {
+  locale: string;
+}
