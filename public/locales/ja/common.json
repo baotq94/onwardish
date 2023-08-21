@@ -8,5 +8,11 @@
   "viewAll": "すべて",
   "language": "言語",
   "JP": "日本語",
-  "VN": "ベトナム語"
+  "VN": "ベトナム語",
+  "Blog": "ブログ",
+  "Tags": "タグ",
+  "Introduce": "サイトについて",
+  "Policy": "プライバシーポリシー",
+  "Term": "利用規約",
+  "toblog": "/ja/blog"
 }

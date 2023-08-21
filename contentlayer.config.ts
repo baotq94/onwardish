@@ -71,7 +71,7 @@ const Project = defineDocumentType(() => ({
 
 const Page = defineDocumentType(() => ({
   name: 'Page',
-  filePathPattern: 'pages/*.mdx',
+  filePathPattern: 'pages/**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },

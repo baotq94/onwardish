@@ -4,7 +4,6 @@ import { pick } from 'contentlayer/utils';
 import ListPostLayout from 'src/layouts/ListPostLayout';
 import { NextSeo } from 'next-seo';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { LocaleType } from 'src/lib/types';
 
 export default function BlogPage({ posts }: { posts: Post[] }) {
   console.log('co vo day khong ta 123');
@@ -16,13 +15,16 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }: { locale: string }) {
   const posts = allPosts
     .filter((post) => post.draft !== true)
     .map((blog) => pick(blog, ['slug', 'title', 'summary', 'date', 'tags']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
   return {
-    props: { posts },
+    props: {
+      posts,
+      ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+    },
   };
 }
