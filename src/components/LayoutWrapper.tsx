@@ -9,6 +9,8 @@ import Logo from './logo';
 import NowPlaying from './NowPlaying';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageChange from './LanguageChange';
+import { useTranslation } from 'next-i18next';
+
 export default function LayoutWrapper({
   children,
 }: {
@@ -41,6 +43,7 @@ export default function LayoutWrapper({
 function Header() {
   const router = useRouter();
   const [hovered, sethovered] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   return (
     <header className='flex items-center justify-between py-10'>
@@ -61,7 +64,7 @@ function Header() {
       <div className='flex items-center justify-center text-base leading-5 '>
         <div className='hidden sm:block'>
           {headerNavLinks.map((link) => (
-            <Link key={link.title} href={link.href} legacyBehavior>
+            <Link key={t(link.title)} href={t(link.href)} legacyBehavior>
               <motion.span
                 onMouseEnter={() => sethovered(link.title)}
                 onMouseLeave={() => sethovered(null)}
@@ -82,7 +85,7 @@ function Header() {
                     />
                   )}
                 </AnimatePresence>
-                <span className='relative z-10'>{link.title}</span>
+                <span className='relative z-10'>{t(link.title)}</span>
               </motion.span>
             </Link>
           ))}
@@ -97,7 +100,7 @@ function Header() {
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
-
+  const { t } = useTranslation();
   const onToggleNav = () => {
     setNavShow((status) => {
       if (status) {
@@ -169,7 +172,7 @@ const MobileNav = () => {
                 onClick={onToggleNav}
                 className='text-2xl font-bold tracking-widest text-text'
               >
-                {link.title}
+                {t(link.title)}
               </Link>
             </div>
           ))}

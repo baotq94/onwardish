@@ -5,7 +5,7 @@ import { NewsArticleJsonLd, NextSeo } from 'next-seo';
 import PostLayout from 'src/layouts/PostLayout';
 import components from '../../components/MDXComponents';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import { InferGetServerSidePropsType } from 'next';
 
 type Props = {
   // Add custom props here
@@ -72,10 +72,17 @@ function SEO({ post }: { post: Post }) {
   );
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: { locales: string[] }) {
+  const paths: any = [];
+  allPosts.map((p) => {
+    return locales.map((locale) => {
+      paths.push({ params: { slug: p.slug }, locale });
+    });
+  });
+
   return {
-    paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
-    fallback: false,
+    paths,
+    fallback: false, // blocking, true, false
   };
 }
 
@@ -87,10 +94,13 @@ export async function getStaticProps({
   locale: string;
 }) {
   const post = allPosts.find((post) => post.slug === params.slug);
+
+  console.log('params', post);
   return {
     props: {
       post,
       ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+      locale,
     },
   };
 }

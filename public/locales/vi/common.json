@@ -8,5 +8,11 @@
   "viewAll": "Xem tất cả",
   "language": "Ngôn ngữ",
   "JP": "Tiếng Nhật",
-  "VN": "Tiếng Việt"
+  "VN": "Tiếng Việt",
+  "Blog": "Blog",
+  "Tags": "Tags",
+  "Introduce": "Giới thiệu",
+  "Policy": "Chính sách bảo mật",
+  "Term": "Điều khoản",
+  "toblog": "/blog"
 }
