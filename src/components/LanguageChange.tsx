@@ -90,7 +90,7 @@ export default function LanguageChange() {
                     href='/'
                     locale='vi'
                     onClick={closeModal}
-                    className='inline-block w-3/4 py-2 px-4 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                    className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
                   >
                     {t('VN')}
                   </Link>
@@ -101,7 +101,7 @@ export default function LanguageChange() {
                     href='/'
                     locale='ja'
                     onClick={closeModal}
-                    className='inline-block w-3/4 py-2 px-4 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                    className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
                   >
                     {t('JP')}
                   </Link>

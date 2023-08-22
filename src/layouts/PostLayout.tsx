@@ -6,7 +6,8 @@ import AuthComment from 'src/components/authcomment';
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
-import viLocale from 'src/lib/vilocale';
+import { timeLocale } from 'src/lib/timeLocale';
+import { useTranslation } from 'next-i18next';
 
 export default function PostLayout({
   children,
@@ -15,6 +16,7 @@ export default function PostLayout({
   children: React.ReactNode;
   post: Post;
 }) {
+  const { t } = useTranslation();
   const [percent, setPercent] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,8 @@ export default function PostLayout({
     }
   }
 
-  moment.updateLocale('vi', viLocale);
+  const time = timeLocale(t('localeTime'));
+  moment.updateLocale(t('localeTime'), time);
 
   return (
     <div>
@@ -74,7 +77,7 @@ export default function PostLayout({
           <div className='flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center'>
             <div className='flex items-center'>
               <p className='text-subtle'>
-                {moment(post.date).locale('vi').format('LL')}
+                {moment(post.date).locale(t('localeTime')).format('LL')}
               </p>
             </div>
             <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>

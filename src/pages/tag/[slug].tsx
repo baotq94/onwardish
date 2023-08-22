@@ -1,6 +1,7 @@
 import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
 import { pick } from 'contentlayer/utils';
 import moment from 'moment';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 import ListTagLayout from 'src/layouts/ListTagLayout';
@@ -24,25 +25,50 @@ export default function TagViewPage({
   );
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: { locales: string[] }) {
+  const paths: any = [];
+  allTags().map((t) => {
+    return locales.map((locale) => {
+      paths.push({ params: { slug: t.name }, locale });
+    });
+  });
+
   return {
-    paths: allTags().map((tag) => ({
-      params: { slug: tag.name },
-    })),
+    paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }: { params: { slug: string } }) {
+export async function getStaticProps({
+  params,
+  locale,
+}: {
+  params: { slug: string };
+  locale: string;
+}) {
   const slug = params.slug;
   const posts = allPosts
-    .filter((post) => post.draft !== true && post.tags.includes(slug))
+    .filter(
+      (post) =>
+        post.draft !== true && post.lang === locale && post.tags.includes(slug)
+    )
     .map((blog) => pick(blog, ['slug', 'title', 'summary', 'date', 'tags']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
   const projects = allProjects
-    .filter((project) => project.draft !== true && project.tags.includes(slug))
+    .filter(
+      (project) =>
+        project.draft !== true &&
+        project.lang === locale &&
+        project.tags.includes(slug)
+    )
     .map((pet) => pick(pet, ['slug', 'title', 'summary', 'date', 'tags']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
   const postnprojects = [...posts, ...projects];
-  return { props: { postnprojects, tagName: slug } };
+  return {
+    props: {
+      postnprojects,
+      tagName: slug,
+      ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+    },
+  };
 }

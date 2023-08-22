@@ -4,6 +4,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import { NewsArticleJsonLd, NextSeo } from 'next-seo';
 import ProjectLayout from 'src/layouts/ProjectLayout';
 import components from '../../components/MDXComponents';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function ProjectPage({ project }: { project: Project }) {
   const Component = useMDXComponent(project.body.code);
@@ -60,14 +61,30 @@ function SEO({ project }: { project: Project }) {
   );
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: { locales: string[] }) {
   return {
-    paths: allProjects.map((p) => ({ params: { slug: p.slug } })),
+    paths: allProjects.flatMap((p) =>
+      locales.map((locale) => ({
+        params: { slug: p.slug },
+        locale: locale,
+      }))
+    ),
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }: { params: { slug: string } }) {
+export async function getStaticProps({
+  params,
+  locale,
+}: {
+  params: { slug: string };
+  locale: string;
+}) {
   const project = allProjects.find((project) => project.slug === params.slug);
-  return { props: { project } };
+  return {
+    props: {
+      project,
+      ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+    },
+  };
 }

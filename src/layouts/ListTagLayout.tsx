@@ -5,7 +5,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
-import viLocale from 'src/lib/vilocale';
+import { timeLocale } from 'src/lib/timeLocale';
+import { useTranslation } from 'next-i18next';
 
 export default function ListTagLayout({
   postnprojects,
@@ -14,11 +15,13 @@ export default function ListTagLayout({
   postnprojects: Post[];
   name: string;
 }) {
+  const { t } = useTranslation();
   const [search, setsearch] = useState('');
   const filteredPosts = postnprojects.filter((postnproject) =>
     postnproject.title.toLowerCase().includes(search.toLowerCase())
   );
-  moment.updateLocale('vi', viLocale);
+  const time = timeLocale(t('localeTime'));
+  moment.updateLocale(t('localeTime'), time);
 
   return (
     <div>
@@ -29,7 +32,7 @@ export default function ListTagLayout({
           </h1>
 
           <p className='mb-4 text-subtle'>
-            Có {postnprojects.length} bài viết liên quan đến chủ đề này
+            {t('beforeTList')} {postnprojects.length} {t('afterTList')}
           </p>
           <div className='relative w-full'>
             <input
@@ -37,7 +40,7 @@ export default function ListTagLayout({
               value={search}
               onChange={(e) => setsearch(e.target.value)}
               type='text'
-              placeholder='Tìm kiếm'
+              placeholder={t('Search')}
               className='block w-full px-4 py-2 border rounded-md border-hightlight-med bg-surface focus:ring-rose focus:border-rose'
             />
             <svg
@@ -62,10 +65,12 @@ export default function ListTagLayout({
           <motion.li layout='position' key={postnproject.slug} className='py-4'>
             <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
               <dl>
-                <dt className='sr-only'>Được viết vào ngày</dt>
+                <dt className='sr-only'>{t('writtenDate')}</dt>
                 <dd className='font-medium leading-6 text-subtle'>
                   <time dateTime={postnproject.date}>
-                    {moment(postnproject.date).locale('vi').format('LL')}
+                    {moment(postnproject.date)
+                      .locale(t('localeTime'))
+                      .format('LL')}
                   </time>
                 </dd>
                 <div className='font-medium leading-6 text-muted'>

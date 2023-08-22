@@ -7,13 +7,8 @@ import components from '../../components/MDXComponents';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { InferGetServerSidePropsType } from 'next';
 
-type Props = {
-  // Add custom props here
-};
-
 export default function BlogDetailPage({
   post,
-  locale,
 }: {
   post: Post;
   locale: InferGetServerSidePropsType<typeof getStaticProps>;
@@ -95,7 +90,6 @@ export async function getStaticProps({
 }) {
   const post = allPosts.find((post) => post.slug === params.slug);
 
-  console.log('params', post);
   return {
     props: {
       post,
