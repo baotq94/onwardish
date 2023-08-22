@@ -14,7 +14,7 @@ export default function Pages({ page }: { page: Page }) {
         {page.title}
       </h1>
       <p className='mt-2 mb-8 text-subtle'>{page.description}</p>
-      <div className='w-full prose dark:prose-dark'>
+      <div className='mt-8 prose max-w-none'>
         <Component components={components} />
       </div>
     </article>

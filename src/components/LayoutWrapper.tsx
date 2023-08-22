@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import headerNavLinks from '../../data/headerNavLinks';
+import footerNavLinks from '../../data/footerNavLinks';
 import siteMetadata from '../../data/siteMetadata';
 import Logo from './logo';
 import NowPlaying from './NowPlaying';
@@ -73,7 +74,6 @@ function Header() {
                   {
                     'text-subtle font-medium': link.href != router.asPath,
                     'text-text  font-bold ': link.href == router.asPath,
-                    'sm:hidden': link.id === 4 || link.id === 5,
                   }
                 )}
               >
@@ -168,7 +168,7 @@ const MobileNav = () => {
               }}
             >
               <Link
-                href={link.href}
+                href={t(link.href)}
                 onClick={onToggleNav}
                 className='text-2xl font-bold tracking-widest text-text'
               >
@@ -183,15 +183,16 @@ const MobileNav = () => {
 };
 
 function Footer() {
+  const router = useRouter();
+  const [hovered, sethovered] = useState<string | null>(null);
+  const { t } = useTranslation();
   return (
     <footer className='mt-10 '>
       <NowPlaying />
       <div className='flex flex-col-reverse gap-3 md:flex-row  justify-between py-5 text-sm border-t-[1px] border-t-muted'>
         <div>
           © {new Date().getFullYear()} {siteMetadata.author} •{' '}
-          {siteMetadata.description}
-        </div>
-        <div>
+          {siteMetadata.description} •{' '}
           <a target='_blank' href='/feed.xml' rel='noreferrer'>
             RSS
           </a>{' '}
@@ -199,6 +200,33 @@ function Footer() {
           <a target='_blank' href={siteMetadata.linkedin} rel='noreferrer'>
             Linkedin
           </a>
+        </div>
+        <div>
+          {footerNavLinks.map((link) => (
+            <Link key={t(link.title)} href={t(link.href)} legacyBehavior>
+              <motion.span
+                onMouseEnter={() => sethovered(link.title)}
+                onMouseLeave={() => sethovered(null)}
+                className={classNames(
+                  'p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer',
+                  {
+                    'text-subtle font-medium': link.href != router.asPath,
+                    'text-text  font-bold ': link.href == router.asPath,
+                  }
+                )}
+              >
+                <AnimatePresence>
+                  {hovered == link.title && (
+                    <motion.span
+                      layoutId='hover'
+                      className='absolute inset-0 z-0 w-full h-full rounded-md bg-overlay'
+                    />
+                  )}
+                </AnimatePresence>
+                <span className='relative z-10'>{t(link.title)}</span>
+              </motion.span>
+            </Link>
+          ))}
         </div>
       </div>
     </footer>

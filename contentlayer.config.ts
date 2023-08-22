@@ -30,6 +30,7 @@ const Post = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     date: { type: 'string', required: true },
     summary: { type: 'string', required: true },
+    lang: { type: 'string', required: true },
     image: { type: 'string', required: false },
     draft: { type: 'boolean', required: false },
     tags: {
@@ -37,7 +38,7 @@ const Post = defineDocumentType(() => ({
       of: {
         type: 'string',
       },
-      default: ['linh tinh'],
+      default: ['Blog'],
       description: 'Tags for the post',
       required: false,
     },
@@ -54,6 +55,7 @@ const Project = defineDocumentType(() => ({
     icon: { type: 'string', required: true },
     date: { type: 'string', required: true },
     summary: { type: 'string', required: true },
+    lang: { type: 'string', required: true },
     image: { type: 'string', required: false },
     draft: { type: 'boolean', required: false },
     tags: {
@@ -61,7 +63,7 @@ const Project = defineDocumentType(() => ({
       of: {
         type: 'string',
       },
-      default: ['linh tinh'],
+      default: ['Project'],
       description: 'Tags for the project',
       required: false,
     },
@@ -71,11 +73,12 @@ const Project = defineDocumentType(() => ({
 
 const Page = defineDocumentType(() => ({
   name: 'Page',
-  filePathPattern: 'pages/*.mdx' || 'pages/jp/*.mdx',
+  filePathPattern: 'pages/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
+    lang: { type: 'string', required: true },
   },
   computedFields,
 }));

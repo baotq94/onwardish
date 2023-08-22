@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
+import { useTranslation } from 'next-i18next';
 
 type CommentFormProps = {
   text: string;
@@ -15,6 +16,7 @@ export default function CommentForm({
 }: CommentFormProps) {
   const { data: session } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
+  const { t } = useTranslation();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
@@ -38,11 +40,7 @@ export default function CommentForm({
       <textarea
         className='flex w-full max-h-40 p-3 border border-gray-400 rounded resize-y bg-gray-200 bg-opacity-0 text-900 placeholder-gray-500 focus:outline-none focus:border-gray-600'
         rows={2}
-        placeholder={
-          session
-            ? 'Để lại bình luận cho bài viết này nhé'
-            : 'Bạn cần đăng nhập để bình luận bài viết này'
-        }
+        placeholder={session ? t('AlreadyLogin') : t('NotLoginYet')}
         onChange={(e) => handleChange(e)}
         value={text}
         disabled={!session}
@@ -62,7 +60,7 @@ export default function CommentForm({
                 signOut();
               }}
             >
-              Đăng xuất
+              {t('Logout')}
             </Link>
             <button
               className='py-2 px-4 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
@@ -72,7 +70,7 @@ export default function CommentForm({
               }}
               disabled={isSubmitting}
             >
-              Bình luận
+              {t('Comment')}
             </button>
           </div>
         ) : (
@@ -89,7 +87,7 @@ export default function CommentForm({
               signIn();
             }}
           >
-            Đăng nhập
+            {t('Login')}
           </Link>
         )}
       </div>

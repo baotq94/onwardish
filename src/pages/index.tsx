@@ -2,13 +2,12 @@ import classNames from 'classnames';
 import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
 import { pick } from 'contentlayer/utils';
 import moment from 'moment';
-import viLocale from 'src/lib/vilocale';
+import { timeLocale } from 'src/lib/timeLocale';
 import Link from 'next/link';
 import ViewCounter from 'src/components/ViewCounter';
 import getIconByName from 'src/lib/get-icon-by-name';
 import { IconArrowRight } from '@tabler/icons-react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { LocaleType } from 'src/lib/types';
 import { useTranslation } from 'next-i18next';
 
 export default function Home({
@@ -18,9 +17,9 @@ export default function Home({
   posts: Post[];
   projects: Project[];
 }) {
-  // Set the custom Vietnamese locale
-  moment.updateLocale('vi', viLocale);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
+  const time = timeLocale(t('localeTime'));
+  moment.updateLocale(t('localeTime'), time);
 
   return (
     <div className='space-y-10'>
@@ -29,14 +28,20 @@ export default function Home({
           {t('h1')}
         </h1>
         <div className='mt-3 font-mono md:text-lg text-subtle'>
-          <Link href='/about' className='hover-underline-animation text-rose'>
+          <Link
+            href={t('/about')}
+            className='hover-underline-animation text-rose'
+          >
             {t('author')}
           </Link>
         </div>
       </div>
       <p className='px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50'>
         <b>{t('tips')}&nbsp;&nbsp; </b>{' '}
-        <Link href='/roadmap' className='hover-underline-animation text-rose'>
+        <Link
+          href={t('/roadmap')}
+          className='hover-underline-animation text-rose'
+        >
           {' '}
           {t('Roadmap')} &nbsp; &nbsp;
         </Link>
@@ -49,7 +54,7 @@ export default function Home({
 }
 
 function NewestPost({ posts }: { posts: Post[] }) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   return (
     <div>
       <h3 className='mb-6 text-2xl font-bold'>{t('newestblog')}</h3>
@@ -80,7 +85,9 @@ function NewestPost({ posts }: { posts: Post[] }) {
                 <div className='text-subtle'>
                   <ViewCounter slug={post.slug} />
                 </div>
-                <div>{moment(post.date).locale('vi').format('LL')}</div>
+                <div>
+                  {moment(post.date).locale(t('localeTime')).format('LL')}
+                </div>
               </div>
             </div>
           </Link>
@@ -147,14 +154,14 @@ function NewestProject({ projects }: { projects: Project[] }) {
   );
 }
 
-export async function getStaticProps({ locale }: LocaleType) {
+export async function getStaticProps({ locale }: { locale: string }) {
   const posts = allPosts
-    .filter((post) => post.draft !== true)
+    .filter((post) => post.draft !== true && post.lang === locale)
     .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 3);
   const projects = allProjects
-    .filter((project) => project.draft !== true)
+    .filter((project) => project.draft !== true && project.lang === locale)
     .map((project) =>
       pick(project, ['slug', 'title', 'summary', 'date', 'icon'])
     )
