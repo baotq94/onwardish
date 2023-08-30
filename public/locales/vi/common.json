@@ -36,5 +36,8 @@
   "writtenDate": "Được viết vào ngày",
   "view": "lượt xem",
   "notviewyet": "chưa có",
-  "localeTime": "vi"
+  "localeTime": "vi",
+  "readingMinute": "phút đọc",
+  "readingHour": "giờ đọc",
+  "hour": "giờ"
 }

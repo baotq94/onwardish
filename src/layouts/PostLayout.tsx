@@ -40,11 +40,19 @@ export default function PostLayout({
     const remainingMinutes = minutes % 60;
 
     if (hours === 0) {
-      return `${remainingMinutes} phút đọc`;
+      return remainingMinutes + ' ' + t('readingMinute');
     } else if (remainingMinutes === 0) {
-      return `${hours} giờ đọc`;
+      return hours + ' ' + t('readingHour');
     } else {
-      return `${hours} giờ ${remainingMinutes} phút đọc`;
+      return (
+        hours +
+        ' ' +
+        t('hour') +
+        ' ' +
+        remainingMinutes +
+        ' ' +
+        t('readingMinute')
+      );
     }
   }
 
