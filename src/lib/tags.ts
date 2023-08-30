@@ -11,7 +11,7 @@ export function allTags(locale: string) {
   const projects = allProjects;
   const tags: Tag[] = [];
   for (const post of posts) {
-    if (post.draft === true || post.lang !== locale) {
+    if ((post.draft === true || post.lang !== locale) && locale !== 'all') {
       continue;
     }
     for (const tag of post.tags) {
@@ -24,7 +24,10 @@ export function allTags(locale: string) {
     }
   }
   for (const project of projects) {
-    if (project.draft === true || project.lang !== locale) {
+    if (
+      (project.draft === true || project.lang !== locale) &&
+      locale !== 'all'
+    ) {
       continue;
     }
     for (const tag of project.tags) {
@@ -36,6 +39,5 @@ export function allTags(locale: string) {
       }
     }
   }
-  console.log('tags:', tags);
   return tags;
 }

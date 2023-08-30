@@ -27,7 +27,7 @@ export default function TagViewPage({
 
 export async function getStaticPaths({ locales }: { locales: string[] }) {
   const paths: any = [];
-  allTags().map((t) => {
+  allTags('all').map((t) => {
     return locales.map((locale) => {
       paths.push({ params: { slug: t.name }, locale });
     });
