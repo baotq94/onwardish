@@ -25,7 +25,9 @@ export default function TagPage({ tags }: { tags: Tag[] }) {
 }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-  const tags = allTags().sort((a, b) => b.count - a.count);
+  const tags = allTags(locale)
+    .filter((tag) => tag.lang === locale)
+    .sort((a, b) => b.count - a.count);
   return {
     props: {
       tags,
