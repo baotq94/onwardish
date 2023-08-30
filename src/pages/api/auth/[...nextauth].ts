@@ -12,10 +12,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID as string,
-      clientSecret: process.env.FACEBOOK_SECRET as string,
-    }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_ID as string,
+    //   clientSecret: process.env.FACEBOOK_SECRET as string,
+    // }),
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,

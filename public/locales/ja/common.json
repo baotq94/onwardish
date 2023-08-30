@@ -36,5 +36,8 @@
   "writtenDate": "記載日時",
   "view": "閲覧回数",
   "notviewyet": "0",
-  "localeTime": "ja"
+  "localeTime": "ja",
+  "readingMinute": "分で読める",
+  "readingHour": "時間で読める",
+  "hour": "時間"
 }
