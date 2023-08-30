@@ -114,7 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // full host url
   const posts = allPosts.filter((post) => post.draft !== true);
   const projects = allProjects.filter((project) => project.draft !== true);
-  const tags = allTags();
+  const tags = allTags('all');
   const pages = allPages;
 
   const sitemap = generateSiteMap(siteMetadata.siteUrl, {
