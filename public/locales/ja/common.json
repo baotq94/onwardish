@@ -39,5 +39,6 @@
   "localeTime": "ja",
   "readingMinute": "分で読める",
   "readingHour": "時間で読める",
-  "hour": "時間"
+  "hour": "時間",
+  "logininfo": "ログイン中のアカウント"
 }
