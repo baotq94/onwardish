@@ -36,8 +36,6 @@ export default function CommentForm({
     setIsSubmitting(false); // Enable the submit button after request is complete
   };
 
-  console.log(session);
-
   return (
     <form onSubmit={handleSubmit} className="bg-opacity-80">
       <textarea
@@ -93,7 +91,7 @@ export default function CommentForm({
               )}
               &nbsp;&nbsp;
               <span className="hidden md:inline-block">
-                Bạn đang đăng nhập với tài khoản &nbsp;
+                {t("logininfo")}&nbsp;
               </span>
               <span className="text-sm md:text-lg text-rose">
                 {session.user?.name}

@@ -39,5 +39,6 @@
   "localeTime": "vi",
   "readingMinute": "phút đọc",
   "readingHour": "giờ đọc",
-  "hour": "giờ"
+  "hour": "giờ",
+  "logininfo": "Bạn đang đăng nhập với tài khoản"
 }

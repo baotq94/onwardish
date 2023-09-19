@@ -12,7 +12,7 @@ import LayoutWrapper from "../components/LayoutWrapper";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import { ConfigProvider } from "antd";
-import theme from "./themeConfig";
+import theme from "../lib/themeConfig";
 
 function MyApp({
   Component,
