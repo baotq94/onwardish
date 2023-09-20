@@ -50,6 +50,16 @@ export default function CommentForm({
         {session ? (
           <>
             <div className="flex items-center space-x-2 md:space-x-6">
+              <button
+                className="py-2 px-4 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay"
+                style={{
+                  minWidth: "5rem",
+                  transition: "border-color 0.3s, color 0.3s",
+                }}
+                disabled={isSubmitting}
+              >
+                {t("Comment")}
+              </button>
               <Link
                 href="/api/auth/signout"
                 className="py-2 px-4 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay"
@@ -64,16 +74,6 @@ export default function CommentForm({
               >
                 {t("Logout")}
               </Link>
-              <button
-                className="py-2 px-4 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay"
-                style={{
-                  minWidth: "5rem",
-                  transition: "border-color 0.3s, color 0.3s",
-                }}
-                disabled={isSubmitting}
-              >
-                {t("Comment")}
-              </button>
             </div>
             <div className="">
               {session.user?.image ? (
