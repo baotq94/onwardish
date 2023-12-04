@@ -1,32 +1,32 @@
 import { GetServerSideProps } from 'next';
 import {
-  allPosts,
-  allPages,
-  allProjects,
-  Post,
-  Page,
-  Project,
+    allPosts,
+    allPages,
+    allProjects,
+    Post,
+    Page,
+    Project,
 } from 'contentlayer/generated';
 import siteMetadata from 'data/siteMetadata';
 import { allTags, Tag } from 'src/lib/tags';
 import moment from 'moment';
 
 function generateSiteMap(
-  host_url: string | undefined,
-  {
-    posts,
-    projects,
-    pages,
-    tags,
-  }: {
-    posts: Post[];
-    projects: Project[];
-    pages: Page[];
-    tags: Tag[];
-  }
+    host_url: string | undefined,
+    {
+        posts,
+        projects,
+        pages,
+        tags,
+    }: {
+        posts: Post[];
+        projects: Project[];
+        pages: Page[];
+        tags: Tag[];
+    },
 ) {
-  const date = moment().format('YYYY-MM-DD');
-  return `<?xml version="1.0" encoding="UTF-8"?>
+    const date = moment().format('YYYY-MM-DD');
+    return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
       <loc>${host_url}</loc>
@@ -53,8 +53,8 @@ function generateSiteMap(
       <priority>0.9</priority>
       </url>
        ${pages
-         .map(({ slug }) => {
-           return `
+           .map(({ slug }) => {
+               return `
       <url>
           <loc>${`${host_url}/${slug}`}</loc>
           <lastmod>${date}</lastmod>
@@ -63,34 +63,34 @@ function generateSiteMap(
 
       </url>
     `;
-         })
-         .join('')}
+           })
+           .join('')}
 
          ${posts
-           .map(({ slug, date }) => {
-             return `
+             .map(({ slug, date }) => {
+                 return `
           <url>
               <loc>${`${host_url}/blog/${slug}`}</loc>
               <lastmod>${date}</lastmod>
           </url>
         `;
-           })
-           .join('')}
+             })
+             .join('')}
 
           ${projects
-            .map(({ slug, date }) => {
-              return `
+              .map(({ slug, date }) => {
+                  return `
           <url>
               <loc>${`${host_url}/pet/${slug}`}</loc>
               <lastmod>${date}</lastmod>
           </url>
         `;
-            })
-            .join('')}
+              })
+              .join('')}
        
          ${tags
-           .map(({ name }) => {
-             return `
+             .map(({ name }) => {
+                 return `
             <url>
                 <loc>${`${host_url}/tag/${encodeURI(name)}`}</loc>
                 <lastmod>${date}</lastmod>
@@ -98,37 +98,37 @@ function generateSiteMap(
                 <priority>0.9</priority>
             </url>
                `;
-           })
-           .join('')}
+             })
+             .join('')}
         
    </urlset>
  `;
 }
 
 export default function SiteMap() {
-  // getServerSideProps will do the heavy lifting
+    // getServerSideProps will do the heavy lifting
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { res } = context;
-  // full host url
-  const posts = allPosts.filter((post) => post.draft !== true);
-  const projects = allProjects.filter((project) => project.draft !== true);
-  const tags = allTags('all');
-  const pages = allPages;
+    const { res } = context;
+    // full host url
+    const posts = allPosts.filter((post) => post.draft !== true);
+    const projects = allProjects.filter((project) => project.draft !== true);
+    const tags = allTags('all');
+    const pages = allPages;
 
-  const sitemap = generateSiteMap(siteMetadata.siteUrl, {
-    posts,
-    projects,
-    tags,
-    pages,
-  });
-  res.setHeader('Content-Type', 'text/xml');
-  // we send the XML to the browser
-  res.write(sitemap);
-  res.end();
+    const sitemap = generateSiteMap(siteMetadata.siteUrl, {
+        posts,
+        projects,
+        tags,
+        pages,
+    });
+    res.setHeader('Content-Type', 'text/xml');
+    // we send the XML to the browser
+    res.write(sitemap);
+    res.end();
 
-  return {
-    props: {},
-  };
+    return {
+        props: {},
+    };
 };

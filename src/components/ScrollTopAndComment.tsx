@@ -2,37 +2,37 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ScrollTopAndComment() {
-  const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const handleWindowScroll = () => {
-      if (window.scrollY > 50) setShow(true);
-      else setShow(false);
+    useEffect(() => {
+        const handleWindowScroll = () => {
+            if (window.scrollY > 50) setShow(true);
+            else setShow(false);
+        };
+
+        window.addEventListener('scroll', handleWindowScroll);
+        return () => window.removeEventListener('scroll', handleWindowScroll);
+    }, []);
+
+    const handleScrollTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    const handleScrollToComment = () => {
+        document.getElementById('comment')?.scrollIntoView({
+            behavior: 'smooth',
+        });
     };
 
-    window.addEventListener('scroll', handleWindowScroll);
-    return () => window.removeEventListener('scroll', handleWindowScroll);
-  }, []);
-
-  const handleScrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  const handleScrollToComment = () => {
-    document.getElementById('comment')?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  };
-
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className='fixed z-50 flex-col gap-3 transition-all duration-300 transform md:flex right-8 bottom-8'
-        >
-          {/* <button
+    return (
+        <AnimatePresence>
+            {show && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className='fixed z-50 flex-col gap-3 transition-all duration-300 transform md:flex right-8 bottom-8'
+                >
+                    {/* <button
             aria-label='Scroll To Comment'
             type='button'
             onClick={handleScrollToComment}
@@ -46,22 +46,26 @@ export default function ScrollTopAndComment() {
               />
             </svg>
           </button> */}
-          <button
-            aria-label='Scroll To Top'
-            type='button'
-            onClick={handleScrollTop}
-            className='p-2 transition-all duration-200 rounded-full text-subtle bg-hightlight-med hover:bg-hightlight-high'
-          >
-            <svg className='w-5 h-5' viewBox='0 0 20 20' fill='currentColor'>
-              <path
-                fillRule='evenodd'
-                d='M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z'
-                clipRule='evenodd'
-              />
-            </svg>
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+                    <button
+                        aria-label='Scroll To Top'
+                        type='button'
+                        onClick={handleScrollTop}
+                        className='p-2 transition-all duration-200 rounded-full text-subtle bg-hightlight-med hover:bg-hightlight-high'
+                    >
+                        <svg
+                            className='w-5 h-5'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                        >
+                            <path
+                                fillRule='evenodd'
+                                d='M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z'
+                                clipRule='evenodd'
+                            />
+                        </svg>
+                    </button>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
 }

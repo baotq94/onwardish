@@ -9,21 +9,21 @@ image: '/static/images/2022/blog-tutorial/newblog.png'
 
 このブログはテンプレート [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) から複製しました。 このソースは最初は問題ありませんでしたが、しばらく使用すると、次のような問題が発生しました。
 
-- 使用するライブラリが多すぎます。 依存関係が多すぎるため、古いコア ライブラリを更新できない
+-   使用するライブラリが多すぎます。 依存関係が多すぎるため、古いコア ライブラリを更新できない
 
-- mdx から記事を構築するコードが複雑すぎる
+-   mdx から記事を構築するコードが複雑すぎる
 
-- テーマはライトとダークの 2 つだけです
+-   テーマはライトとダークの 2 つだけです
 
-- SEO の最適化がうまくいっていない
+-   SEO の最適化がうまくいっていない
 
 ゼロから作るのは楽しい！
 
-- 解決すべき問題があると嬉しい
+-   解決すべき問題があると嬉しい
 
-- 新しい知識を喜んで学ぶ
+-   新しい知識を喜んで学ぶ
 
-- 破壊的な実験をする機会を得てうれしい
+-   破壊的な実験をする機会を得てうれしい
 
 ぜひ試してみてはいかがでしょうか。 このペットプロジェクトを一緒に計画しましょう:D.
 
@@ -31,23 +31,23 @@ image: '/static/images/2022/blog-tutorial/newblog.png'
 
 ブログに必要な基本機能:
 
-- 投稿
+-   投稿
 
-- タグ（記事を分類）
+-   タグ（記事を分類）
 
-- About(著者情報)
+-   About(著者情報)
 
 ただし、彼のブログに関しては。 制限なく自由に作成できるため、次のような興味深い機能をいくつか思いつきました。
 
-- Spotify のステータス
+-   Spotify のステータス
 
-- 投稿ビュー
+-   投稿ビュー
 
-- コードスニペット
+-   コードスニペット
 
-- 今日は学びます (毎日学んだことを保存します)
+-   今日は学びます (毎日学んだことを保存します)
 
-- インタラクティブな記事。 例: 記事にコードを挿入します
+-   インタラクティブな記事。 例: 記事にコードを挿入します
 
 ...
 
@@ -63,22 +63,22 @@ image: '/static/images/2022/blog-tutorial/newblog.png'
 
 最後に、フォントを選択します。
 
-- タイトルは **Barlow**
-- コンテンツの **Barlow Condensed**
-- コード内の **Consolas** フォント。 エディターで使用しているフォント
+-   タイトルは **Barlow**
+-   コンテンツの **Barlow Condensed**
+-   コード内の **Consolas** フォント。 エディターで使用しているフォント
 
 ## どのテクノロジーを選択すればよいでしょうか?
 
 欠かすことのできないテクノロジー:
 
-- [Typescript](https://www.typescriptlang.org/) JavaScript の使用体験は本当に退屈です。 しかし、typescript を使用すると、
-- [Markdown](https://www.markdownguide.org/) 書くのに最適な言語
-- [MDX](https://mdxjs.com/) を使用すると、マークダウン ファイルに jsx を記述することができます
-- [Next.js](https://nextjs.org/) は Web サイトのメインフレームワークです
-- [Tailwindcss](https://tailwindcss.com/)。 さらに、tailwindcss エコシステムのいくつかのツール (ヘッドレス UI、ヒーローアイコン、ヒーローパターンなど) も使用します。
-- [Framer motion](https://www.framer.com/motion/) アニメーション作成用ライブラリ
-- [Render](https://render.com/) 数回クリックするだけで postgresql データベースをセットアップします。 そして ORM[プリズマ](https://www.prisma.io/)
-- [sentry.io](https://sentry.io/) はウェブサイトの追跡に使用されます
+-   [Typescript](https://www.typescriptlang.org/) JavaScript の使用体験は本当に退屈です。 しかし、typescript を使用すると、
+-   [Markdown](https://www.markdownguide.org/) 書くのに最適な言語
+-   [MDX](https://mdxjs.com/) を使用すると、マークダウン ファイルに jsx を記述することができます
+-   [Next.js](https://nextjs.org/) は Web サイトのメインフレームワークです
+-   [Tailwindcss](https://tailwindcss.com/)。 さらに、tailwindcss エコシステムのいくつかのツール (ヘッドレス UI、ヒーローアイコン、ヒーローパターンなど) も使用します。
+-   [Framer motion](https://www.framer.com/motion/) アニメーション作成用ライブラリ
+-   [Render](https://render.com/) 数回クリックするだけで postgresql データベースをセットアップします。 そして ORM[プリズマ](https://www.prisma.io/)
+-   [sentry.io](https://sentry.io/) はウェブサイトの追跡に使用されます
 
 # グローバルレイアウトの構築
 
@@ -86,40 +86,40 @@ image: '/static/images/2022/blog-tutorial/newblog.png'
 
 Web のレイアウトは 3 つの部分で構成されます。
 
-- ヘッダー: Web サイト名、ナビゲーション、テーマスイッチャーが含まれます
+-   ヘッダー: Web サイト名、ナビゲーション、テーマスイッチャーが含まれます
 
-- メイン: ページのコンテンツ
+-   メイン: ページのコンテンツ
 
-- フッター: 著者情報、著作権
+-   フッター: 著者情報、著作権
 
 私たちのほとんどは古い Web デザインを再利用しますが、次のような調整がいくつかあります。
 
-- [ヒーロー パターン](https://heropatterns.com/) の背景 **回路基板** を使用します
+-   [ヒーロー パターン](https://heropatterns.com/) の背景 **回路基板** を使用します
 
-- 古い Web のダーク モードとライト モードの代わりに、異なるテーマを使用します。
+-   古い Web のダーク モードとライト モードの代わりに、異なるテーマを使用します。
 
 設定方法は非常に簡単で、CSS 変数アプリケーションです。
 
 ```css
 /* 2 つのテーマを定義します: */
 .theme-first {
-  /*25 23 36 は rgb(25,23,36) を意味します */
-  --カラーベース: 25 23 36;
-  --color-surface: 31 29 46;
-  --カラーテキスト: 38 35 58;
+    /*25 23 36 は rgb(25,23,36) を意味します */
+    --カラーベース: 25 23 36;
+    --color-surface: 31 29 46;
+    --カラーテキスト: 38 35 58;
 }
 
 .theme-秒 {
-  --カラーベース: 250 244 237;
-  --color-surface: 255 250 243;
-  --カラーテキスト: 242 233 222;
+    --カラーベース: 250 244 237;
+    --color-surface: 255 250 243;
+    --カラーテキスト: 242 233 222;
 }
 
 /* クラスでカラーテーマを使用します: */
 .my-box {
-  幅: 100ピクセル;
-  高さ: 100ピクセル;
-  背景: rgb(var(--color-base));
+    幅: 100ピクセル;
+    高さ: 100ピクセル;
+    背景: rgb(var(--color-base));
 }
 ```
 
@@ -127,7 +127,7 @@ Web のレイアウトは 3 つの部分で構成されます。
 
 ```html
 <body class="テーマファースト">
-  <div class="my-box"></div>
+    <div class="my-box"></div>
 </body>
 ```
 

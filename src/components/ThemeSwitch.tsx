@@ -3,30 +3,30 @@ import { useTheme } from 'next-themes';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 
 export default function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
+    const { theme, setTheme } = useTheme();
 
-  function onThemeChange() {
-    setTheme(theme === 'theme-second' ? 'theme-first' : 'theme-second');
-  }
-  return (
-    <div className='flex items-center justify-center'>
-      <button
-        aria-label='Switch theme'
-        type='button'
-        onClick={onThemeChange}
-        className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
-      >
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            key='theme'
-          >
-            <BsFillMoonStarsFill />
-          </motion.div>
-        </AnimatePresence>
-      </button>
-    </div>
-  );
+    function onThemeChange() {
+        setTheme(theme === 'theme-second' ? 'theme-first' : 'theme-second');
+    }
+    return (
+        <div className='flex items-center justify-center'>
+            <button
+                aria-label='Switch theme'
+                type='button'
+                onClick={onThemeChange}
+                className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
+            >
+                <AnimatePresence>
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        key='theme'
+                    >
+                        <BsFillMoonStarsFill />
+                    </motion.div>
+                </AnimatePresence>
+            </button>
+        </div>
+    );
 }

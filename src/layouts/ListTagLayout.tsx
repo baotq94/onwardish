@@ -9,97 +9,104 @@ import { timeLocale } from 'src/lib/timeLocale';
 import { useTranslation } from 'next-i18next';
 
 export default function ListTagLayout({
-  postnprojects,
-  name,
+    postnprojects,
+    name,
 }: {
-  postnprojects: Post[];
-  name: string;
+    postnprojects: Post[];
+    name: string;
 }) {
-  const { t } = useTranslation();
-  const [search, setsearch] = useState('');
-  const filteredPosts = postnprojects.filter((postnproject) =>
-    postnproject.title.toLowerCase().includes(search.toLowerCase())
-  );
-  const time = timeLocale(t('localeTime'));
-  moment.updateLocale(t('localeTime'), time);
+    const { t } = useTranslation();
+    const [search, setsearch] = useState('');
+    const filteredPosts = postnprojects.filter((postnproject) =>
+        postnproject.title.toLowerCase().includes(search.toLowerCase()),
+    );
+    const time = timeLocale(t('localeTime'));
+    moment.updateLocale(t('localeTime'), time);
 
-  return (
-    <div>
-      <div className='border-b-[1px] pb-8 mb-8 border-muted'>
-        <div className='max-w-xl '>
-          <h1 className='mb-4 text-3xl font-bold uppercase md:text-5xl text-text'>
-            {name}
-          </h1>
+    return (
+        <div>
+            <div className='border-b-[1px] pb-8 mb-8 border-muted'>
+                <div className='max-w-xl '>
+                    <h1 className='mb-4 text-3xl font-bold uppercase md:text-5xl text-text'>
+                        {name}
+                    </h1>
 
-          <p className='mb-4 text-subtle'>
-            {t('beforeTList')} {postnprojects.length} {t('afterTList')}
-          </p>
-          <div className='relative w-full'>
-            <input
-              aria-label='Search articles'
-              value={search}
-              onChange={(e) => setsearch(e.target.value)}
-              type='text'
-              placeholder={t('Search')}
-              className='block w-full px-4 py-2 border rounded-md border-hightlight-med bg-surface focus:ring-rose focus:border-rose'
-            />
-            <svg
-              className='absolute w-5 h-5 right-3 top-3 text-subtle'
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <motion.ul layout='position' transition={{ duration: 0.5 }}>
-        {filteredPosts.map((postnproject) => (
-          <motion.li layout='position' key={postnproject.slug} className='py-4'>
-            <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
-              <dl>
-                <dt className='sr-only'>{t('writtenDate')}</dt>
-                <dd className='font-medium leading-6 text-subtle'>
-                  <time dateTime={postnproject.date}>
-                    {moment(postnproject.date)
-                      .locale(t('localeTime'))
-                      .format('LL')}
-                  </time>
-                </dd>
-                <div className='font-medium leading-6 text-muted'>
-                  <ViewCounter slug={postnproject.slug} />
+                    <p className='mb-4 text-subtle'>
+                        {t('beforeTList')} {postnprojects.length}{' '}
+                        {t('afterTList')}
+                    </p>
+                    <div className='relative w-full'>
+                        <input
+                            aria-label='Search articles'
+                            value={search}
+                            onChange={(e) => setsearch(e.target.value)}
+                            type='text'
+                            placeholder={t('Search')}
+                            className='block w-full px-4 py-2 border rounded-md border-hightlight-med bg-surface focus:ring-rose focus:border-rose'
+                        />
+                        <svg
+                            className='absolute w-5 h-5 right-3 top-3 text-subtle'
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                        >
+                            <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+                            ></path>
+                        </svg>
+                    </div>
                 </div>
-              </dl>
-              <div className='space-y-3 xl:col-span-3'>
-                <div>
-                  <h3 className='text-2xl font-bold leading-8'>
-                    <Link
-                      href={`/blog/${postnproject.slug}`}
-                      className='text-text'
-                      legacyBehavior
+            </div>
+            <motion.ul layout='position' transition={{ duration: 0.5 }}>
+                {filteredPosts.map((postnproject) => (
+                    <motion.li
+                        layout='position'
+                        key={postnproject.slug}
+                        className='py-4'
                     >
-                      {postnproject.title}
-                    </Link>
-                  </h3>
-                  <div className='flex flex-wrap gap-3 mt-2 text-sm'>
-                    {postnproject.tags?.map((tag) => (
-                      <Tag key={tag} text={tag} />
-                    ))}
-                  </div>
-                </div>
-                <div className='prose text-subtle'>{postnproject.summary}</div>
-              </div>
-            </article>
-          </motion.li>
-        ))}
-      </motion.ul>
-    </div>
-  );
+                        <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
+                            <dl>
+                                <dt className='sr-only'>{t('writtenDate')}</dt>
+                                <dd className='font-medium leading-6 text-subtle'>
+                                    <time dateTime={postnproject.date}>
+                                        {moment(postnproject.date)
+                                            .locale(t('localeTime'))
+                                            .format('LL')}
+                                    </time>
+                                </dd>
+                                <div className='font-medium leading-6 text-muted'>
+                                    <ViewCounter slug={postnproject.slug} />
+                                </div>
+                            </dl>
+                            <div className='space-y-3 xl:col-span-3'>
+                                <div>
+                                    <h3 className='text-2xl font-bold leading-8'>
+                                        <Link
+                                            href={`/blog/${postnproject.slug}`}
+                                            className='text-text'
+                                            legacyBehavior
+                                        >
+                                            {postnproject.title}
+                                        </Link>
+                                    </h3>
+                                    <div className='flex flex-wrap gap-3 mt-2 text-sm'>
+                                        {postnproject.tags?.map((tag) => (
+                                            <Tag key={tag} text={tag} />
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className='prose text-subtle'>
+                                    {postnproject.summary}
+                                </div>
+                            </div>
+                        </article>
+                    </motion.li>
+                ))}
+            </motion.ul>
+        </div>
+    );
 }

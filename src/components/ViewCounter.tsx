@@ -5,27 +5,27 @@ import useSWR from 'swr';
 import { useTranslation } from 'next-i18next';
 
 export default function ViewCounter({
-  slug,
-  update = false,
+    slug,
+    update = false,
 }: {
-  slug: string;
-  update?: boolean;
+    slug: string;
+    update?: boolean;
 }) {
-  const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
-  const views = new Number(data?.total);
-  const { t } = useTranslation();
+    const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
+    const views = new Number(data?.total);
+    const { t } = useTranslation();
 
-  useEffect(() => {
-    if (update)
-      fetch(`/api/views/${slug}`, {
-        method: 'POST',
-      });
-  }, [slug, update]);
+    useEffect(() => {
+        if (update)
+            fetch(`/api/views/${slug}`, {
+                method: 'POST',
+            });
+    }, [slug, update]);
 
-  return (
-    <span>
-      {views.valueOf() > 0 ? views.toLocaleString() : t('notviewyet')}{' '}
-      {t('view')}
-    </span>
-  );
+    return (
+        <span>
+            {views.valueOf() > 0 ? views.toLocaleString() : t('notviewyet')}{' '}
+            {t('view')}
+        </span>
+    );
 }

@@ -4,57 +4,57 @@ import clearUrl from './clearUrl';
 import prisma from './prisma';
 
 export default async function fetchComment(
-  req: NextApiRequest,
-  res: NextApiResponse
+    req: NextApiRequest,
+    res: NextApiResponse,
 ) {
-  let url;
-  if (req.headers.referer) {
-    url = clearUrl(req.headers.referer);
-  } else {
-    throw new Error('Referer header is missing or not a valid string.');
-  }
+    let url;
+    if (req.headers.referer) {
+        url = clearUrl(req.headers.referer);
+    } else {
+        throw new Error('Referer header is missing or not a valid string.');
+    }
 
-  try {
-    // Fetch rawComments using Prisma
-    const rawComments = await prisma.comment.findMany({
-      where: {
-        url,
-      },
-    });
-
-    // Fetch user information based on user_id
-    const commentsWithUserInfo = await Promise.all(
-      rawComments.map(async (rawComment) => {
-        let user = await prisma.user.findUnique({
-          where: {
-            email: rawComment.user_email,
-          },
+    try {
+        // Fetch rawComments using Prisma
+        const rawComments = await prisma.comment.findMany({
+            where: {
+                url,
+            },
         });
 
-        // If user is not found by email, try finding by name
-        if (!user && rawComment.user_name) {
-          user = await prisma.user.findFirst({
-            where: {
-              name: rawComment.user_name,
-            },
-          });
-        }
+        // Fetch user information based on user_id
+        const commentsWithUserInfo = await Promise.all(
+            rawComments.map(async (rawComment) => {
+                let user = await prisma.user.findUnique({
+                    where: {
+                        email: rawComment.user_email,
+                    },
+                });
 
-        const comment: CommentWithStringSCreatedAt = {
-          comment_id: rawComment.comment_id,
-          created_at: rawComment.created_at.toString(),
-          url: rawComment.url,
-          text: rawComment.text,
-          user: user as any, // Type assertion
-        };
+                // If user is not found by email, try finding by name
+                if (!user && rawComment.user_name) {
+                    user = await prisma.user.findFirst({
+                        where: {
+                            name: rawComment.user_name,
+                        },
+                    });
+                }
 
-        return comment;
-      })
-    );
+                const comment: CommentWithStringSCreatedAt = {
+                    comment_id: rawComment.comment_id,
+                    created_at: rawComment.created_at.toString(),
+                    url: rawComment.url,
+                    text: rawComment.text,
+                    user: user as any, // Type assertion
+                };
 
-    return res.status(200).json(commentsWithUserInfo.reverse());
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({ message: 'Unexpected error occurred.' });
-  }
+                return comment;
+            }),
+        );
+
+        return res.status(200).json(commentsWithUserInfo.reverse());
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: 'Unexpected error occurred.' });
+    }
 }
