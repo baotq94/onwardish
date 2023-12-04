@@ -7,26 +7,26 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 export default function ProjectPage({ projects }: { projects: Project[] }) {
-  const { t } = useTranslation();
+    const { t } = useTranslation();
 
-  return (
-    <>
-      <NextSeo title='Pet' description='allPets' />
-      <ListProjectLayout projects={projects} name={t('Pet')} />
-    </>
-  );
+    return (
+        <>
+            <NextSeo title='Pet' description='allPets' />
+            <ListProjectLayout projects={projects} name={t('Pet')} />
+        </>
+    );
 }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-  const projects = allProjects
-    .filter((project) => project.draft !== true && project.lang === locale)
-    .map((pet) => pick(pet, ['slug', 'title', 'summary', 'date', 'tags']))
-    .sort((a, b) => moment(b.date).diff(moment(a.date)));
+    const projects = allProjects
+        .filter((project) => project.draft !== true && project.lang === locale)
+        .map((pet) => pick(pet, ['slug', 'title', 'summary', 'date', 'tags']))
+        .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
-  return {
-    props: {
-      projects,
-      ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
-    },
-  };
+    return {
+        props: {
+            projects,
+            ...(await serverSideTranslations(locale ?? 'vi', ['common'])),
+        },
+    };
 }

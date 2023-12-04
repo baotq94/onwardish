@@ -9,16 +9,16 @@ image: '/static/images/2022/blog-tutorial/newblog.png'
 
 Mình clone blog này từ template : [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog). Source này ban đầu thì rất ok, nhưng qua một thời gian sử dụng mình gặp một số vấn đề sau:
 
-- Sử dụng quá nhiều lib. Các lib core bị outdated thì ko update dc vì dependencies quá nhiều
-- Phần code để build bài viết từ mdx quá phức tạp
-- Chỉ có 2 theme, light và dark.
-- Tối ưu SEO chưa tốt
+-   Sử dụng quá nhiều lib. Các lib core bị outdated thì ko update dc vì dependencies quá nhiều
+-   Phần code để build bài viết từ mdx quá phức tạp
+-   Chỉ có 2 theme, light và dark.
+-   Tối ưu SEO chưa tốt
 
 Build from scratch rất vui!
 
-- Vui vì có vấn đề cần giải quyết
-- Vui vì học được kiến thức mới
-- Vui vì có cơ hội thử nghiệm nghịch phá
+-   Vui vì có vấn đề cần giải quyết
+-   Vui vì học được kiến thức mới
+-   Vui vì có cơ hội thử nghiệm nghịch phá
 
 Vậy nên ngại gì mà không thử. Cùng lên kế hoạch cho petproject này của mình nhé :D.
 
@@ -26,18 +26,18 @@ Vậy nên ngại gì mà không thử. Cùng lên kế hoạch cho petproject n
 
 Những tính năng cơ bản mà bất kì blog nào cũng cần có:
 
-- Bài viết
-- Tags (phân loại bài viết)
-- About (thông tin tác giả)
+-   Bài viết
+-   Tags (phân loại bài viết)
+-   About (thông tin tác giả)
 
 Tuy nhiên, đối với blog của mình. Vì được tự do sáng tạo mà không bị giới hạn nên mình nghĩ ra được vài tính năng khá thú vị như:
 
-- Trạng thái Spotify
-- Số lượt xem bài viết
-- Code snippet
-- Today I learn (lưu lại những gì mình học hàng ngày)
-- Bài viết tương tác được. VD: chèn code vào bài viết
-- ...
+-   Trạng thái Spotify
+-   Số lượt xem bài viết
+-   Code snippet
+-   Today I learn (lưu lại những gì mình học hàng ngày)
+-   Bài viết tương tác được. VD: chèn code vào bài viết
+-   ...
 
 Và quan trọng là phải giải quyết được những vấn đề mà cái blog cũ mình gặp phải.
 
@@ -51,22 +51,22 @@ Tiếp theo là chọn màu phù hợp, [Rosé Pine](https://rosepinetheme.com/)
 
 Cuối cùng là chọn font:
 
-- **Barlow** dùng cho tiêu đề
-- **Barlow Condensed** dùng cho nội dung
-- **Consolas** font chữ trong các đoạn code. Font mình xài trong editor
+-   **Barlow** dùng cho tiêu đề
+-   **Barlow Condensed** dùng cho nội dung
+-   **Consolas** font chữ trong các đoạn code. Font mình xài trong editor
 
 ## Chọn công nghệ gì?
 
 Các công nghệ không thể không có:
 
-- [Typescript](https://www.typescriptlang.org/) trải nghiệm với javascript thật sự rất chán. Nhưng với typescript thì 🎆🎆
-- [Markdown](https://www.markdownguide.org/) ngôn ngữ tuyệt vời để viết
-- [MDX](https://mdxjs.com/) cho phép ta viết jsx trong file markdown
-- [Next.js](https://nextjs.org/) là bộ khung chủ đạo của website
-- [Tailwindcss](https://tailwindcss.com/). Ngoài ra mình cũng sử dụng vài tool nằm trong hệ sinh thái của tailwindcss như: headless ui, heroicons, heropatterns...
-- [Framer motion](https://www.framer.com/motion/) thư viện để tạo ra các animation
-- [Render](https://render.com/) setup postgresql database chỉ bằng vài click. Và ORM [prisma](https://www.prisma.io/)
-- [sentry.io](https://sentry.io/) dùng để tracking website
+-   [Typescript](https://www.typescriptlang.org/) trải nghiệm với javascript thật sự rất chán. Nhưng với typescript thì 🎆🎆
+-   [Markdown](https://www.markdownguide.org/) ngôn ngữ tuyệt vời để viết
+-   [MDX](https://mdxjs.com/) cho phép ta viết jsx trong file markdown
+-   [Next.js](https://nextjs.org/) là bộ khung chủ đạo của website
+-   [Tailwindcss](https://tailwindcss.com/). Ngoài ra mình cũng sử dụng vài tool nằm trong hệ sinh thái của tailwindcss như: headless ui, heroicons, heropatterns...
+-   [Framer motion](https://www.framer.com/motion/) thư viện để tạo ra các animation
+-   [Render](https://render.com/) setup postgresql database chỉ bằng vài click. Và ORM [prisma](https://www.prisma.io/)
+-   [sentry.io](https://sentry.io/) dùng để tracking website
 
 # Build Global Layout
 
@@ -74,108 +74,112 @@ Các công nghệ không thể không có:
 
 Layout của web có 3 phần:
 
-- Header: chứa tên website, navigation, theme switcher
+-   Header: chứa tên website, navigation, theme switcher
 
-- Main: nội dung của page
+-   Main: nội dung của page
 
-- Footer: Info tác giả, copyright
+-   Footer: Info tác giả, copyright
 
 Đa số mình tái sử dụng lại design của web cũ, tuy nhiên có điều chỉnh một vài chổ như:
 
-- Sử dụng background **Circuit Board** từ [Hero Patterns](https://heropatterns.com/)
+-   Sử dụng background **Circuit Board** từ [Hero Patterns](https://heropatterns.com/)
 
-- Sử dụng nhiều theme khác nhau thay vì dark mode và light mode ở web cũ.
-  Cách mình setup khá đơn giản, đó là ứng dụng CSS Variables:
+-   Sử dụng nhiều theme khác nhau thay vì dark mode và light mode ở web cũ.
+    Cách mình setup khá đơn giản, đó là ứng dụng CSS Variables:
 
-  ```css
-  /* Định nghĩa 2 theme: */
-  .theme-first {
-    /*25 23 36 nghĩa là rgb(25,23,36) */
-    --color-base: 25 23 36;
-    --color-surface: 31 29 46;
-    --color-text: 38 35 58;
-  }
+    ```css
+    /* Định nghĩa 2 theme: */
+    .theme-first {
+        /*25 23 36 nghĩa là rgb(25,23,36) */
+        --color-base: 25 23 36;
+        --color-surface: 31 29 46;
+        --color-text: 38 35 58;
+    }
 
-  .theme-second {
-    --color-base: 250 244 237;
-    --color-surface: 255 250 243;
-    --color-text: 242 233 222;
-  }
+    .theme-second {
+        --color-base: 250 244 237;
+        --color-surface: 255 250 243;
+        --color-text: 242 233 222;
+    }
 
-  /* Sử dụng color theme trong class: */
-  .my-box {
-    width: 100px;
-    height: 100px;
-    background: rgb(var(--color-base));
-  }
-  ```
+    /* Sử dụng color theme trong class: */
+    .my-box {
+        width: 100px;
+        height: 100px;
+        background: rgb(var(--color-base));
+    }
+    ```
 
-  Để sử dụng theme, đơn giản ta chỉ cần gắn tên class của theme đó vào thẻ body. Ví dụ:
+    Để sử dụng theme, đơn giản ta chỉ cần gắn tên class của theme đó vào thẻ body. Ví dụ:
 
-  ```html
-  <body class="theme-first">
-    <div class="my-box"></div>
-  </body>
-  ```
+    ```html
+    <body class="theme-first">
+        <div class="my-box"></div>
+    </body>
+    ```
 
-  Vì mình sử dụng tailwindcss nên cần setup thêm một bước nữa, trong file `tailwind.config.js`:
+    Vì mình sử dụng tailwindcss nên cần setup thêm một bước nữa, trong file `tailwind.config.js`:
 
-  ```js
-  // Cần hàm này để có thể sử dụng class opacity-[value]
-  function withOpacityValue(variable) {
-    return ({ opacityValue }) => {
-      if (opacityValue === undefined) {
-        return `rgb(var(${variable}))`;
-      }
-      return `rgb(var(${variable}) / ${opacityValue})`;
+    ```js
+    // Cần hàm này để có thể sử dụng class opacity-[value]
+    function withOpacityValue(variable) {
+        return ({ opacityValue }) => {
+            if (opacityValue === undefined) {
+                return `rgb(var(${variable}))`;
+            }
+            return `rgb(var(${variable}) / ${opacityValue})`;
+        };
+    }
+
+    // Có bao nhiêu css varible trong theme thì ta định nghĩa bấy nhiêu đó:
+    let themeColors = {
+        base: withOpacityValue('--color-base'),
+        surface: withOpacityValue('--color-surface'),
+        text: withOpacityValue('--color-text'),
+        //...
     };
-  }
 
-  // Có bao nhiêu css varible trong theme thì ta định nghĩa bấy nhiêu đó:
-  let themeColors = {
-    base: withOpacityValue('--color-base'),
-    surface: withOpacityValue('--color-surface'),
-    text: withOpacityValue('--color-text'),
-    //...
-  };
+    module.exports = {
+        content: [
+            './pages/**/*.{js,ts,jsx,tsx}',
+            './components/**/*.{js,ts,jsx,tsx}',
+        ],
+        theme: {
+            extend: {
+                colors: themeColors,
+            },
+        },
+        plugins: [],
+    };
+    ```
 
-  module.exports = {
-    content: [
-      './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
-    ],
-    theme: {
-      extend: {
-        colors: themeColors,
-      },
-    },
-    plugins: [],
-  };
-  ```
+    Sử dụng:
 
-  Sử dụng:
+    ```html
+    <button className="bg-base text-text p-3">    Hello World</button>
+    ```
 
-  ```html
-  <button className="bg-base text-text p-3">    Hello World</button>
-  ```
+    Cuối cùng, sử dụng thư viện [next-themes](https://github.com/pacocoursey/next-themes). Giúp việc chuyển đổi theme dễ dàng hơn, chỉ qua vài dòng code:
 
-  Cuối cùng, sử dụng thư viện [next-themes](https://github.com/pacocoursey/next-themes). Giúp việc chuyển đổi theme dễ dàng hơn, chỉ qua vài dòng code:
+    ```jsx
+    import { useTheme } from 'next-themes';
 
-  ```jsx
-  import { useTheme } from 'next-themes';
+    const ThemeChanger = () => {
+        const { theme, setTheme } = useTheme();
 
-  const ThemeChanger = () => {
-    const { theme, setTheme } = useTheme();
-
-    return (
-      <div>
-        The current theme is: {theme}
-        <button onClick={() => setTheme('theme-first')}>First Theme</button>
-        <button onClick={() => setTheme('theme-second')}>Second Theme</button>
-      </div>
-    );
-  };
-  ```
+        return (
+            <div>
+                The current theme is: {theme}
+                <button onClick={() => setTheme('theme-first')}>
+                    First Theme
+                </button>
+                <button onClick={() => setTheme('theme-second')}>
+                    Second Theme
+                </button>
+            </div>
+        );
+    };
+    ```
 
 ## Kết quả:
 
@@ -209,9 +213,9 @@ data:
 
 Trong đó:
 
-- Folder post chứa các bài viết, có thể nested folder.
-- Folder snippet chứa các snippet code. Các đoạn code ngắn hữu ích.
-- Folder pages chứa các page.
+-   Folder post chứa các bài viết, có thể nested folder.
+-   Folder snippet chứa các snippet code. Các đoạn code ngắn hữu ích.
+-   Folder pages chứa các page.
 
 Contentlayer sẽ tự động parse file mdx vào next.js. Sau đó ta có thể sử dụng một cách đơn giản, ví dụ file `blog.tsx`:
 
@@ -221,17 +225,17 @@ import { pick } from 'contentlayer/utils';
 import ListLayout from 'src/layouts/ListLayout';
 
 export default function BlogPage({ posts }: { posts: Post[] }) {
-  return <ListLayout posts={posts} name='Blog' />;
+    return <ListLayout posts={posts} name='Blog' />;
 }
 
 export async function getStaticProps() {
-  // dùng hàm pick để loại bỏ các field không mong muốn, cải thiện thời gian load
-  const posts = allPosts
-    .filter((post) => post.draft !== true)
-    .map((blog) => pick(blog, ['slug', 'title', 'summary', 'date', 'tags']))
-    .sort((a, b) => moment(b.date).diff(moment(a.date)));
+    // dùng hàm pick để loại bỏ các field không mong muốn, cải thiện thời gian load
+    const posts = allPosts
+        .filter((post) => post.draft !== true)
+        .map((blog) => pick(blog, ['slug', 'title', 'summary', 'date', 'tags']))
+        .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
-  return { props: { posts } };
+    return { props: { posts } };
 }
 ```
 
@@ -244,28 +248,28 @@ import PostLayout from 'src/layouts/PostLayout';
 import components from '../../components/MDXComponents';
 
 export default function BlogDetailPage({ post }: { post: Post }) {
-  const Component = useMDXComponent(post.body.code);
-  return (
-    <PostLayout post={post}>
-      <Component
-        components={{
-          ...components,
-        }}
-      />
-    </PostLayout>
-  );
+    const Component = useMDXComponent(post.body.code);
+    return (
+        <PostLayout post={post}>
+            <Component
+                components={{
+                    ...components,
+                }}
+            />
+        </PostLayout>
+    );
 }
 
 export async function getStaticPaths() {
-  return {
-    paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
-    fallback: false,
-  };
+    return {
+        paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
+        fallback: false,
+    };
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post.slug === params.slug);
-  return { props: { post } };
+    const post = allPosts.find((post) => post.slug === params.slug);
+    return { props: { post } };
 }
 ```
 
@@ -275,22 +279,23 @@ File `components/MDXComponents.tsx`:
 import Link from 'next/link';
 
 const CustomLink = (props: any) => {
-  const href = props.href;
-  const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
+    const href = props.href;
+    const isInternalLink =
+        href && (href.startsWith('/') || href.startsWith('#'));
 
-  if (isInternalLink) {
-    return (
-      <Link href={href}>
-        <a {...props}>{props.children}</a>
-      </Link>
-    );
-  }
+    if (isInternalLink) {
+        return (
+            <Link href={href}>
+                <a {...props}>{props.children}</a>
+            </Link>
+        );
+    }
 
-  return <a target='_blank' rel='noopener noreferrer' {...props} />;
+    return <a target='_blank' rel='noopener noreferrer' {...props} />;
 };
 
 const MDXComponents = {
-  a: CustomLink,
+    a: CustomLink,
 };
 
 export default MDXComponents;
@@ -300,21 +305,21 @@ export default MDXComponents;
 
 > Bổ sung
 
-- B1: Cài đặt pscale và client-sql thông qua brew (Terminal)
-- B2: Access vào pscale shell với các câu lệnh sau
+-   B1: Cài đặt pscale và client-sql thông qua brew (Terminal)
+-   B2: Access vào pscale shell với các câu lệnh sau
 
-  - pscale login
+    -   pscale login
 
-  - pscale shell &lt;tên database&gt;
+    -   pscale shell &lt;tên database&gt;
 
-  - sau đó câu lệnh tạo table đếm view
+    -   sau đó câu lệnh tạo table đếm view
 
-  ```
-  CREATE TABLE views (
-  slug VARCHAR(128) PRIMARY KEY,
-  count BIGINT DEFAULT 1
-  );
-  ```
+    ```
+    CREATE TABLE views (
+    slug VARCHAR(128) PRIMARY KEY,
+    count BIGINT DEFAULT 1
+    );
+    ```
 
 ### Cách tạo database và connect prisma đến planetscale
 
@@ -345,42 +350,42 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+    req: NextApiRequest,
+    res: NextApiResponse,
 ) {
-  try {
-    const slug = req.query.slug.toString();
+    try {
+        const slug = req.query.slug.toString();
 
-    if (req.method === 'POST') {
-      const newOrUpdatedViews = await prisma.views.upsert({
-        where: { slug },
-        create: {
-          slug,
-        },
-        update: {
-          count: {
-            increment: 1,
-          },
-        },
-      });
+        if (req.method === 'POST') {
+            const newOrUpdatedViews = await prisma.views.upsert({
+                where: { slug },
+                create: {
+                    slug,
+                },
+                update: {
+                    count: {
+                        increment: 1,
+                    },
+                },
+            });
 
-      return res.status(200).json({
-        total: newOrUpdatedViews.count.toString(),
-      });
+            return res.status(200).json({
+                total: newOrUpdatedViews.count.toString(),
+            });
+        }
+
+        if (req.method === 'GET') {
+            const views = await prisma.views.findUnique({
+                where: {
+                    slug,
+                },
+            });
+
+            return res.status(200).json({ total: views?.count.toString() });
+        }
+    } catch (e: any) {
+        return res.status(500).json({ message: e.message });
     }
-
-    if (req.method === 'GET') {
-      const views = await prisma.views.findUnique({
-        where: {
-          slug,
-        },
-      });
-
-      return res.status(200).json({ total: views?.count.toString() });
-    }
-  } catch (e: any) {
-    return res.status(500).json({ message: e.message });
-  }
 }
 ```
 
@@ -393,24 +398,24 @@ import { Views } from 'src/lib/types';
 import useSWR from 'swr';
 
 export default function ViewCounter({
-  slug,
-  update = false,
+    slug,
+    update = false,
 }: {
-  slug: string;
-  update?: boolean;
+    slug: string;
+    update?: boolean;
 }) {
-  const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
-  const views = new Number(data?.total);
+    const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
+    const views = new Number(data?.total);
 
-  useEffect(() => {
-    // nếu update = true thì update lại số lượng view
-    if (update)
-      fetch(`/api/views/${slug}`, {
-        method: 'POST',
-      });
-  }, [slug, update]);
+    useEffect(() => {
+        // nếu update = true thì update lại số lượng view
+        if (update)
+            fetch(`/api/views/${slug}`, {
+                method: 'POST',
+            });
+    }, [slug, update]);
 
-  return <span>{`${views > 0 ? views.toLocaleString() : '–––'} views`}</span>;
+    return <span>{`${views > 0 ? views.toLocaleString() : '–––'} views`}</span>;
 }
 ```
 

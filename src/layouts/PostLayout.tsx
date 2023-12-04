@@ -10,103 +10,103 @@ import { timeLocale } from 'src/lib/timeLocale';
 import { useTranslation } from 'next-i18next';
 
 export default function PostLayout({
-  children,
-  post,
+    children,
+    post,
 }: {
-  children: React.ReactNode;
-  post: Post;
+    children: React.ReactNode;
+    post: Post;
 }) {
-  const { t } = useTranslation();
-  const [percent, setPercent] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
+    const [percent, setPercent] = useState(0);
+    const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (ref.current != null) {
-        const height = ref.current.clientHeight;
-        const currentScrollY = window.scrollY || window.pageYOffset;
-        setPercent(Math.min(currentScrollY / height, 1));
-      }
-    };
+    useEffect(() => {
+        const handleScroll = () => {
+            if (ref.current != null) {
+                const height = ref.current.clientHeight;
+                const currentScrollY = window.scrollY || window.pageYOffset;
+                setPercent(Math.min(currentScrollY / height, 1));
+            }
+        };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
-  function formatTime(minutes: number) {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+    function formatTime(minutes: number) {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
 
-    if (hours === 0) {
-      return remainingMinutes + ' ' + t('readingMinute');
-    } else if (remainingMinutes === 0) {
-      return hours + ' ' + t('readingHour');
-    } else {
-      return (
-        hours +
-        ' ' +
-        t('hour') +
-        ' ' +
-        remainingMinutes +
-        ' ' +
-        t('readingMinute')
-      );
+        if (hours === 0) {
+            return remainingMinutes + ' ' + t('readingMinute');
+        } else if (remainingMinutes === 0) {
+            return hours + ' ' + t('readingHour');
+        } else {
+            return (
+                hours +
+                ' ' +
+                t('hour') +
+                ' ' +
+                remainingMinutes +
+                ' ' +
+                t('readingMinute')
+            );
+        }
     }
-  }
 
-  const time = timeLocale(t('localeTime'));
-  moment.updateLocale(t('localeTime'), time);
+    const time = timeLocale(t('localeTime'));
+    moment.updateLocale(t('localeTime'), time);
 
-  return (
-    <div>
-      <div className='fixed top-0 left-0 z-50 w-full'>
-        <motion.div
-          animate={{ opacity: percent > 0 ? 1 : 0 }}
-          className='h-1 bg-hightlight-high'
-        >
-          <motion.div
-            className='h-1 bg-iris'
-            style={{
-              scaleX: percent,
-              originX: 0,
-              originY: 0,
-            }}
-          />
-        </motion.div>
-      </div>
-      <ScrollTopAndComment />
-      <article>
-        <h1 className='mb-4 text-3xl font-bold text-rose md:text-5xl '>
-          {post.title}
-        </h1>
-        <div className=' border-b-[1px] pb-4 border-muted '>
-          <div className='flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center'>
-            <div className='flex items-center'>
-              <p className='text-subtle'>
-                {moment(post.date).locale(t('localeTime')).format('LL')}
-              </p>
+    return (
+        <div>
+            <div className='fixed top-0 left-0 z-50 w-full'>
+                <motion.div
+                    animate={{ opacity: percent > 0 ? 1 : 0 }}
+                    className='h-1 bg-hightlight-high'
+                >
+                    <motion.div
+                        className='h-1 bg-iris'
+                        style={{
+                            scaleX: percent,
+                            originX: 0,
+                            originY: 0,
+                        }}
+                    />
+                </motion.div>
             </div>
-            <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
-              {formatTime(Math.ceil(post.readingTime.minutes))}
-              {` • `}
-              <ViewCounter slug={post.slug} update />
-            </p>
-          </div>
-          <div className='flex flex-wrap gap-3 mt-4'>
-            {post.tags?.map((tag) => (
-              <Tag key={tag} text={tag} />
-            ))}
-          </div>
+            <ScrollTopAndComment />
+            <article>
+                <h1 className='mb-4 text-3xl font-bold text-rose md:text-5xl '>
+                    {post.title}
+                </h1>
+                <div className=' border-b-[1px] pb-4 border-muted '>
+                    <div className='flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center'>
+                        <div className='flex items-center'>
+                            <p className='text-subtle'>
+                                {moment(post.date)
+                                    .locale(t('localeTime'))
+                                    .format('LL')}
+                            </p>
+                        </div>
+                        <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
+                            {formatTime(Math.ceil(post.readingTime.minutes))}
+                            {` • `}
+                            <ViewCounter slug={post.slug} update />
+                        </p>
+                    </div>
+                    <div className='flex flex-wrap gap-3 mt-4'>
+                        {post.tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                    </div>
+                </div>
+                <div className='mt-8 prose max-w-none' ref={ref}>
+                    {children}
+                </div>
+            </article>
+            <div className='mt-10'>
+                <AuthComment />
+            </div>
         </div>
-        <div className='mt-8 prose max-w-none' ref={ref}>
-          {children}
-        </div>
-      </article>
-      <div className='mt-10'>
-        <AuthComment />
-      </div>
-    </div>
-  );
+    );
 }
