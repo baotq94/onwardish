@@ -6,7 +6,7 @@ import { Avatar } from 'antd';
 
 type CommentFormProps = {
     text: string;
-    setText: Function;
+    setText: (text: string) => void;
     onSubmit: (e: React.FormEvent) => Promise<void>;
 };
 

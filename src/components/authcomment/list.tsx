@@ -1,9 +1,9 @@
 import distanceToNow from 'src/lib/dateRelative';
-import { CommentWithStringSCreatedAt } from '../../lib/types';
+import { Comment } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 
 type CommentListProps = {
-    comments?: CommentWithStringSCreatedAt[];
+    comments?: Comment[];
     onDelete: (comment_id: string) => Promise<void>;
 };
 
@@ -16,7 +16,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                 comments.map((comment) => {
                     const isAuthor =
                         session?.user &&
-                        session.user.email === comment.user?.email;
+                        session.user.email === comment.user_email;
                     return (
                         <div
                             key={comment.created_at}
@@ -24,8 +24,8 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                         >
                             <div className='flex-shrink-0'>
                                 <img
-                                    src={comment.user?.image}
-                                    alt={comment.user?.name}
+                                    src={comment.url}
+                                    alt={comment.user_name}
                                     width={40}
                                     height={40}
                                     className='rounded-full'
@@ -34,7 +34,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
 
                             <div className='flex-grow'>
                                 <div className='flex space-x-2'>
-                                    <b>{comment.user?.name}</b>
+                                    <b>{comment.user_name}</b>
                                     <time className='text-gray-400'>
                                         {distanceToNow(
                                             Number(comment.created_at),

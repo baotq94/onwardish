@@ -8,14 +8,14 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-model views {
+model Views {
   slug String @id @db.VarChar(255)
   count Int @default(1)
 }
 
 model Comment {
   comment_id String @id @db.VarChar(255)
-  created_at BigInt @db.BigInt
+  created_at String @db.VarChar(255)
   url String @db.VarChar(255)
   text String @db.VarChar(255)
   user_email String @db.VarChar(255)
