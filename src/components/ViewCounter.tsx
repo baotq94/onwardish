@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import fetcher from 'src/lib/fetcher';
-import { Views } from 'src/lib/types';
 import useSWR from 'swr';
 import { useTranslation } from 'next-i18next';
+
+type TotalView = { total: number };
 
 export default function ViewCounter({
     slug,
@@ -11,7 +12,7 @@ export default function ViewCounter({
     slug: string;
     update?: boolean;
 }) {
-    const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
+    const { data } = useSWR<TotalView>(`/api/views/${slug}`, fetcher);
     const views = new Number(data?.total);
     const { t } = useTranslation();
 

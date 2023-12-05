@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { CommentWithUserEmail } from './types';
+import type { Comment } from './types';
 import { nanoid } from 'nanoid';
 import clearUrl from './clearUrl';
 import prisma from './prisma';
@@ -23,9 +23,9 @@ export default async function createComments(
     }
 
     try {
-        const comment: CommentWithUserEmail = {
+        const comment: Comment = {
             comment_id: nanoid(),
-            created_at: Date.now(),
+            created_at: Date.now().toString(),
             url,
             text,
             user_email: user_email,
@@ -48,7 +48,7 @@ export default async function createComments(
         // Convert bigint property to string in a new object
         const serializedComment = {
             ...createdComment,
-            created_at: createdComment.created_at.toString(),
+            created_at: createdComment.created_at,
         };
 
         return res.status(200).json(serializedComment);

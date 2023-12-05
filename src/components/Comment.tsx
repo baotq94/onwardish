@@ -17,7 +17,7 @@ export default function Comment() {
             metadata,
             inputPosition,
             lang,
-        } = siteMetadata?.comment?.giscusConfig;
+        } = siteMetadata?.comment?.giscusConfig || {}; // Fallback to an empty object
         const siteUrl = window.location.origin;
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';

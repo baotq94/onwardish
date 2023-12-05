@@ -1,4 +1,4 @@
-import type { Comment, CommentWithStringSCreatedAt } from '../lib/types';
+import type { Comment } from '../lib/types';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { useSession } from 'next-auth/react';
@@ -10,7 +10,7 @@ export default function useComments() {
     const [text, setText] = useState('');
     const { data: session } = useSession();
 
-    const { data: comments, mutate } = useSWR<CommentWithStringSCreatedAt[]>(
+    const { data: comments, mutate } = useSWR<Comment[]>(
         '/api/comment/',
         fetcher,
         { fallbackData: [] },

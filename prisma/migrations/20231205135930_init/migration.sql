@@ -1,20 +1,21 @@
 -- CreateTable
-CREATE TABLE "views" (
+CREATE TABLE "Views" (
     "slug" VARCHAR(255) NOT NULL,
     "count" INTEGER NOT NULL DEFAULT 1,
 
-    CONSTRAINT "views_pkey" PRIMARY KEY ("slug")
+    CONSTRAINT "Views_pkey" PRIMARY KEY ("slug")
 );
 
 -- CreateTable
-CREATE TABLE "comments" (
+CREATE TABLE "Comment" (
     "comment_id" VARCHAR(255) NOT NULL,
-    "created_at" BIGINT NOT NULL,
+    "created_at" VARCHAR(255) NOT NULL,
     "url" VARCHAR(255) NOT NULL,
     "text" VARCHAR(255) NOT NULL,
-    "user_id" VARCHAR(255) NOT NULL,
+    "user_email" VARCHAR(255) NOT NULL,
+    "user_name" VARCHAR(255) NOT NULL,
 
-    CONSTRAINT "comments_pkey" PRIMARY KEY ("comment_id")
+    CONSTRAINT "Comment_pkey" PRIMARY KEY ("comment_id")
 );
 
 -- CreateTable

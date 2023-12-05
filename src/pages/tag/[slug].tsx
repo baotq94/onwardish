@@ -7,6 +7,13 @@ import React from 'react';
 import ListTagLayout from 'src/layouts/ListTagLayout';
 import { allTags } from 'src/lib/tags';
 
+type Path = {
+    params: {
+        slug: string;
+    };
+    locale: string;
+};
+
 export default function TagViewPage({
     postnprojects,
     tagName,
@@ -26,7 +33,7 @@ export default function TagViewPage({
 }
 
 export async function getStaticPaths({ locales }: { locales: string[] }) {
-    const paths: any = [];
+    const paths: Path[] = [];
     allTags('all').map((t) => {
         return locales.map((locale) => {
             paths.push({ params: { slug: t.name }, locale });

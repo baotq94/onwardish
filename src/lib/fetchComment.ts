@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { CommentWithStringSCreatedAt, User } from './types';
+import type { Comment, User } from './types';
 import clearUrl from './clearUrl';
 import prisma from './prisma';
 
@@ -40,12 +40,13 @@ export default async function fetchComment(
                     });
                 }
 
-                const comment: CommentWithStringSCreatedAt = {
+                const comment: Comment = {
                     comment_id: rawComment.comment_id,
-                    created_at: rawComment.created_at.toString(),
+                    created_at: rawComment.created_at,
+                    user_email: rawComment.user_email,
                     url: rawComment.url,
                     text: rawComment.text,
-                    user: user as any, // Type assertion
+                    user_name: rawComment.user_name, // Type assertion
                 };
 
                 return comment;

@@ -1,30 +1,17 @@
+//table type
+
 export type Views = {
-    total: number;
+    slug: string;
+    count: number;
 };
 
 export type Comment = {
     comment_id: string;
-    created_at: number;
-    url: string;
-    text: string;
-    user: User;
-};
-
-export type CommentWithUserEmail = {
-    comment_id: string;
-    created_at: number;
+    created_at: string;
     url: string;
     text: string;
     user_email: string;
     user_name: string;
-};
-
-export type CommentWithStringSCreatedAt = {
-    comment_id: string;
-    created_at: string;
-    url: string;
-    text: string;
-    user: User;
 };
 
 export type Account = {
@@ -54,7 +41,7 @@ export type User = {
     id: string;
     name?: string;
     email?: string;
-    emailVerified?: number;
+    emailVerified?: Date;
     image?: string;
     accounts: Account[];
     session: Session[];
@@ -66,6 +53,7 @@ export type VerificationToken = {
     expires: number;
 };
 
+//common type
 export type LocaleType = {
     locale: string;
 };

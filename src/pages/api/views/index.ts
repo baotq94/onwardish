@@ -15,7 +15,10 @@ export default async function handler(
         return res
             .status(200)
             .json({ total: totalViews._sum.count?.toString() });
-    } catch (e: any) {
-        return res.status(500).json({ message: e.message });
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            // Now TypeScript knows e is an Error
+            return res.status(500).json({ message: e.message });
+        }
     }
 }

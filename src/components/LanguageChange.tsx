@@ -23,7 +23,7 @@ export default function LanguageChange() {
                 aria-label='Switch language'
                 type='button'
                 onClick={openModal}
-                className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
+                className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay outline-none'
             >
                 <AnimatePresence>
                     <motion.div
