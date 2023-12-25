@@ -13,7 +13,7 @@ const siteMetadata = {
     siteRepo: 'https://github.com/backluejapanit',
     siteLogo: '/static/images/logo.png',
     image: '/static/images/avatar.png',
-    socialBanner: '/static/images/socialbg.png',
+    socialBanner: '/static/images/socialbg.jpg',
 
     email: 'tranquocbao031094@gmail.com',
     linkedin: 'https://www.linkedin.com/in/backlueinJP/',

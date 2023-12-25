@@ -1,6 +1,7 @@
 import distanceToNow from 'src/lib/dateRelative';
 import { Comment } from '../../lib/types';
 import { useSession } from 'next-auth/react';
+import Logo from '../logo';
 
 type CommentListProps = {
     comments?: Comment[];
@@ -9,6 +10,8 @@ type CommentListProps = {
 
 export default function CommentList({ comments, onDelete }: CommentListProps) {
     const { data: session } = useSession();
+
+    console.log(session, comments);
 
     return (
         <div className='space-y-6 mt-10'>
@@ -22,14 +25,18 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                             key={comment.created_at}
                             className='flex space-x-4'
                         >
-                            <div className='flex-shrink-0'>
-                                <img
-                                    src={comment.url}
-                                    alt={comment.user_name}
-                                    width={40}
-                                    height={40}
-                                    className='rounded-full'
-                                />
+                            <div className='flex-shrink-0 fill-text'>
+                                {comment.user_image ? (
+                                    <img
+                                        src={comment.user_image}
+                                        alt={comment.user_name}
+                                        width={40}
+                                        height={40}
+                                        className='rounded-full fill-text'
+                                    />
+                                ) : (
+                                    <Logo />
+                                )}
                             </div>
 
                             <div className='flex-grow'>

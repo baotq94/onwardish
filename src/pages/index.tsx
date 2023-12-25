@@ -162,6 +162,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
 }
 
 export async function getStaticProps({ locale }: { locale: string }) {
+    console.log('localelocale', locale);
     const posts = allPosts
         .filter((post) => post.draft !== true && post.lang === locale)
         .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))
