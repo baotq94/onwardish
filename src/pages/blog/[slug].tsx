@@ -75,6 +75,8 @@ export async function getStaticPaths({ locales }: { locales: string[] }) {
         });
     });
 
+    console.log(paths);
+
     return {
         paths,
         fallback: false, // blocking, true, false
@@ -88,7 +90,10 @@ export async function getStaticProps({
     params: { slug: string };
     locale: string;
 }) {
-    const post = allPosts.find((post) => post.slug === params.slug);
+    const post = allPosts.find(
+        (post) => post.slug === params.slug && post.lang === locale,
+    );
+    // console.log('postpostpost', allPosts[1], params, locale, post);
 
     return {
         props: {

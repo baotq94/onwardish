@@ -12,6 +12,7 @@ export type Comment = {
     text: string;
     user_email: string;
     user_name: string;
+    user_image?: string;
 };
 
 export type Account = {
