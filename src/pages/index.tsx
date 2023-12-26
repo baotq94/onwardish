@@ -45,7 +45,6 @@ export default function Home({
                     {' '}
                     {t('Roadmap')} &nbsp; &nbsp;
                 </Link>
-                <span className='mx-auto whitespace-nowrap'>☆(❁´◡`❁)☆</span>
             </p>
             <NewestPost posts={posts} />
             <NewestProject projects={projects} />
@@ -58,27 +57,12 @@ function NewestPost({ posts }: { posts: Post[] }) {
     return (
         <div>
             <h3 className='mb-6 text-2xl font-bold'>{t('newestblog')}</h3>
-            <div className='flex flex-wrap justify-between'>
+            <div className='flex flex-wrap justify-between gap-4'>
                 {posts.map((post, i) => (
                     <Link
                         key={post.slug}
                         href={`/blog/${post.slug}`}
-                        className={classNames(
-                            'transform hover:scale-105 duration-300 transition-all rounded-xl w-full custom-md-width bg-gradient-to-r p-1 mb-5',
-                            {
-                                'from-[#D8B4FE] to-[#818CF8]': i == 0,
-                                'from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]':
-                                    i == 1,
-                                'from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]':
-                                    i == 2,
-                                'from-[#F472B6] via-[#DB2777] to-[#B91C1C]':
-                                    i == 3,
-                                'from-[#FBBF24] via-[#F59E0B] to-[#B45309]':
-                                    i == 4,
-                                'from-[#34D399] via-[#10B981] to-[#059669]':
-                                    i == 5,
-                            },
-                        )}
+                        className='transform hover:scale-105 duration-300 transition-all rounded-xl w-full custom-md-width bg-gray-600 p-1'
                     >
                         <div className='flex flex-col justify-between h-full p-4 rounded-lg bg-surface '>
                             <div className='flex flex-col justify-between md:flex-row'>
@@ -100,24 +84,15 @@ function NewestPost({ posts }: { posts: Post[] }) {
                     </Link>
                 ))}
             </div>
-            <Link
-                href='/blog'
-                className='flex items-center mt-5 transition-all hover:text-text text-subtle'
-            >
-                {t('viewAll')}
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='w-5 h-5'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
+            <div className='flex'>
+                <Link
+                    href='/blog'
+                    className='group mt-4 flex items-center gap-2 text-lg font-medium'
                 >
-                    <path
-                        fillRule='evenodd'
-                        d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-                        clipRule='evenodd'
-                    />
-                </svg>
-            </Link>
+                    {t('viewAll')}
+                    <IconArrowRight className='h-4 w-4 transition duration-200 group-hover:translate-x-2' />
+                </Link>
+            </div>
         </div>
     );
 }
@@ -125,8 +100,8 @@ function NewestPost({ posts }: { posts: Post[] }) {
 function NewestProject({ projects }: { projects: Project[] }) {
     const { t } = useTranslation('common');
     return (
-        <div className='my-16 flex flex-col'>
-            <h2 className='mb-8 text-3xl font-bold'>{t('newestproject')}</h2>
+        <div className='flex flex-col'>
+            <h3 className='mb-6 text-2xl font-bold'>{t('newestproject')}</h3>
             <div className='flex flex-col gap-8'>
                 {projects.map((project) => {
                     const Icon = getIconByName(project.icon);
@@ -134,7 +109,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
                         <Link
                             key={project.slug}
                             href={`/pet/${project.slug}`}
-                            className='flex w-full flex-1 items-center justify-start rounded-lg border border-gray-600 p-4 transition-colors duration-150 hover:border-accent-fg sm:px-6'
+                            className='ftransform hover:scale-105 duration-300 transition-all flex w-full flex-1 items-center justify-start rounded-lg border border-gray-600 p-4 sm:px-6'
                         >
                             <Icon />
                             <div className='px-4'>
@@ -151,10 +126,10 @@ function NewestProject({ projects }: { projects: Project[] }) {
             <div className='flex'>
                 <Link
                     href='/pet'
-                    className='group my-8 flex items-center gap-4 text-lg font-medium'
+                    className='group mt-4 flex items-center gap-2 text-lg font-medium'
                 >
                     {t('viewAll')}
-                    <IconArrowRight className='h-4 w-4 transition duration-200 group-hover:translate-x-1' />
+                    <IconArrowRight className='h-4 w-4 transition duration-200 group-hover:translate-x-2' />
                 </Link>
             </div>
         </div>

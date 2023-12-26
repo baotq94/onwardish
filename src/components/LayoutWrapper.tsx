@@ -196,7 +196,7 @@ function Footer() {
     const { t } = useTranslation();
     return (
         <footer className='mt-10 '>
-            <NowPlaying />
+            {/* <NowPlaying /> */}
             <div className='flex flex-col-reverse gap-3 md:flex-row  justify-between py-5 text-sm border-t-[1px] border-t-muted'>
                 <div>
                     © {new Date().getFullYear()} {siteMetadata.author} •{' '}
