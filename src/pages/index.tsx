@@ -30,7 +30,7 @@ export default function Home({
                 <div className='mt-3 font-mono md:text-lg text-subtle'>
                     <Link
                         href={t('/about')}
-                        className='hover-underline-animation text-rose'
+                        className='hover-underline-animation text-text'
                     >
                         {t('author')}
                     </Link>
@@ -40,7 +40,7 @@ export default function Home({
                 <b>{t('tips')}&nbsp;&nbsp; </b>{' '}
                 <Link
                     href={t('/roadmap')}
-                    className='hover-underline-animation text-rose'
+                    className='hover-underline-animation text-text'
                 >
                     {' '}
                     {t('Roadmap')} &nbsp; &nbsp;
