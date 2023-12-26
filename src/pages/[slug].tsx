@@ -42,7 +42,9 @@ export async function getStaticProps({
     params: { slug: string };
     locale: string;
 }) {
-    const page = allPages.find((page) => page.slug === params.slug);
+    const page = allPages.find(
+        (page) => page.slug === params.slug && page.lang === locale,
+    );
     return {
         props: {
             page,
