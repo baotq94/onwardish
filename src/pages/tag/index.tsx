@@ -15,7 +15,7 @@ export default function TagPage({ tags }: { tags: Tag[] }) {
             />
             <div className='border-b-[1px] pb-5 border-muted mb-10'>
                 <h1 className='text-3xl font-bold tracking-wide uppercase md:text-5xl text-text sm:leading-10 md:leading-14'>
-                    {t('Tags')}
+                    {t('tags')}
                 </h1>
             </div>
             <div className='flex flex-wrap gap-4 text-lg'>

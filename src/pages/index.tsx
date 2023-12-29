@@ -25,7 +25,7 @@ export default function Home({
         <div className='space-y-10'>
             <div className='border-b-[1px] pb-5 border-muted'>
                 <h1 className='text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14'>
-                    {t('h1')}
+                    {t('welcome')}
                 </h1>
                 <div className='mt-3 font-mono md:text-lg text-subtle'>
                     <Link
@@ -43,7 +43,7 @@ export default function Home({
                     className='hover-underline-animation text-text'
                 >
                     {' '}
-                    {t('Roadmap')} &nbsp; &nbsp;
+                    {t('roadmap')} &nbsp; &nbsp;
                 </Link>
             </p>
             <NewestPost posts={posts} />
@@ -56,7 +56,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
     const { t } = useTranslation();
     return (
         <div>
-            <h3 className='mb-6 text-2xl font-bold'>{t('newestblog')}</h3>
+            <h3 className='mb-6 text-2xl font-bold'>{t('newestBlog')}</h3>
             <div className='flex flex-wrap justify-between gap-4'>
                 {posts.map((post, i) => (
                     <Link
@@ -101,7 +101,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
     const { t } = useTranslation('common');
     return (
         <div className='flex flex-col'>
-            <h3 className='mb-6 text-2xl font-bold'>{t('newestproject')}</h3>
+            <h3 className='mb-6 text-2xl font-bold'>{t('newestProject')}</h3>
             <div className='flex flex-col gap-8'>
                 {projects.map((project) => {
                     const Icon = getIconByName(project.icon);
@@ -137,7 +137,6 @@ function NewestProject({ projects }: { projects: Project[] }) {
 }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-    console.log('localelocale', locale);
     const posts = allPosts
         .filter((post) => post.draft !== true && post.lang === locale)
         .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))

@@ -92,7 +92,7 @@ export default function LanguageChange() {
                                         onClick={closeModal}
                                         className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
                                     >
-                                        {t('VN')}
+                                        {t('vn')}
                                     </Link>
                                 </div>
 
@@ -103,7 +103,7 @@ export default function LanguageChange() {
                                         onClick={closeModal}
                                         className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
                                     >
-                                        {t('JP')}
+                                        {t('jp')}
                                     </Link>
                                 </div>
                             </div>

@@ -40,7 +40,7 @@ export default function ListProjectLayout({
                             value={search}
                             onChange={(e) => setsearch(e.target.value)}
                             type='text'
-                            placeholder={t('Search')}
+                            placeholder={t('search')}
                             className='block w-full px-4 py-2 border rounded-md border-hightlight-med bg-surface focus:ring-rose focus:border-rose'
                         />
                         <svg

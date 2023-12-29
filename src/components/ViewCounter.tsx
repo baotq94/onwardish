@@ -25,7 +25,7 @@ export default function ViewCounter({
 
     return (
         <span>
-            {views.valueOf() > 0 ? views.toLocaleString() : t('notviewyet')}{' '}
+            {views.valueOf() > 0 ? views.toLocaleString() : t('noView')}{' '}
             {t('view')}
         </span>
     );

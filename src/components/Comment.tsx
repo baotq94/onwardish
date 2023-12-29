@@ -5,7 +5,6 @@ import { useCallback, useEffect } from 'react';
 export default function Comment() {
     const { theme } = useTheme();
 
-    console.log('theme', theme);
     const COMMENTS_ID = 'comments-container';
 
     const LoadComments = useCallback(() => {

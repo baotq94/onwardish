@@ -12,7 +12,7 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
     return (
         <>
             <NextSeo title='Blog' description='allBlog' />
-            <ListPostLayout posts={posts} name={t('Blog')} />
+            <ListPostLayout posts={posts} name={t('blog')} />
         </>
     );
 }

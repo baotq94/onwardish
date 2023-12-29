@@ -59,7 +59,7 @@ module.exports = {
                             borderRadius: theme('borderRadius.lg'),
                         },
                         code: {
-                            color: theme('colors.pine'),
+                            color: theme('colors.rose'),
                             background: 'rgb(38 35 58)',
                             padding: '0.25rem 0.4rem',
                             borderRadius: '0.25rem',

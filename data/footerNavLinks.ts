@@ -1,6 +1,6 @@
 const footerNavLinks = [
-    { id: 1, href: '/policy', title: 'Term' },
-    { id: 2, href: '/term', title: 'Policy' },
+    { id: 1, href: '/policy', title: 'policy' },
+    { id: 2, href: '/term', title: 'term' },
 ];
 
 export default footerNavLinks;
