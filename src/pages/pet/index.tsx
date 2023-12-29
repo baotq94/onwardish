@@ -12,7 +12,7 @@ export default function ProjectPage({ projects }: { projects: Project[] }) {
     return (
         <>
             <NextSeo title='Pet' description='allPets' />
-            <ListProjectLayout projects={projects} name={t('Pet')} />
+            <ListProjectLayout projects={projects} name={t('pet')} />
         </>
     );
 }

@@ -41,7 +41,7 @@ export default function CommentForm({
             <textarea
                 className='flex w-full max-h-40 p-3 border border-gray-400 rounded resize-y bg-gray-200 bg-opacity-0 text-900 placeholder-gray-500 focus:outline-none focus:border-gray-600'
                 rows={2}
-                placeholder={session ? t('AlreadyLogin') : t('NotLoginYet')}
+                placeholder={session ? t('alreadyLogin') : t('notLoginYet')}
                 onChange={(e) => handleChange(e)}
                 value={text}
                 disabled={!session}
@@ -62,7 +62,7 @@ export default function CommentForm({
                                     signOut();
                                 }}
                             >
-                                {t('Logout')}
+                                {t('logout')}
                             </Link>
                             <button
                                 className='py-2 px-4 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
@@ -72,7 +72,7 @@ export default function CommentForm({
                                 }}
                                 disabled={isSubmitting}
                             >
-                                {t('Comment')}
+                                {t('comment')}
                             </button>
                         </div>
                         <div className=''>
@@ -99,7 +99,7 @@ export default function CommentForm({
                             )}
                             &nbsp;&nbsp;
                             <span className='hidden md:inline-block'>
-                                {t('logininfo')}&nbsp;
+                                {t('loginInfo')}&nbsp;
                             </span>
                             <span className='text-sm md:text-lg text-rose'>
                                 {session.user?.name}
@@ -120,7 +120,7 @@ export default function CommentForm({
                             signIn();
                         }}
                     >
-                        {t('Login')}
+                        {t('login')}
                     </Link>
                 )}
             </div>
