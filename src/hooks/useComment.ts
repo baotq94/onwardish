@@ -20,7 +20,21 @@ export default function useComments() {
         try {
             e.preventDefault();
 
+            // empty comment is not allowed
             if (text === '') return;
+
+            // XSS prevent
+            // any html tag including <script>
+            const htmlTagPattern = /<[^>]*>/;
+            // any script tag uppercase and lowercase
+            const scriptTagPattern = /<\s*script[^>]*>.*?<\s*\/\s*script\s*>/i;
+
+            if (htmlTagPattern.test(text) || scriptTagPattern.test(text)) {
+                alert(
+                    'Chứa ký tự không cho phép \nNếu bạn là hacker lỏ, tha cho mình đi blog mình viết chơi thôi chưa làm secure layer :(',
+                );
+                return;
+            }
 
             const user_email = session?.user?.email || '';
             const user_name = session?.user?.name || '';
