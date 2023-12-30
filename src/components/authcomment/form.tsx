@@ -87,8 +87,6 @@ export default function CommentForm({
                                     }
                                 />
                             ) : (
-                                // Render a placeholder or null
-                                // For example, you can render a default avatar image:
                                 <Avatar
                                     className='h-full w-[25px] md:w-[32px]'
                                     style={{
