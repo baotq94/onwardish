@@ -31,7 +31,7 @@ export default async function createComments(
                 url,
                 text,
                 user_id,
-                user
+                user,
             },
         });
 

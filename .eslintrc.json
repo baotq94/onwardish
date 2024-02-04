@@ -9,7 +9,8 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
-        "prettier"
+        "prettier",
+        "next"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
