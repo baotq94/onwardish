@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Comment, User } from './types';
 import clearUrl from './clearUrl';
 import prisma from './prisma';
 
@@ -22,40 +21,8 @@ export default async function fetchComment(
             },
         });
 
-        // Fetch user information based on user_id
-        const commentsWithUserInfo = await Promise.all(
-            rawComments.map(async (rawComment) => {
-                let user = await prisma.user.findUnique({
-                    where: {
-                        email: rawComment.user_email,
-                    },
-                });
-
-                // If user is not found by email, try finding by name
-                if (!user && rawComment.user_name) {
-                    user = await prisma.user.findFirst({
-                        where: {
-                            name: rawComment.user_name,
-                        },
-                    });
-                }
-
-                const comment: Comment = {
-                    comment_id: rawComment.comment_id,
-                    created_at: rawComment.created_at,
-                    user_email: rawComment.user_email,
-                    url: rawComment.url,
-                    text: rawComment.text,
-                    user_name: rawComment.user_name, // Type assertion
-                };
-
-                return comment;
-            }),
-        );
-
-        return res.status(200).json(commentsWithUserInfo.reverse());
+        return res.status(200).json(rawComments.reverse());
     } catch (error) {
-        console.log(error);
         return res.status(400).json({ message: 'Unexpected error occurred.' });
     }
 }

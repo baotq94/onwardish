@@ -13,16 +13,16 @@ export default async function deleteComments(
         throw new Error('Referer header is missing or not a valid string.');
     }
 
-    const { comment_id } = req.body;
+    const { id } = req.body;
 
-    if (!comment_id) {
+    if (!id) {
         return res.status(400).json({ message: 'Missing comment parameter.' });
     }
 
     try {
         await prisma.comment.delete({
             where: {
-                comment_id,
+                id,
             },
         });
 
