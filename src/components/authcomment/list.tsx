@@ -2,6 +2,7 @@ import distanceToNow from 'src/lib/dateRelative';
 import { Comment } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import Logo from '../logo';
+import Image from 'next/image';
 
 type CommentListProps = {
     comments?: Comment[];
@@ -15,16 +16,15 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
         <div className='space-y-6 mt-10'>
             {comments &&
                 comments.map((comment) => {
-                    
-                    const isAuthor = session?.user && session.user.id === comment.id;
-                    
+                    const isAuthor =
+                        session?.user && session.user.id === comment.id;
                     return (
                         <div key={comment.id} className='flex space-x-4'>
                             <div className='flex-shrink-0 fill-text'>
-                                {comment.user ? (
-                                    <img
+                                {comment.user?.image ? (
+                                    <Image
                                         src={comment.user.image}
-                                        alt={comment.user.name}
+                                        alt={comment.user.name || ''}
                                         width={40}
                                         height={40}
                                         className='rounded-full fill-text'
