@@ -5,13 +5,11 @@ import Logo from '../logo';
 
 type CommentListProps = {
     comments?: Comment[];
-    onDelete: (comment_id: string) => Promise<void>;
+    onDelete: (id: string) => Promise<void>;
 };
 
 export default function CommentList({ comments, onDelete }: CommentListProps) {
     const { data: session } = useSession();
-
-    console.log(session, comments);
 
     return (
         <div className='space-y-6 mt-10'>
@@ -19,17 +17,17 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                 comments.map((comment) => {
                     const isAuthor =
                         session?.user &&
-                        session.user.email === comment.user_email;
+                        session.user.id === comment.id;
                     return (
                         <div
-                            key={comment.created_at}
+                            key={comment.id}
                             className='flex space-x-4'
                         >
                             <div className='flex-shrink-0 fill-text'>
-                                {comment.user_image ? (
+                                {comment.user ? (
                                     <img
-                                        src={comment.user_image}
-                                        alt={comment.user_name}
+                                        src={comment.user.image}
+                                        alt={comment.user.name}
                                         width={40}
                                         height={40}
                                         className='rounded-full fill-text'
@@ -41,7 +39,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
 
                             <div className='flex-grow'>
                                 <div className='flex space-x-2'>
-                                    <b>{comment.user_name}</b>
+                                    <b>{comment.user?.name}</b>
                                     <time className='text-gray-400'>
                                         {distanceToNow(
                                             Number(comment.created_at),
@@ -51,7 +49,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                                         <button
                                             className='text-gray-400 hover:text-red-500'
                                             onClick={() =>
-                                                onDelete(comment.comment_id)
+                                                onDelete(comment.id)
                                             }
                                             aria-label='Close'
                                         >

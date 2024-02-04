@@ -1,18 +1,18 @@
 //table type
 
 export type Views = {
+    id: string;
     slug: string;
     count: number;
 };
 
 export type Comment = {
-    comment_id: string;
+    id: string;
     created_at: string;
     url: string;
     text: string;
-    user_email: string;
-    user_name: string;
-    user_image?: string;
+    user_id: string;
+    user?: User;
 };
 
 export type Account = {

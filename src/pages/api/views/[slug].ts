@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
+import { nanoid } from 'nanoid';
 
 export default async function handler(
     req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async function handler(
             const newOrUpdatedViews = await prisma.views.upsert({
                 where: { slug },
                 create: {
+                    id: nanoid(),
                     slug,
                 },
                 update: {

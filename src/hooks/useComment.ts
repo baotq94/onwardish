@@ -1,4 +1,4 @@
-import type { Comment } from '../lib/types';
+import { Comment } from '../lib/types';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { useSession } from 'next-auth/react';
@@ -31,26 +31,25 @@ export default function useComments() {
 
             if (htmlTagPattern.test(text) || scriptTagPattern.test(text)) {
                 alert(
-                    'Chứa ký tự không cho phép \nNếu bạn là hacker lỏ, tha cho mình đi blog mình viết chơi thôi chưa làm secure layer :(',
+                    'Chứa ký tự không cho phép',
                 );
                 return;
             }
 
-            const user_email = session?.user?.email || '';
-            const user_name = session?.user?.name || '';
-            const token = '';
+            const user = session?.user;
+            const user_id = session?.user.id;
 
             const requestBody = {
                 text,
-                user_email,
-                user_name,
+                user_id,
+                user,
             };
 
             await fetch('/api/comment/', {
                 method: 'POST',
                 body: JSON.stringify(requestBody),
                 headers: {
-                    Authorization: token,
+                    Authorization: '',
                     'Content-Type': 'application/json',
                 },
             });
@@ -61,13 +60,13 @@ export default function useComments() {
         }
     };
 
-    const onDelete = async (comment_id: string) => {
+    const onDelete = async (id: string) => {
         const token = '';
 
         try {
             await fetch('/api/comment/', {
                 method: 'DELETE',
-                body: JSON.stringify({ comment_id }),
+                body: JSON.stringify({ id }),
                 headers: {
                     Authorization: token,
                     'Content-Type': 'application/json',
