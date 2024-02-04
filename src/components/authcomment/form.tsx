@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Avatar } from 'antd';
+import Image from 'next/image';
 
 type CommentFormProps = {
     text: string;
@@ -80,7 +81,7 @@ export default function CommentForm({
                                 <Avatar
                                     className='h-full w-[25px] md:w-[32px]'
                                     src={
-                                        <img
+                                        <Image
                                             src={session.user.image}
                                             alt='avatar'
                                         />
