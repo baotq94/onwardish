@@ -30,9 +30,7 @@ export default function useComments() {
             const scriptTagPattern = /<\s*script[^>]*>.*?<\s*\/\s*script\s*>/i;
 
             if (htmlTagPattern.test(text) || scriptTagPattern.test(text)) {
-                alert(
-                    'Chứa ký tự không cho phép',
-                );
+                alert('Chứa ký tự không cho phép');
                 return;
             }
 

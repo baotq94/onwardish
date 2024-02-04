@@ -15,14 +15,11 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
         <div className='space-y-6 mt-10'>
             {comments &&
                 comments.map((comment) => {
-                    const isAuthor =
-                        session?.user &&
-                        session.user.id === comment.id;
+                    
+                    const isAuthor = session?.user && session.user.id === comment.id;
+                    
                     return (
-                        <div
-                            key={comment.id}
-                            className='flex space-x-4'
-                        >
+                        <div key={comment.id} className='flex space-x-4'>
                             <div className='flex-shrink-0 fill-text'>
                                 {comment.user ? (
                                     <img
@@ -48,9 +45,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
                                     {isAuthor && (
                                         <button
                                             className='text-gray-400 hover:text-red-500'
-                                            onClick={() =>
-                                                onDelete(comment.id)
-                                            }
+                                            onClick={() => onDelete(comment.id)}
                                             aria-label='Close'
                                         >
                                             <svg
