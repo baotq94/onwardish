@@ -73,7 +73,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
                             </div>
                             <div>
                                 <div className='text-subtle'>
-                                    <ViewCounter slug={post.slug} />
+                                    <ViewCounter path={`/blog/${post.slug}`} />
                                 </div>
                                 <div>
                                     {moment(post.date)
@@ -117,7 +117,7 @@ function NewestProject({ projects }: { projects: Project[] }) {
                                 <div>{project.title}</div>
                                 <p className='text-subtle'>{project.summary}</p>
                                 <div className='text-subtle'>
-                                    <ViewCounter slug={project.slug} />
+                                    <ViewCounter path={`/pet/${project.slug}`} />
                                 </div>
                             </div>
                         </Link>

@@ -78,7 +78,7 @@ export default function ListPostLayout({
                                     </time>
                                 </dd>
                                 <div className='font-medium leading-6 text-muted'>
-                                    <ViewCounter slug={post.slug} />
+                                    <ViewCounter path={`/blog/${post.slug}`} />
                                 </div>
                             </dl>
                             <div className='space-y-3 xl:col-span-3'>

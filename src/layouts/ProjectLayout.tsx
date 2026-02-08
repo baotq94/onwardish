@@ -92,7 +92,7 @@ export default function ProjectLayout({
                         <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
                             {formatTime(Math.ceil(project.readingTime.minutes))}
                             {` • `}
-                            <ViewCounter slug={project.slug} update />
+                            <ViewCounter path={`/pet/${project.slug}`} update />
                         </p>
                     </div>
                     <div className='flex flex-wrap gap-3 mt-4'>

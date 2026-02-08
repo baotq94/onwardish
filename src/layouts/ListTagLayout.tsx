@@ -79,7 +79,7 @@ export default function ListTagLayout({
                                     </time>
                                 </dd>
                                 <div className='font-medium leading-6 text-muted'>
-                                    <ViewCounter slug={postnproject.slug} />
+                                    <ViewCounter path={`/blog/${postnproject.slug}`} />
                                 </div>
                             </dl>
                             <div className='space-y-3 xl:col-span-3'>

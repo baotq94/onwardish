@@ -10,6 +10,7 @@ import seo from 'src/seo.config';
 import 'src/styles/globals.css';
 import 'src/styles/prism.css';
 import LayoutWrapper from '../components/LayoutWrapper';
+import GoatCounter from 'src/components/GoatCounter';
 import { ConfigProvider } from 'antd';
 import theme from '../lib/themeConfig';
 
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                 </ConfigProvider>
                 <Analytics />
+                <GoatCounter />
                 <SocialProfileJsonLd
                     type='Person'
                     name={siteMetadata.author}

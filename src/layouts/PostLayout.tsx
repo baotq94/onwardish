@@ -92,7 +92,7 @@ export default function PostLayout({
                         <p className='mt-2 text-sm text-subtle min-w-32 md:mt-0'>
                             {formatTime(Math.ceil(post.readingTime.minutes))}
                             {` • `}
-                            <ViewCounter slug={post.slug} update />
+                            <ViewCounter path={`/blog/${post.slug}`} update />
                         </p>
                     </div>
                     <div className='flex flex-wrap gap-3 mt-4'>
