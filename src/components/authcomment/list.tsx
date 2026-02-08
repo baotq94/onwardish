@@ -17,7 +17,7 @@ export default function CommentList({ comments, onDelete }: CommentListProps) {
             {comments &&
                 comments.map((comment) => {
                     const isAuthor =
-                        session?.user && session.user.id === comment.id;
+                        session?.user && session.user.id === comment.user_id;
                     return (
                         <div key={comment.id} className='flex space-x-4'>
                             <div className='flex-shrink-0 fill-text'>

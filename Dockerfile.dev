@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1.5
+FROM node:20-alpine
+WORKDIR /app
+
+ARG DATABASE_URL=postgresql://postgres:postgres@db:5432/blog2023?schema=public
+ENV DATABASE_URL=$DATABASE_URL
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+
+EXPOSE 3000
+CMD ["npm", "run", "dev"]

@@ -19,9 +19,15 @@ export default async function fetchComment(
             where: {
                 url,
             },
+            include: {
+                user: true,
+            },
+            orderBy: {
+                created_at: 'desc',
+            },
         });
 
-        return res.status(200).json(rawComments.reverse());
+        return res.status(200).json(rawComments);
     } catch (error) {
         return res.status(400).json({ message: 'Unexpected error occurred.' });
     }
