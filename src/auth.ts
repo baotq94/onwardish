@@ -1,12 +1,12 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import prisma from 'src/lib/prisma';
+import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import prisma from 'src/lib/prisma';
+import type { NextAuthConfig } from 'next-auth';
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
     adapter: PrismaAdapter(prisma) as any,
-    // https://next-auth.js.org/configuration/providers/oauth
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_ID as string,
@@ -32,7 +32,9 @@ export const authOptions: NextAuthOptions = {
             if (token) {
                 session.user.id = token.id as string;
                 session.user.name = token.name;
-                session.user.email = token.email;
+                if (typeof token.email === 'string') {
+                    session.user.email = token.email;
+                }
             }
 
             return session;
@@ -40,4 +42,4 @@ export const authOptions: NextAuthOptions = {
     },
 };
 
-export default NextAuth(authOptions);
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
