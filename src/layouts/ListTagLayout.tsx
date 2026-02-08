@@ -1,4 +1,4 @@
-import { Post } from 'contentlayer/generated';
+import type { Post } from 'src/lib/content-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import Link from 'next/link';
@@ -88,7 +88,6 @@ export default function ListTagLayout({
                                         <Link
                                             href={`/blog/${postnproject.slug}`}
                                             className='text-text'
-                                            legacyBehavior
                                         >
                                             {postnproject.title}
                                         </Link>

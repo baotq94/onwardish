@@ -1,4 +1,4 @@
-import { Project } from 'contentlayer/generated';
+import type { Project } from 'src/lib/content-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import Link from 'next/link';
@@ -87,7 +87,6 @@ export default function ListProjectLayout({
                                         <Link
                                             href={`/pet/${project.slug}`}
                                             className='text-text'
-                                            legacyBehavior
                                         >
                                             {project.title}
                                         </Link>
