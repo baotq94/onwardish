@@ -88,7 +88,6 @@ export default function ListTagLayout({
                                         <Link
                                             href={`/blog/${postnproject.slug}`}
                                             className='text-text'
-                                            legacyBehavior
                                         >
                                             {postnproject.title}
                                         </Link>

@@ -1,13 +1,51 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import { IoLanguage } from 'react-icons/io5';
-import { Dialog, Transition } from '@headlessui/react';
-import Link from 'next/link';
+import {
+    Dialog,
+    DialogBackdrop,
+    DialogPanel,
+    Transition,
+} from '@headlessui/react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { contentManifest } from 'src/generated/content-manifest';
 
-export default function LanguageChange() {
-    const { t } = useTranslation();
+const supportedLocales = ['vi', 'ja'] as const;
+type SupportedLocale = (typeof supportedLocales)[number];
+
+type Manifest = {
+    posts: Partial<Record<SupportedLocale, string[]>>;
+    projects: Partial<Record<SupportedLocale, string[]>>;
+    pages: Partial<Record<SupportedLocale, string[]>>;
+    tags: Partial<Record<SupportedLocale, string[]>>;
+};
+
+const manifest = contentManifest as Manifest;
+
+const normalizeLocale = (value: string): SupportedLocale => {
+    const short = value.split('-')[0];
+    return short === 'ja' ? 'ja' : 'vi';
+};
+
+type LanguageChangeProps = {
+    isHovered?: boolean;
+    onHoverStart?: () => void;
+    onHoverEnd?: () => void;
+};
+
+export default function LanguageChange({
+    isHovered,
+    onHoverStart,
+    onHoverEnd,
+}: LanguageChangeProps) {
+    const { t, i18n } = useTranslation();
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+    const [hoveredLocale, setHoveredLocale] = useState<string | null>(null);
+    const currentLocale = normalizeLocale(
+        router.locale ?? i18n.language ?? 'vi',
+    );
 
     const openModal = () => {
         setIsOpen(true);
@@ -17,35 +55,99 @@ export default function LanguageChange() {
         setIsOpen(false);
     };
 
+    const changeLocale = async (locale: SupportedLocale) => {
+        if (locale === currentLocale) {
+            closeModal();
+            return;
+        }
+        const slugParam = router.query.slug;
+        const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
+        const listFor = (key: keyof Manifest, lang: SupportedLocale) =>
+            manifest[key]?.[lang] ?? [];
+        const hasSlug = (
+            key: 'posts' | 'projects' | 'pages',
+            value?: string,
+        ) => !!value && listFor(key, locale).includes(value);
+        const hasTag = (value?: string) =>
+            !!value && listFor('tags', locale).includes(value);
+
+        let targetPathname = router.pathname;
+
+        if (router.pathname === '/blog/[slug]' && !hasSlug('posts', slug)) {
+            targetPathname = '/';
+        } else if (
+            router.pathname === '/pet/[slug]' &&
+            !hasSlug('projects', slug)
+        ) {
+            targetPathname = '/';
+        } else if (router.pathname === '/[slug]' && !hasSlug('pages', slug)) {
+            targetPathname = '/';
+        } else if (router.pathname === '/tag/[slug]' && !hasTag(slug)) {
+            targetPathname = '/';
+        }
+
+        await router.push(
+            {
+                pathname: targetPathname,
+                query: targetPathname === '/' ? {} : router.query,
+            },
+            undefined,
+            { locale },
+        );
+        closeModal();
+    };
+
+    const activeLocale = hoveredLocale ?? currentLocale;
+    const optionClass = (locale: string) =>
+        `inline-block w-5/6 py-2 px-2 m-3 rounded border transition ${
+            activeLocale === locale
+                ? 'border-iris bg-overlay text-text'
+                : 'border-muted text-subtle hover:border-iris hover:text-text hover:bg-overlay'
+        }`;
+
     return (
         <div className='flex items-center justify-center'>
             <button
                 aria-label='Switch language'
                 type='button'
                 onClick={openModal}
-                className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay outline-none'
+                onPointerEnter={onHoverStart}
+                onPointerLeave={onHoverEnd}
+                className='relative flex items-center justify-center ml-1 p-1 md:p-4 rounded-md text-text outline-none'
             >
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                    >
-                        <IoLanguage />
-                    </motion.div>
-                </AnimatePresence>
+                {isHovered ? (
+                    <motion.span
+                        layoutId='nav-hover'
+                        className='absolute inset-0 z-0 w-full h-full rounded-md bg-overlay pointer-events-none'
+                        transition={{
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 40,
+                        }}
+                    />
+                ) : null}
+                <span className='relative z-10'>
+                    <IoLanguage />
+                </span>
             </button>
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog
                     as='div'
-                    className='fixed inset-0 z-10 flex items-center justify-center overflow-y-auto'
+                    className='fixed inset-0 z-50 flex items-center justify-center overflow-y-auto'
                     onClose={closeModal}
                 >
-                    <div
-                        className='fixed inset-0 bg-black opacity-30'
-                        onClick={closeModal}
-                    />
+                    <Transition.Child
+                        as={Fragment}
+                        enter='transition ease-out duration-300'
+                        enterFrom='opacity-0'
+                        enterTo='opacity-100'
+                        leave='transition ease-in duration-200'
+                        leaveFrom='opacity-100'
+                        leaveTo='opacity-0'
+                    >
+                        <DialogBackdrop className='fixed inset-0 bg-black/30' />
+                    </Transition.Child>
 
                     <Transition.Child
                         as={Fragment}
@@ -56,7 +158,7 @@ export default function LanguageChange() {
                         leaveFrom='opacity-100 scale-100'
                         leaveTo='opacity-0 scale-95'
                     >
-                        <div className='dialog-box rounded-lg p-4 shadow-xl'>
+                        <DialogPanel className='dialog-box rounded-lg p-4 shadow-xl relative z-10'>
                             <div className='w-full flex justify-between items-center pb-4 border-b'>
                                 <h3 className='text-lg font-medium leading-6'>
                                     {t('language')}
@@ -86,28 +188,38 @@ export default function LanguageChange() {
                                 style={{ minWidth: '300px' }}
                             >
                                 <div className='flex-1'>
-                                    <Link
-                                        href='/'
-                                        locale='vi'
-                                        onClick={closeModal}
-                                        className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                                    <button
+                                        type='button'
+                                        onClick={() => changeLocale('vi')}
+                                        onPointerEnter={() =>
+                                            setHoveredLocale('vi')
+                                        }
+                                        onPointerLeave={() =>
+                                            setHoveredLocale(null)
+                                        }
+                                        className={optionClass('vi')}
                                     >
                                         {t('vn')}
-                                    </Link>
+                                    </button>
                                 </div>
 
                                 <div className='flex-1'>
-                                    <Link
-                                        href='/'
-                                        locale='ja'
-                                        onClick={closeModal}
-                                        className='inline-block w-5/6 py-2 px-2 m-3 rounded border border-gray-400 bg-opacity-0 text-600 hover:border-opacity-60 hover:border-gray-800 hover:text-800 hover:bg-overlay'
+                                    <button
+                                        type='button'
+                                        onClick={() => changeLocale('ja')}
+                                        onPointerEnter={() =>
+                                            setHoveredLocale('ja')
+                                        }
+                                        onPointerLeave={() =>
+                                            setHoveredLocale(null)
+                                        }
+                                        className={optionClass('ja')}
                                     >
                                         {t('jp')}
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        </DialogPanel>
                     </Transition.Child>
                 </Dialog>
             </Transition>
