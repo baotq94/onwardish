@@ -1,4 +1,4 @@
-import { allPosts, allProjects } from 'contentlayer/generated';
+import { allPosts, allProjects } from 'src/lib/content';
 
 export type Tag = {
     name: string;

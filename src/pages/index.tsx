@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
-import { pick } from 'contentlayer/utils';
+import { allPosts, allProjects } from 'src/lib/content';
+import type { Post, Project } from 'src/lib/content-types';
+import { pick } from 'src/lib/pick';
 import moment from 'moment';
 import { timeLocale } from 'src/lib/timeLocale';
 import Link from 'next/link';

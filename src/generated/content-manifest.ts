@@ -1,0 +1,52 @@
+/* eslint-disable */
+export const contentManifest = {
+    "posts": {
+        "ja": [
+            "blog-tutorial",
+            "ddd",
+            "itpassport-cert"
+        ],
+        "vi": [
+            "aws-saa-c03-cert",
+            "blog-tutorial",
+            "books-2023",
+            "books-in-2024",
+            "cheapest-sim-cards",
+            "drive-cert",
+            "fe-cert",
+            "itpassport-cert",
+            "n1-how-hard-it-is"
+        ]
+    },
+    "projects": {
+        "vi": [
+            "e-commerce"
+        ]
+    },
+    "pages": {
+        "ja": [
+            "about",
+            "policy",
+            "roadmap",
+            "term"
+        ],
+        "vi": [
+            "about",
+            "policy",
+            "roadmap",
+            "term"
+        ]
+    },
+    "tags": {
+        "ja": [
+            "IT"
+        ],
+        "vi": [
+            "IT",
+            "Sách",
+            "cuộc sống",
+            "project",
+            "tiếng Nhật"
+        ]
+    }
+};

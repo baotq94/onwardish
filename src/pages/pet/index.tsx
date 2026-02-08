@@ -1,6 +1,7 @@
 import moment from 'moment';
-import { allProjects, Project } from 'contentlayer/generated';
-import { pick } from 'contentlayer/utils';
+import { allProjects } from 'src/lib/content';
+import type { Project } from 'src/lib/content-types';
+import { pick } from 'src/lib/pick';
 import ListProjectLayout from 'src/layouts/ListProjectLayout';
 import { NextSeo } from 'next-seo';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

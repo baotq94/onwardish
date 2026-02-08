@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { allPosts, allProjects } from 'contentlayer/generated';
+import { allPosts, allProjects } from 'src/lib/content';
 import siteMetadata from 'data/siteMetadata';
 import { Feed } from 'feed';
 

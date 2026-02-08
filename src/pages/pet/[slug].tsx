@@ -1,13 +1,16 @@
-import { allProjects, Project } from 'contentlayer/generated';
+import { allProjects, projectComponents } from 'src/lib/content';
+import type { Project } from 'src/lib/content-types';
 import siteMetadata from 'data/siteMetadata';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import { NewsArticleJsonLd, NextSeo } from 'next-seo';
 import ProjectLayout from 'src/layouts/ProjectLayout';
 import components from '../../components/MDXComponents';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function ProjectPage({ project }: { project: Project }) {
-    const Component = useMDXComponent(project.body.code);
+    const Component = projectComponents[`${project.lang}/${project.slug}`];
+    if (!Component) {
+        return null;
+    }
     return (
         <ProjectLayout project={project}>
             <SEO project={project} />
@@ -64,10 +67,12 @@ function SEO({ project }: { project: Project }) {
 export async function getStaticPaths({ locales }: { locales: string[] }) {
     return {
         paths: allProjects.flatMap((p) =>
-            locales.map((locale) => ({
-                params: { slug: p.slug },
-                locale: locale,
-            })),
+            locales
+                .filter((locale) => locale === p.lang)
+                .map((locale) => ({
+                    params: { slug: p.slug },
+                    locale: locale,
+                })),
         ),
         fallback: false,
     };
@@ -80,7 +85,14 @@ export async function getStaticProps({
     params: { slug: string };
     locale: string;
 }) {
-    const project = allProjects.find((project) => project.slug === params.slug);
+    const project = allProjects.find(
+        (project) => project.slug === params.slug && project.lang === locale,
+    );
+    if (!project) {
+        return {
+            notFound: true,
+        };
+    }
     return {
         props: {
             project,
