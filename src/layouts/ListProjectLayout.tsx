@@ -87,7 +87,6 @@ export default function ListProjectLayout({
                                         <Link
                                             href={`/pet/${project.slug}`}
                                             className='text-text'
-                                            legacyBehavior
                                         >
                                             {project.title}
                                         </Link>

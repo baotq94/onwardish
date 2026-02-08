@@ -1,8 +1,18 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 
-export default function ThemeSwitch() {
+type ThemeSwitchProps = {
+    isHovered?: boolean;
+    onHoverStart?: () => void;
+    onHoverEnd?: () => void;
+};
+
+export default function ThemeSwitch({
+    isHovered,
+    onHoverStart,
+    onHoverEnd,
+}: ThemeSwitchProps) {
     const { theme, setTheme } = useTheme();
 
     function onThemeChange() {
@@ -14,18 +24,24 @@ export default function ThemeSwitch() {
                 aria-label='Switch theme'
                 type='button'
                 onClick={onThemeChange}
-                className='flex flex-col items-center justify-center w-10 h-10 ml-1 overflow-hidden font-medium duration-200 ease-in-out rounded-md sm:p-4 text-text hover:bg-overlay focus:outline-none'
+                onPointerEnter={onHoverStart}
+                onPointerLeave={onHoverEnd}
+                className='relative flex items-center justify-center ml-1 p-1 md:p-4 rounded-md text-text focus:outline-none'
             >
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        key='theme'
-                    >
-                        <BsFillMoonStarsFill />
-                    </motion.div>
-                </AnimatePresence>
+                {isHovered ? (
+                    <motion.span
+                        layoutId='nav-hover'
+                        className='absolute inset-0 z-0 w-full h-full rounded-md bg-overlay pointer-events-none'
+                        transition={{
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 40,
+                        }}
+                    />
+                ) : null}
+                <span className='relative z-10'>
+                    <BsFillMoonStarsFill />
+                </span>
             </button>
         </div>
     );

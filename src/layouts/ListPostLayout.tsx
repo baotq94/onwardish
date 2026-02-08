@@ -87,7 +87,6 @@ export default function ListPostLayout({
                                         <Link
                                             href={`/blog/${post.slug}`}
                                             className='text-text'
-                                            legacyBehavior
                                         >
                                             {post.title}
                                         </Link>
