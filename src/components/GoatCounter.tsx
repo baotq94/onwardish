@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const GOATCOUNTER_URL = process.env.NEXT_PUBLIC_GOATCOUNTER_URL || '';
+const GOATCOUNTER_ALLOW_LOCAL =
+    process.env.NEXT_PUBLIC_GOATCOUNTER_ALLOW_LOCAL === 'true';
 
 function normalizeBaseUrl(url: string) {
     return url.trim().replace(/\/+$/, '');
@@ -54,6 +56,10 @@ export default function GoatCounter() {
 
     if (!baseUrl) return null;
 
+    const extraAttrs = GOATCOUNTER_ALLOW_LOCAL
+        ? { 'data-goatcounter-settings': '{"allow_local": true}' }
+        : {};
+
     return (
         <>
             <Script id='goatcounter-init' strategy='beforeInteractive'>
@@ -61,6 +67,7 @@ export default function GoatCounter() {
             </Script>
             <Script
                 data-goatcounter={`${baseUrl}/count`}
+                {...extraAttrs}
                 src='https://gc.zgo.at/count.js'
                 strategy='afterInteractive'
             />
