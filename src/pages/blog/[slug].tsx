@@ -1,6 +1,6 @@
-import { allPosts, Post } from 'contentlayer/generated';
+import { allPosts, postComponents } from 'src/lib/content';
+import type { Post } from 'src/lib/content-types';
 import siteMetadata from 'data/siteMetadata';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import { NewsArticleJsonLd, NextSeo } from 'next-seo';
 import PostLayout from 'src/layouts/PostLayout';
 import components from '../../components/MDXComponents';
@@ -13,7 +13,10 @@ export default function BlogDetailPage({
     post: Post;
     locale: InferGetServerSidePropsType<typeof getStaticProps>;
 }) {
-    const Component = useMDXComponent(post.body.code);
+    const Component = postComponents[`${post.lang}/${post.slug}`];
+    if (!Component) {
+        return null;
+    }
     return (
         <PostLayout post={post}>
             <SEO post={post} />
@@ -70,9 +73,11 @@ function SEO({ post }: { post: Post }) {
 export async function getStaticPaths({ locales }: { locales: string[] }) {
     const paths: any = [];
     allPosts.map((p) => {
-        return locales.map((locale) => {
-            paths.push({ params: { slug: p.slug }, locale });
-        });
+        return locales
+            .filter((locale) => locale === p.lang)
+            .map((locale) => {
+                paths.push({ params: { slug: p.slug }, locale });
+            });
     });
 
     return {

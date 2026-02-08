@@ -1,4 +1,4 @@
-import { Project } from 'contentlayer/generated';
+import type { Project } from 'src/lib/content-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';

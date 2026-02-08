@@ -15,23 +15,27 @@ export default async function createComments(
         throw new Error('Referer header is missing or not a valid string.');
     }
 
-    const { text, user_id, user } = req.body;
+    const { text, user_id } = req.body;
 
     if (!text) {
         return res.status(400).json({ message: 'Missing text parameter.' });
+    }
+    if (!user_id) {
+        return res.status(401).json({ message: 'Missing user parameter.' });
     }
 
     try {
         // Use Prisma to create the comment in the database
         const createdComment = await prisma.comment.create({
-            // await prisma.comment.create({
             data: {
                 id: nanoid(),
                 created_at: Date.now().toString(),
                 url,
                 text,
                 user_id,
-                user,
+            },
+            include: {
+                user: true,
             },
         });
 

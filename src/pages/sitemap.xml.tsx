@@ -1,12 +1,6 @@
 import { GetServerSideProps } from 'next';
-import {
-    allPosts,
-    allPages,
-    allProjects,
-    Post,
-    Page,
-    Project,
-} from 'contentlayer/generated';
+import { allPosts, allPages, allProjects } from 'src/lib/content';
+import type { Post, Page, Project } from 'src/lib/content-types';
 import siteMetadata from 'data/siteMetadata';
 import { allTags, Tag } from 'src/lib/tags';
 import moment from 'moment';
