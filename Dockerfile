@@ -2,17 +2,11 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
-ARG DATABASE_URL=postgresql://postgres:postgres@localhost:5432/blog2023?schema=public
-ENV DATABASE_URL=$DATABASE_URL
-
 COPY package.json package-lock.json ./
 RUN npm ci
 
 FROM node:20-alpine AS builder
 WORKDIR /app
-
-ARG DATABASE_URL=postgresql://postgres:postgres@localhost:5432/blog2023?schema=public
-ENV DATABASE_URL=$DATABASE_URL
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
