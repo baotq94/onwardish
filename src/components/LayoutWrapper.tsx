@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -22,7 +22,7 @@ export default function LayoutWrapper({
     return (
         <motion.div className='max-w-3xl min-h-screen px-5 mx-auto '>
             <Header />
-            <AnimatePresence initial={false} exitBeforeEnter>
+            <AnimatePresence initial={false} mode='wait'>
                 <motion.div
                     key={router.asPath}
                     initial={{
@@ -62,46 +62,55 @@ function Header() {
                     </span>
                 </Link>
             </div>
-            <div className='flex items-center justify-center text-base leading-5 '>
+            <LayoutGroup id='header-nav'>
+                <div className='flex items-center justify-center text-base leading-5 '>
                 <div className='hidden sm:block'>
                     {headerNavLinks.map((link) => (
                         <Link
                             key={t(link.title)}
                             href={t(link.href)}
-                            legacyBehavior
+                            className={classNames(
+                                'p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer',
+                                {
+                                    'text-subtle font-medium':
+                                        link.href != router.asPath,
+                                    'text-text  font-bold ':
+                                        link.href == router.asPath,
+                                },
+                            )}
+                            onPointerEnter={() => sethovered(link.title)}
+                            onPointerLeave={() => sethovered(null)}
                         >
-                            <motion.span
-                                onMouseEnter={() => sethovered(link.title)}
-                                onMouseLeave={() => sethovered(null)}
-                                className={classNames(
-                                    'p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer',
-                                    {
-                                        'text-subtle font-medium':
-                                            link.href != router.asPath,
-                                        'text-text  font-bold ':
-                                            link.href == router.asPath,
-                                    },
-                                )}
-                            >
-                                <AnimatePresence>
-                                    {hovered == link.title && (
-                                        <motion.span
-                                            layoutId='hover'
-                                            className='absolute inset-0 z-0 w-full h-full rounded-md bg-overlay'
-                                        />
-                                    )}
-                                </AnimatePresence>
-                                <span className='relative z-10'>
-                                    {t(link.title)}
-                                </span>
-                            </motion.span>
+                            {hovered == link.title && (
+                                <motion.span
+                                    layoutId='nav-hover'
+                                    className='absolute inset-0 z-0 w-full h-full rounded-md bg-overlay'
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 500,
+                                        damping: 40,
+                                    }}
+                                />
+                            )}
+                            <span className='relative z-10'>
+                                {t(link.title)}
+                            </span>
                         </Link>
                     ))}
                 </div>
-                <LanguageChange />
-                <ThemeSwitch />
+                <LanguageChange
+                    isHovered={hovered === 'language'}
+                    onHoverStart={() => sethovered('language')}
+                    onHoverEnd={() => sethovered(null)}
+                />
+                <ThemeSwitch
+                    isHovered={hovered === 'theme'}
+                    onHoverStart={() => sethovered('theme')}
+                    onHoverEnd={() => sethovered(null)}
+                />
                 <MobileNav />
-            </div>
+                </div>
+            </LayoutGroup>
         </header>
     );
 }
@@ -218,21 +227,19 @@ function Footer() {
                         <Link
                             key={t(link.title)}
                             href={t(link.href)}
-                            legacyBehavior
+                            className={classNames(
+                                'p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer',
+                                {
+                                    'text-subtle font-medium':
+                                        link.href != router.asPath,
+                                    'text-text  font-bold ':
+                                        link.href == router.asPath,
+                                },
+                            )}
+                            onMouseEnter={() => sethovered(link.title)}
+                            onMouseLeave={() => sethovered(null)}
                         >
-                            <motion.span
-                                onMouseEnter={() => sethovered(link.title)}
-                                onMouseLeave={() => sethovered(null)}
-                                className={classNames(
-                                    'p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer',
-                                    {
-                                        'text-subtle font-medium':
-                                            link.href != router.asPath,
-                                        'text-text  font-bold ':
-                                            link.href == router.asPath,
-                                    },
-                                )}
-                            >
+                            <motion.span>
                                 <AnimatePresence>
                                     {hovered == link.title && (
                                         <motion.span

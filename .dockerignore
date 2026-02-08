@@ -1,0 +1,11 @@
+node_modules
+.next
+.contentlayer
+.git
+.gitignore
+.DS_Store
+.env
+.vercel
+.vscode
+npm-debug.log
+docker-compose.yml

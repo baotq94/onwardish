@@ -1,6 +1,7 @@
 import moment from 'moment';
-import { allPosts, Post } from 'contentlayer/generated';
-import { pick } from 'contentlayer/utils';
+import { allPosts } from 'src/lib/content';
+import type { Post } from 'src/lib/content-types';
+import { pick } from 'src/lib/pick';
 import ListPostLayout from 'src/layouts/ListPostLayout';
 import { NextSeo } from 'next-seo';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

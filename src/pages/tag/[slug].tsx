@@ -1,5 +1,6 @@
-import { allPosts, Post, allProjects, Project } from 'contentlayer/generated';
-import { pick } from 'contentlayer/utils';
+import { allPosts, allProjects } from 'src/lib/content';
+import type { Post, Project } from 'src/lib/content-types';
+import { pick } from 'src/lib/pick';
 import moment from 'moment';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
