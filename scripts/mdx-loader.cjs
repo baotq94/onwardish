@@ -4,14 +4,19 @@ const { createHash } = require('node:crypto');
 const { SourceMapGenerator } = require('source-map');
 const { createFormatAwareProcessors } = require('@mdx-js/mdx/internal-create-format-aware-processors');
 
-const remarkFrontmatter = require('remark-frontmatter');
-const remarkGfm = require('remark-gfm');
-const remarkMath = require('remark-math');
-const rehypeSlug = require('rehype-slug');
-const rehypeCodeTitles = require('rehype-code-titles');
-const rehypePrismPlus = require('rehype-prism-plus');
-const rehypeKatex = require('rehype-katex');
-const rehypeAutolinkHeadings = require('rehype-autolink-headings');
+const loadPlugin = (mod) =>
+    mod && typeof mod === 'object' && 'default' in mod ? mod.default : mod;
+
+const remarkFrontmatter = loadPlugin(require('remark-frontmatter'));
+const remarkGfm = loadPlugin(require('remark-gfm'));
+const remarkMath = loadPlugin(require('remark-math'));
+const rehypeSlug = loadPlugin(require('rehype-slug'));
+const rehypeCodeTitles = loadPlugin(require('rehype-code-titles'));
+const rehypePrismPlus = loadPlugin(require('rehype-prism-plus'));
+const rehypeKatex = loadPlugin(require('rehype-katex'));
+const rehypeAutolinkHeadings = loadPlugin(
+    require('rehype-autolink-headings'),
+);
 const remarkImgToJsx = require(path.join(__dirname, '..', 'src', 'lib', 'remark-img-to-jsx.cjs'));
 
 const BASE_OPTIONS = {

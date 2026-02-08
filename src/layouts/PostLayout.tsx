@@ -2,8 +2,6 @@ import type { Post } from 'src/lib/content-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
-import AuthComment from 'src/components/authcomment';
-import Comment from 'src/components/Comment';
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
@@ -105,10 +103,7 @@ export default function PostLayout({
                     {children}
                 </div>
             </article>
-            <div className='mt-10'>
-                {/* <Comment /> */}
-                <AuthComment />
-            </div>
+            <div className='mt-10' />
         </div>
     );
 }
