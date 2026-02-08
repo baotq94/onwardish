@@ -17,6 +17,30 @@ function normalizePath(path: string) {
     return withoutQuery.startsWith('/') ? withoutQuery : `/${withoutQuery}`;
 }
 
+function stripTrailingSlash(path: string) {
+    if (path === '/') return path;
+    return path.replace(/\/+$/, '');
+}
+
+function stripLocalePrefix(path: string, locales: readonly string[] = []) {
+    for (const locale of locales) {
+        const prefix = `/${locale}`;
+        if (path === prefix) return '/';
+        if (path.startsWith(`${prefix}/`)) {
+            return path.slice(prefix.length) || '/';
+        }
+    }
+    return path;
+}
+
+function isCountablePath(path: string) {
+    const trimmed = stripTrailingSlash(path);
+    return (
+        trimmed.startsWith('/blog/') ||
+        trimmed.startsWith('/pet/')
+    );
+}
+
 function countWithRetry(path: string) {
     const tryCount = () => {
         if (window.goatcounter && typeof window.goatcounter.count === 'function') {
@@ -44,7 +68,10 @@ export default function GoatCounter() {
         if (!baseUrl) return;
 
         const handleRouteChange = (url: string) => {
-            countWithRetry(normalizePath(url));
+            const normalized = normalizePath(url);
+            const checkPath = stripLocalePrefix(normalized, router.locales || []);
+            if (!isCountablePath(checkPath)) return;
+            countWithRetry(normalized);
         };
 
         handleRouteChange(router.asPath);
