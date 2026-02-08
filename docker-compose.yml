@@ -17,8 +17,8 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     environment:
-      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@db:5432/blog2023?schema=public}
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      DATABASE_URL: ${DATABASE_URL}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
     volumes:
       - .:/app
       - node_modules:/app/node_modules
