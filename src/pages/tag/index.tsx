@@ -1,6 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
-import React from 'react';
 import TagComponent from 'src/components/Tag';
 import { allTags, Tag } from 'src/lib/tags';
 import { useTranslation } from 'next-i18next';

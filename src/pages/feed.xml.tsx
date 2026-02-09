@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { allPosts, allProjects } from 'src/lib/content';
+import { allPosts } from 'src/lib/content';
 import siteMetadata from 'data/siteMetadata';
 import { Feed } from 'feed';
 
@@ -12,9 +12,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // full host url
     const posts = allPosts
         .filter((post) => post.draft !== true)
-        .sort((a, b) => b.date.localeCompare(a.date));
-    const projects = allProjects
-        .filter((project) => project.draft !== true)
         .sort((a, b) => b.date.localeCompare(a.date));
     const siteURL = siteMetadata.siteUrl;
     const author = {
@@ -48,20 +45,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             author: [author],
             contributor: [author],
             date: new Date(post.date),
-        });
-    });
-    projects.forEach((project) => {
-        const url = `${siteURL}/pet/${project.slug}`;
-        feed.addItem({
-            title: project.title,
-            id: url,
-            link: url,
-            description: project.summary,
-            content: project.summary,
-            image: project.image ? `${siteURL}${project.image}` : undefined,
-            author: [author],
-            contributor: [author],
-            date: new Date(project.date),
         });
     });
     res.setHeader('Content-Type', 'text/xml');

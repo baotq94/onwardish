@@ -36,8 +36,7 @@ function stripLocalePrefix(path: string, locales: readonly string[] = []) {
 function isCountablePath(path: string) {
     const trimmed = stripTrailingSlash(path);
     return (
-        trimmed.startsWith('/blog/') ||
-        trimmed.startsWith('/pet/')
+        trimmed.startsWith('/blog/')
     );
 }
 

@@ -22,20 +22,6 @@ export type Post = {
     readingTime: ReadingTime;
 };
 
-export type Project = {
-    title: string;
-    icon: string;
-    date: string;
-    summary: string;
-    lang: string;
-    image?: string;
-    draft?: boolean;
-    tags: string[];
-    slug: string;
-    body: Body;
-    readingTime: ReadingTime;
-};
-
 export type Page = {
     title: string;
     description: string;

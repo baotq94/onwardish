@@ -28,25 +28,6 @@ const collections = [
         ],
     },
     {
-        exportName: 'allProjects',
-        componentExportName: 'projectComponents',
-        typeName: 'Project',
-        dir: 'project',
-        manifestKey: 'projects',
-        defaults: { tags: ['Project'], draft: false },
-        required: ['title', 'date', 'summary', 'lang', 'icon'],
-        fields: [
-            'title',
-            'icon',
-            'date',
-            'summary',
-            'lang',
-            'image',
-            'draft',
-            'tags',
-        ],
-    },
-    {
         exportName: 'allPages',
         componentExportName: 'pageComponents',
         typeName: 'Page',
@@ -162,9 +143,9 @@ function toObjectLiteral(obj) {
 }
 
 function buildFile() {
-    const imports = ["import type { Post, Project, Page } from '../lib/content-types';"];
+    const imports = ["import type { Post, Page } from '../lib/content-types';"];
     const exports = [];
-    const manifest = { posts: {}, projects: {}, pages: {}, tags: {} };
+    const manifest = { posts: {}, pages: {}, tags: {} };
 
     for (const config of collections) {
         const { imports: collImports, entries, manifestItems } = buildCollection(
@@ -195,7 +176,7 @@ function buildFile() {
 
         for (const item of manifestItems) {
             addToManifest(manifest, config.manifestKey, item.lang, item.slug);
-            if (config.manifestKey === 'posts' || config.manifestKey === 'projects') {
+            if (config.manifestKey === 'posts') {
                 for (const tag of item.tags) {
                     addToManifest(manifest, 'tags', item.lang, tag);
                 }

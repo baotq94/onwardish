@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
-import { allPosts, allPages, allProjects } from 'src/lib/content';
-import type { Post, Page, Project } from 'src/lib/content-types';
+import { allPosts, allPages } from 'src/lib/content';
+import type { Post, Page } from 'src/lib/content-types';
 import siteMetadata from 'data/siteMetadata';
 import { allTags, Tag } from 'src/lib/tags';
 import moment from 'moment';
@@ -9,12 +9,10 @@ function generateSiteMap(
     host_url: string | undefined,
     {
         posts,
-        projects,
         pages,
         tags,
     }: {
         posts: Post[];
-        projects: Project[];
         pages: Page[];
         tags: Tag[];
     },
@@ -30,12 +28,6 @@ function generateSiteMap(
       </url>
     <url>
       <loc>${host_url}/blog</loc>
-      <lastmod>${date}</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-      </url>
-    <url>
-      <loc>${host_url}/pet</loc>
       <lastmod>${date}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.9</priority>
@@ -71,17 +63,6 @@ function generateSiteMap(
              })
              .join('')}
 
-          ${projects
-              .map(({ slug, date }) => {
-                  return `
-          <url>
-              <loc>${`${host_url}/pet/${slug}`}</loc>
-              <lastmod>${date}</lastmod>
-          </url>
-        `;
-              })
-              .join('')}
-       
          ${tags
              .map(({ name }) => {
                  return `
@@ -107,13 +88,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { res } = context;
     // full host url
     const posts = allPosts.filter((post) => post.draft !== true);
-    const projects = allProjects.filter((project) => project.draft !== true);
     const tags = allTags('all');
     const pages = allPages;
 
     const sitemap = generateSiteMap(siteMetadata.siteUrl, {
         posts,
-        projects,
         tags,
         pages,
     });
