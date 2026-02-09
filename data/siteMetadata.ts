@@ -1,5 +1,5 @@
 const siteMetadata = {
-    title: 'blognhatban',
+    title: 'onwardish',
     author: 'backlue',
     SEO_author: {
         first_name: 'backlue',
@@ -7,9 +7,9 @@ const siteMetadata = {
         username: 'backlue',
         gender: 'male',
     },
-    headerTitle: 'blognhatban',
-    description: 'blognhatban',
-    siteUrl: 'https://blognhatban.com',
+    headerTitle: 'onwardish',
+    description: 'onwardish',
+    siteUrl: 'https://onwardish.com',
     siteRepo: 'https://github.com/backluejapanit',
     siteLogo: '/static/images/logo.png',
     image: '/static/images/avatar.png',

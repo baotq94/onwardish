@@ -1,4 +1,4 @@
-Sitemap: https://kysunhatban.org/sitemap.xml
+Sitemap: https://onwardish.com/sitemap.xml
 
 User-agent: *
 Allow: /
