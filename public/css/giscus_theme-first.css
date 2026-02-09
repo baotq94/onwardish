@@ -34,16 +34,16 @@ main {
     --color-prettylights-syntax-brackethighlighter-angle: #6e6a86;
     --color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
     --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
-    --color-btn-text: #e0def4;
-    --color-btn-bg: #21202e;
-    --color-btn-border: rgba(205, 217, 229, 0.1);
+    --color-btn-text: #f1edf9;
+    --color-btn-bg: #3a3652;
+    --color-btn-border: rgba(205, 217, 229, 0.25);
     --color-btn-shadow: 0 0 transparent;
     --color-btn-inset-shadow: 0 0 transparent;
-    --color-btn-hover-bg: #524f67;
-    --color-btn-hover-border: #6e6a86;
-    --color-btn-active-bg: #3d444d;
-    --color-btn-active-border: #636e7b;
-    --color-btn-selected-bg: #403d52;
+    --color-btn-hover-bg: #4a4567;
+    --color-btn-hover-border: #8f8aa9;
+    --color-btn-active-bg: #454060;
+    --color-btn-active-border: #8f8aa9;
+    --color-btn-selected-bg: #4a4567;
     --color-btn-primary-text: #fff;
     --color-btn-primary-bg: #347d39;
     --color-btn-primary-border: rgba(205, 217, 229, 0.1);
@@ -56,15 +56,15 @@ main {
     --color-btn-primary-disabled-text: rgba(205, 217, 229, 0.5);
     --color-btn-primary-disabled-bg: rgba(52, 125, 57, 0.6);
     --color-btn-primary-disabled-border: rgba(205, 217, 229, 0.1);
-    --color-fg-default: #e0def4;
-    --color-fg-muted: #6e6a86;
-    --color-fg-subtle: #545d68;
-    --color-canvas-default: #191724;
+    --color-fg-default: #ffffff;
+    --color-fg-muted: #e6e3f2;
+    --color-fg-subtle: #c9c5d8;
+    --color-canvas-default: #2f2b44;
     --color-canvas-overlay: #26233a;
-    --color-canvas-inset: #1f1d2e;
-    --color-canvas-subtle: #1f1d2e;
-    --color-border-default: #524f67;
-    --color-border-muted: #1f1d2e;
+    --color-canvas-inset: #3c3857;
+    --color-canvas-subtle: #35314c;
+    --color-border-default: #e6e1f2;
+    --color-border-muted: #bcb7cf;
     --color-neutral-muted: rgba(99, 110, 123, 0.4);
     --color-accent-fg: #539bf5;
     --color-accent-emphasis: #316dca;
@@ -82,6 +82,7 @@ main {
     --color-social-reaction-bg-hover: var(--color-scale-gray-7);
     --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
     color-scheme: dark;
+    background-color: var(--color-canvas-default);
 }
 main .pagination-loader-container {
     background-image: url(https://github.com/images/modules/pulls/progressive-disclosure-line-dark.svg);
@@ -108,8 +109,31 @@ main .pagination-loader-container {
     order: 3;
 }
 .gsc-homepage-bg {
-    background-color: #1f1d2e;
+    background-color: var(--color-canvas-default);
 }
 main .gsc-loading-image {
     background-image: url(https://github.githubassets.com/images/mona-loading-dimmed.gif);
+}
+
+.gsc-comment-box,
+.gsc-comment,
+.gsc-reply-box,
+.gsc-reply {
+    border: 1px solid var(--color-border-default);
+    background: var(--color-canvas-subtle);
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.gsc-comment-box-textarea,
+.gsc-comment-box-preview,
+.gsc-comment-box textarea {
+    background: var(--color-canvas-inset);
+    border: 1px solid var(--color-border-muted);
+    border-radius: 10px;
+}
+
+.gsc-comment-box-tabs {
+    border-bottom: 1px solid var(--color-border-muted);
 }
