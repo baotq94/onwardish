@@ -2,6 +2,7 @@
 export const contentManifest = {
     "posts": {
         "ja": [
+            "best-practices",
             "blog-tutorial",
             "ddd",
             "itpassport-cert"
