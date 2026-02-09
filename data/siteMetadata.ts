@@ -1,10 +1,10 @@
 const siteMetadata = {
     title: 'onwardish',
-    author: 'backlue',
+    author: 'miles',
     SEO_author: {
-        first_name: 'backlue',
-        last_name: 'backlue',
-        username: 'backlue',
+        first_name: 'miles',
+        last_name: 'tran',
+        username: 'miles',
         gender: 'male',
     },
     headerTitle: 'onwardish',
