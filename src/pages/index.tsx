@@ -58,7 +58,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
                     >
                         <div className='flex flex-col justify-between h-full p-4 rounded-lg bg-surface '>
                             <div className='flex flex-col justify-between md:flex-row'>
-                                <h4 className='w-full mb-6 text-lg font-medium text-text md:text-lg sm:mb-10 '>
+                                <h4 className='w-full mb-6 text-lg font-medium text-text md:text-lg sm:mb-10 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden break-words leading-7'>
                                     {post.title}
                                 </h4>
                             </div>
