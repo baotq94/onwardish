@@ -94,7 +94,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
         .filter((post) => post.draft !== true && post.lang === locale)
         .map((post) => pick(post, ['slug', 'title', 'summary', 'date']))
         .sort((a, b) => moment(b.date).diff(moment(a.date)))
-        .slice(0, 3);
+        .slice(0, 6);
     return {
         props: {
             posts,
