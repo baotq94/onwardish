@@ -14,14 +14,10 @@ export const contentManifest = {
             "books-in-2024",
             "cheapest-sim-cards",
             "drive-cert",
+            "e-commerce",
             "fe-cert",
             "itpassport-cert",
             "n1-how-hard-it-is"
-        ]
-    },
-    "projects": {
-        "vi": [
-            "e-commerce"
         ]
     },
     "pages": {

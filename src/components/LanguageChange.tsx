@@ -16,7 +16,6 @@ type SupportedLocale = (typeof supportedLocales)[number];
 
 type Manifest = {
     posts: Partial<Record<SupportedLocale, string[]>>;
-    projects: Partial<Record<SupportedLocale, string[]>>;
     pages: Partial<Record<SupportedLocale, string[]>>;
     tags: Partial<Record<SupportedLocale, string[]>>;
 };
@@ -64,21 +63,14 @@ export default function LanguageChange({
         const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
         const listFor = (key: keyof Manifest, lang: SupportedLocale) =>
             manifest[key]?.[lang] ?? [];
-        const hasSlug = (
-            key: 'posts' | 'projects' | 'pages',
-            value?: string,
-        ) => !!value && listFor(key, locale).includes(value);
+        const hasSlug = (key: 'posts' | 'pages', value?: string) =>
+            !!value && listFor(key, locale).includes(value);
         const hasTag = (value?: string) =>
             !!value && listFor('tags', locale).includes(value);
 
         let targetPathname = router.pathname;
 
         if (router.pathname === '/blog/[slug]' && !hasSlug('posts', slug)) {
-            targetPathname = '/';
-        } else if (
-            router.pathname === '/pet/[slug]' &&
-            !hasSlug('projects', slug)
-        ) {
             targetPathname = '/';
         } else if (router.pathname === '/[slug]' && !hasSlug('pages', slug)) {
             targetPathname = '/';

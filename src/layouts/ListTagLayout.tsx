@@ -2,23 +2,23 @@ import type { Post } from 'src/lib/content-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
 import { timeLocale } from 'src/lib/timeLocale';
 import { useTranslation } from 'next-i18next';
 
 export default function ListTagLayout({
-    postnprojects,
+    posts,
     name,
 }: {
-    postnprojects: Post[];
+    posts: Post[];
     name: string;
 }) {
     const { t } = useTranslation();
     const [search, setsearch] = useState('');
-    const filteredPosts = postnprojects.filter((postnproject) =>
-        postnproject.title.toLowerCase().includes(search.toLowerCase()),
+    const filteredPosts = posts.filter((post) =>
+        post.title.toLowerCase().includes(search.toLowerCase()),
     );
     const time = timeLocale(t('localeTime'));
     moment.updateLocale(t('localeTime'), time);
@@ -32,7 +32,7 @@ export default function ListTagLayout({
                     </h1>
 
                     <p className='mb-4 text-subtle'>
-                        {t('beforeTList')} {postnprojects.length}{' '}
+                        {t('beforeTList')} {posts.length}{' '}
                         {t('afterTList')}
                     </p>
                     <div className='relative w-full'>
@@ -62,44 +62,44 @@ export default function ListTagLayout({
                 </div>
             </div>
             <motion.ul layout='position' transition={{ duration: 0.5 }}>
-                {filteredPosts.map((postnproject) => (
+                {filteredPosts.map((post) => (
                     <motion.li
                         layout='position'
-                        key={postnproject.slug}
+                        key={post.slug}
                         className='py-4'
                     >
                         <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
                             <dl>
                                 <dt className='sr-only'>{t('writtenDate')}</dt>
                                 <dd className='font-medium leading-6 text-subtle'>
-                                    <time dateTime={postnproject.date}>
-                                        {moment(postnproject.date)
+                                    <time dateTime={post.date}>
+                                        {moment(post.date)
                                             .locale(t('localeTime'))
                                             .format('LL')}
                                     </time>
                                 </dd>
                                 <div className='font-medium leading-6 text-muted'>
-                                    <ViewCounter path={`/blog/${postnproject.slug}`} />
+                                    <ViewCounter path={`/blog/${post.slug}`} />
                                 </div>
                             </dl>
                             <div className='space-y-3 xl:col-span-3'>
                                 <div>
                                     <h3 className='text-2xl font-bold leading-8'>
                                         <Link
-                                            href={`/blog/${postnproject.slug}`}
+                                            href={`/blog/${post.slug}`}
                                             className='text-text'
                                         >
-                                            {postnproject.title}
+                                            {post.title}
                                         </Link>
                                     </h3>
                                     <div className='flex flex-wrap gap-3 mt-2 text-sm'>
-                                        {postnproject.tags?.map((tag) => (
+                                        {post.tags?.map((tag) => (
                                             <Tag key={tag} text={tag} />
                                         ))}
                                     </div>
                                 </div>
                                 <div className='prose text-subtle'>
-                                    {postnproject.summary}
+                                    {post.summary}
                                 </div>
                             </div>
                         </article>
