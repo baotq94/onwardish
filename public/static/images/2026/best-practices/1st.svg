@@ -1,0 +1,29 @@
+<svg width="600" height="600" viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="white"></rect>
+  <title>Composite shape comparison</title>
+  <g>
+    <circle cx="25" cy="80" r="10" fill="red"></circle>
+    <circle cx="40" cy="20" r="5" fill="lime"></circle>
+    <circle cx="70" cy="60" r="8" fill="cyan"></circle>
+    <polyline points="25,80 40,20 70,60" fill="none" stroke="black"></polyline>
+  </g>
+  <g transform="translate(100, 0)">
+    <circle cx="25" cy="80" r="10" fill="red"></circle>
+    <circle cx="40" cy="20" r="5" fill="lime"></circle>
+    <circle cx="70" cy="60" r="8" fill="cyan"></circle>
+    <polyline points="25,80 40,20 70,60" fill="white" stroke="black"></polyline>
+  </g>
+  <g transform="translate(0, 100)">
+    <circle cx="25" cy="80" r="10" fill="red"></circle>
+    <circle cx="40" cy="20" r="5" fill="lime"></circle>
+    <circle cx="70" cy="60" r="8" fill="cyan"></circle>
+    <polygon points="25,80 40,20 70,60" fill="none" stroke="black"></polygon>
+  </g>
+  <g transform="translate(100, 100)">
+    <circle cx="25" cy="80" r="10" fill="red"></circle>
+    <circle cx="40" cy="20" r="5" fill="lime"></circle>
+    <circle cx="70" cy="60" r="8" fill="cyan"></circle>
+    <polygon points="25,80 40,20 70,60" fill="white" stroke="black"></polygon>
+  </g>
+</svg>
