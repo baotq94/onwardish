@@ -1,5 +1,5 @@
 const siteMetadata = {
-    title: 'onwardish',
+    title: 'Onwardish',
     author: 'miles',
     SEO_author: {
         first_name: 'miles',
@@ -7,7 +7,7 @@ const siteMetadata = {
         username: 'miles',
         gender: 'male',
     },
-    headerTitle: 'onwardish',
+    headerTitle: 'Onwardish',
     description: 'onwardish',
     siteUrl: 'https://onwardish.com',
     siteRepo: 'https://github.com/backluejapanit',
@@ -23,14 +23,14 @@ const siteMetadata = {
     },
     comment: {
         giscusConfig: {
-            repo: 'backluejapanit/blog2023',
-            repositoryId: 'R_kgDOKB1NGA',
+            repo: 'backluejapanit/onwardish-comments',
+            repositoryId: 'R_kgDORL1qbw',
             category: 'General',
-            categoryId: 'DIC_kwDOKB1NGM4CYQPS',
+            categoryId: 'DIC_kwDORL1qb84C2EpJ',
             mapping: 'pathname',
             reactions: '1',
             metadata: '0',
-            inputPosition: 'top',
+            inputPosition: 'bottom',
             lang: 'en',
         },
     },
