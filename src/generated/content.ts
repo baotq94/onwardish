@@ -351,16 +351,16 @@ export const allPages: Page[] = [
 {
     ...{
     "body": {
-        "raw": "\n**バオ**と申します.日本の関東辺りに住んでいます。\n\nプログラミングや旅行が好き (｡˃ ᵕ ˂ )⸝\n\n# このブログについて\n\n自分の執筆の趣味を楽しむ場所としてブログを始めたところで、日本での小さな出来事や体験を共有させてもらいます。 ♨♨\n\n何か質問や相談などがあれば、遠慮なくお気軽にお問い合わせしてみてくださいね。楽しいブログと素敵な日本生活について楽しんでください！ (◕‿◕) _tada_\n\n# 連絡\n\n-   メール: tranquocbao031094@gmail.com\n-   リンクトイン: [https://www.linkedin.com/in/backlueinjp/](https://www.linkedin.com/in/backlueinjp/)\n-   サイト: https://onwardish.com\n"
+        "raw": "\n**バオ**です。関東あたりに住んでいます。  \nふだんはエンジニア、休日は散歩・旅行・カフェ巡りが多めです。\n\nこのブログは、**日本での生活の小ネタ**とか、**作ってみたもの**、**学んだこと**を、気楽にメモしていく場所です。  \n（まじめ 3割、ゆるめ 7割くらいの温度感で書きます）\n\n---\n\n## このブログについて\n\n- 日本での暮らし：手続き・子育て・買い物・便利だったこと\n- ものづくり：小さいWebアプリ、開発メモ、気づき\n- 雑談：旅行、日々の発見、たまに愚痴\n\n読んでくれた人の「へぇ」とか「助かった」が1つでも増えたら嬉しいです。\n\n---\n\n## 近況\n\n平日はWeb開発してます。技術の話もたまに書きます。  \nちゃんとしたプロフィールは LinkedIn に置いてます。\n\n- LinkedIn: https://www.linkedin.com/in/backlueinjp/\n\n---\n\n## 連絡\n\n- メール: tranquocbao031094@gmail.com\n- サイト: https://onwardish.com"
     },
     "readingTime": {
-        "text": "1 min read",
-        "minutes": 0.815,
-        "time": 48900,
-        "words": 163
+        "text": "2 min read",
+        "minutes": 1.195,
+        "time": 71700,
+        "words": 239
     },
     "title": "About",
-    "description": "",
+    "description": "関東で暮らすエンジニアの雑記ブログ。たまに開発、たまに日本生活。",
     "lang": "ja"
 },
     slug: 'about',
