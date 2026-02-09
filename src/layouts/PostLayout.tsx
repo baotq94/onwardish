@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
+import Comment from 'src/components/Comment';
 import { timeLocale } from 'src/lib/timeLocale';
 import { useTranslation } from 'next-i18next';
 
@@ -103,6 +104,9 @@ export default function PostLayout({
                     {children}
                 </div>
             </article>
+            <div className='mt-10'>
+                <Comment />
+            </div>
             <div className='mt-10' />
         </div>
     );
