@@ -6,7 +6,6 @@ export default function Comment() {
     const { theme } = useTheme();
 
     const COMMENTS_ID = 'comments-container';
-    const THEME_VERSION = '3';
 
     const LoadComments = useCallback(() => {
         const {
@@ -20,15 +19,12 @@ export default function Comment() {
             inputPosition,
             lang,
         } = siteMetadata?.comment?.giscusConfig || {}; // Fallback to an empty object
-        const resolvedTheme =
-            theme === 'theme-first' || theme === 'theme-second'
-                ? theme
-                : 'theme-first';
-        const siteUrl =
-            window.location.protocol === 'https:'
-                ? window.location.origin
-                : siteMetadata.siteUrl;
-        const themeUrl = `${siteUrl}/css/giscus_${resolvedTheme}.css?v=${THEME_VERSION}`;
+        const giscusTheme =
+            theme === 'theme-second'
+                ? 'light'
+                : theme === 'theme-first'
+                  ? 'dark'
+                  : 'preferred_color_scheme';
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
         script.setAttribute('data-repo', repo);
@@ -40,7 +36,7 @@ export default function Comment() {
         script.setAttribute('data-emit-metadata', metadata);
         script.setAttribute('data-input-position', inputPosition);
         script.setAttribute('data-lang', lang);
-        script.setAttribute('data-theme', themeUrl);
+        script.setAttribute('data-theme', giscusTheme);
         script.setAttribute('crossorigin', 'anonymous');
         script.async = true;
         const comments = document.getElementById(COMMENTS_ID);
