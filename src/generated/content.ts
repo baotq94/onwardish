@@ -104,7 +104,7 @@ export const allPosts: Post[] = [
     "date": "2023-12-31",
     "summary": "Các đầu sách mình đọc năm 2023",
     "lang": "vi",
-    "image": "/static/images/2023/books-2023/1st.jpg",
+    "image": "/static/images/2023/books-in-2023/1st.jpg",
     "draft": false,
     "tags": [
         "Sách"
@@ -217,9 +217,9 @@ export const allPosts: Post[] = [
     },
     "title": "Tôi đã đọc gì trong năm 2024",
     "date": "2024-12-31",
-    "summary": "Các đầu sách tôi đọc trong năm 2024 và phần ghi chú cá nhân để cập nhật sau.",
+    "summary": "Các đầu sách tôi đã đọc trong năm 2024",
     "lang": "vi",
-    "image": "/static/images/2024/books-in-2024/1st.jpg",
+    "image": "/static/images/2024/books-in-2024/1st.webp",
     "draft": false,
     "tags": [
         "Sách"
@@ -240,9 +240,9 @@ export const allPosts: Post[] = [
     },
     "title": "Tôi đã đọc gì trong năm 2025",
     "date": "2025-12-31",
-    "summary": "Danh sách sách tôi đọc trong năm 2025, kèm cảm nhận ngắn gọn cho từng cuốn.",
+    "summary": "Việc đọc sách trong năm 2025",
     "lang": "vi",
-    "image": "/static/images/2025/books-in-2025/1st.jpg",
+    "image": "/static/images/2025/books-in-2025/1st.webp",
     "draft": false,
     "tags": [
         "Sách"
