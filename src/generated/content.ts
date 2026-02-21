@@ -280,17 +280,17 @@ export const allPosts: Post[] = [
 {
     ...{
     "body": {
-        "raw": ""
+        "raw": "\nNăm 2024, tôi quay lại với thói quen đọc sách đều đặn hơn, tập trung vào những cuốn nền tảng về tư duy, xã hội và hiệu suất.\nMục tiêu của tôi là đọc chậm hơn một chút, ghi chú kỹ hơn một chút, và áp dụng thực tế nhiều hơn một chút.\n\nSau vài cuốn về tài chính và hiệu suất, tài khoản ngân hàng của tôi chưa đổi đời, nhưng danh sách việc cần làm thì đã bớt lộn xộn đáng kể.\n\n---\n\n## Danh sách sách năm 2024\n\n### 1. Cha Giàu Cha Nghèo (Rich Dad Poor Dad) - Robert T. Kiyosaki\n\n**Tổng quan**  \nCuốn sách trình bày sự khác biệt giữa tư duy làm việc vì tiền và tư duy để tiền làm việc cho mình.\nNội dung xoay quanh các khái niệm quan trọng như tài sản, tiêu sản, dòng tiền và kỷ luật tài chính cá nhân.\nĐây là một đầu sách nhập môn phù hợp nếu muốn bắt đầu nhìn tài chính theo hướng hệ thống hơn.\n\n**Link tham khảo/mua**  \nhttps://www.amazon.com/s?k=Rich+Dad+Poor+Dad+Robert+Kiyosaki\n\n**Ghi chú cá nhân (tôi sẽ cập nhật sau)**  \n_[Viết cảm nhận của tôi ở đây]_\n\n### 2. Giết Con Chim Nhại (To Kill a Mockingbird) - Harper Lee\n\n**Tổng quan**  \nThông qua góc nhìn của trẻ nhỏ, tác phẩm phản ánh các vấn đề sâu sắc về công lý, định kiến và lòng trắc ẩn trong xã hội.\nNgôn ngữ mạch lạc, giàu hình ảnh, dễ đọc nhưng để lại dư âm dài về những câu hỏi đạo đức căn bản.\nCuốn này không dạy \"cách thành công nhanh\", nhưng nhắc rất rõ về cách làm người tử tế.\n\n**Link tham khảo/mua**  \nhttps://www.amazon.com/s?k=To+Kill+a+Mockingbird+Harper+Lee\n\n**Ghi chú cá nhân (tôi sẽ cập nhật sau)**  \n_[Viết cảm nhận của tôi ở đây]_\n\n### 3. Lược Sử Loài Người (Sapiens) - Yuval Noah Harari\n\n**Tổng quan**  \nSách đi từ lịch sử tiến hóa đến sự hình thành tôn giáo, kinh tế, quốc gia và các hệ thống niềm tin của con người.\nTác giả kết nối dữ liệu lịch sử với các câu hỏi hiện đại, giúp người đọc nhìn lại vị trí của cá nhân trong bức tranh lớn.\nĐây là cuốn sách phù hợp cho những ai muốn mở rộng góc nhìn liên ngành.\n\n**Link tham khảo/mua**  \nhttps://www.amazon.com/s?k=Sapiens+A+Brief+History+of+Humankind+Yuval+Noah+Harari\n\n**Ghi chú cá nhân (tôi sẽ cập nhật sau)**  \n_[Viết cảm nhận của tôi ở đây]_\n\n### 4. Nguyên Lý 80/20 (The 80/20 Principle) - Richard Koch\n\n**Tổng quan**  \nNội dung tập trung vào nguyên lý: phần lớn kết quả thường đến từ một phần nhỏ nguyên nhân.\nTác giả đưa ra cách ứng dụng tư duy 80/20 vào công việc, học tập, quản lý thời gian và ra quyết định.\nĐiểm giá trị của cuốn này là nhắc người đọc chọn đúng việc quan trọng thay vì chỉ làm nhiều việc.\n\n**Link tham khảo/mua**  \nhttps://www.amazon.com/s?k=The+80%2F20+Principle+Richard+Koch\n\n**Ghi chú cá nhân (tôi sẽ cập nhật sau)**  \n_[Viết cảm nhận của tôi ở đây]_\n\n---\n\n## Tổng kết\n\nDanh sách năm 2024 của tôi không dài, nhưng đủ để tạo một nhịp đọc ổn định và có tính ứng dụng.\nTôi sẽ cập nhật thêm phần cảm nhận cá nhân cho từng cuốn trong lần chỉnh sửa tiếp theo.\n"
     },
     "readingTime": {
-        "text": "0 min read",
-        "minutes": 0,
-        "time": 0,
-        "words": 0
+        "text": "3 min read",
+        "minutes": 2.71,
+        "time": 162600,
+        "words": 542
     },
-    "title": "Mình đọc gì trong năm 2024",
-    "date": "2024-01-03",
-    "summary": "Các đầu sách mình đọc năm 2024",
+    "title": "Tôi đã đọc gì trong năm 2024",
+    "date": "2024-12-31",
+    "summary": "Các đầu sách tôi đọc trong năm 2024 và phần ghi chú cá nhân để cập nhật sau.",
     "lang": "vi",
     "image": "/static/images/2024/books-in-2024/1st.jpg",
     "draft": true,
