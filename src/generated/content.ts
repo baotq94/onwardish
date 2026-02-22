@@ -107,7 +107,7 @@ export const allPosts: Post[] = [
     "image": "/static/images/2023/books-in-2023/1st.jpg",
     "draft": false,
     "tags": [
-        "Sách"
+        "sách"
     ]
 },
     slug: 'books-in-2023',
@@ -222,7 +222,7 @@ export const allPosts: Post[] = [
     "image": "/static/images/2024/books-in-2024/1st.webp",
     "draft": false,
     "tags": [
-        "Sách"
+        "sách"
     ]
 },
     slug: 'books-in-2024',
@@ -245,7 +245,7 @@ export const allPosts: Post[] = [
     "image": "/static/images/2025/books-in-2025/1st.webp",
     "draft": false,
     "tags": [
-        "Sách"
+        "sách"
     ]
 },
     slug: 'books-in-2025',

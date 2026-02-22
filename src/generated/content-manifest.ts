@@ -36,8 +36,8 @@ export const contentManifest = {
         ],
         "vi": [
             "IT",
-            "Sách",
-            "cuộc sống"
+            "cuộc sống",
+            "sách"
         ]
     }
 };
