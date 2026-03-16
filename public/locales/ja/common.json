@@ -22,6 +22,8 @@
     "login": "ログイン",
     "logout": "ログアウト",
     "comment": "コメント",
+    "loadComments": "コメントを読み込む",
+    "commentNotice": "コメントは GitHub Discussions で管理され、必要なときだけ読み込みます。",
     "notLoginYet": "この投稿にコメントするにはログインする必要があります",
     "alreadyLogin": "この投稿にコメントしませんか?",
     "beforeBList": "",

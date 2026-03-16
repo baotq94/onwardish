@@ -22,6 +22,8 @@
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "comment": "Bình luận",
+    "loadComments": "Tải bình luận",
+    "commentNotice": "Bình luận được lưu trên GitHub Discussions và chỉ được tải khi cần.",
     "notLoginYet": "Bạn cần đăng nhập để bình luận bài viết này",
     "alreadyLogin": "Để lại bình luận cho bài viết này nhé",
     "beforeBList": "Có",

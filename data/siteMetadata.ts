@@ -1,3 +1,5 @@
+import giscusConfig from './giscusConfig.json';
+
 const siteMetadata = {
     title: 'Onwardish',
     author: 'miles',
@@ -22,17 +24,7 @@ const siteMetadata = {
         googleAnalyticsId: '',
     },
     comment: {
-        giscusConfig: {
-            repo: 'backluejapanit/onwardish-comments',
-            repositoryId: 'R_kgDORL1qbw',
-            category: 'General',
-            categoryId: 'DIC_kwDORL1qb84C2EpJ',
-            mapping: 'pathname',
-            reactions: '1',
-            metadata: '0',
-            inputPosition: 'bottom',
-            lang: 'en',
-        },
+        giscusConfig,
     },
 };
 

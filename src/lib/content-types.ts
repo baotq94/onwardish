@@ -14,6 +14,7 @@ export type Post = {
     date: string;
     summary: string;
     lang: string;
+    discussionId: string;
     image?: string;
     draft?: boolean;
     tags: string[];

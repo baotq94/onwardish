@@ -6,6 +6,7 @@ import ScrollTopAndComment from 'src/components/ScrollTopAndComment';
 import Tag from 'src/components/Tag';
 import ViewCounter from 'src/components/ViewCounter';
 import Comment from 'src/components/Comment';
+import { getPostDiscussionTerm } from 'src/lib/discussions';
 import { timeLocale } from 'src/lib/timeLocale';
 import { useTranslation } from 'next-i18next';
 
@@ -58,6 +59,7 @@ export default function PostLayout({
 
     const time = timeLocale(t('localeTime'));
     moment.updateLocale(t('localeTime'), time);
+    const discussionTerm = getPostDiscussionTerm(post);
 
     return (
         <div>
@@ -105,7 +107,7 @@ export default function PostLayout({
                 </div>
             </article>
             <div className='mt-10'>
-                <Comment />
+                <Comment term={discussionTerm} />
             </div>
             <div className='mt-10' />
         </div>

@@ -6,6 +6,8 @@
         "generate:content": "node scripts/generate-content-index.mjs",
         "dev": "npm run generate:content && next dev --webpack --hostname 0.0.0.0",
         "build": "npm run generate:content && next build --webpack",
+        "discussions:plan": "node scripts/sync-giscus-discussions.mjs",
+        "discussions:sync": "node scripts/sync-giscus-discussions.mjs --write",
         "postinstall": "patch-package",
         "start": "next start",
         "lint": "next lint",
