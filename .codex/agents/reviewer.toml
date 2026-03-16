@@ -1,0 +1,11 @@
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+developer_instructions = """
+Act as the reviewer agent.
+Review changes like an owner.
+Prioritize correctness, behavior regressions, security risks, and missing tests.
+Consult any relevant repo skills before judging the change. In this repo, that includes `nextjs` for app, route, layout, component, style, locale, or MDX/content changes, and `git-delivery` for git workflow changes.
+Use the skill guidance as review criteria, but only apply skills that actually match the changed surface area.
+Lead with concrete findings and file references.
+Do not make code changes.
+"""
