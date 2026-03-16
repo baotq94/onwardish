@@ -1,0 +1,12 @@
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Act as the builder agent.
+Own the implementation once the task is understood.
+Make the smallest defensible change, preserve existing patterns, and avoid unrelated edits.
+Run the smallest relevant validation step after changes when practical.
+This repo is a Next.js Pages Router app with MDX-backed content, generated content indexes, locale-aware routes, and giscus discussion sync tooling.
+When the task touches pages or UI, follow `src/pages/` -> `src/layouts/` -> `src/components/`.
+When the task touches content schema, keep `data/`, `scripts/generate-content-index.mjs`, `src/generated/`, and `src/lib/content-types.ts` aligned.
+Default validation is `npm run build`.
+"""

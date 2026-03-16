@@ -1,27 +1,33 @@
-onwardish blog
+# Onwardish
 
-## Giscus discussions
+Onwardish is a personal publication about life, work, and learning in Japan.
 
-Posts use a stable `discussionId` frontmatter field so comment threads do not depend on the URL path.
+The site mixes practical writing and personal notes across:
+- life in Japan
+- self-learning and certifications
+- web development and small product ideas
+- books, reflection, and day-to-day observations
 
-Preview the sync plan:
+## Who it is for
 
-```bash
-GITHUB_TOKEN=YOUR_TOKEN npm run discussions:plan
-```
+Onwardish is for readers who want useful, honest writing from someone building a life and career in Japan, especially across Vietnamese and Japanese contexts.
 
-Create or migrate discussions in GitHub:
+## What readers can expect
 
-```bash
-GITHUB_TOKEN=YOUR_TOKEN npm run discussions:sync
-```
+- Clear notes from lived experience, not generic summaries
+- A mix of technical articles and everyday-life topics
+- Writing in Vietnamese and Japanese
+- A personal but practical tone
 
-Optional filters:
+## Website
 
-```bash
-GITHUB_TOKEN=YOUR_TOKEN node scripts/sync-giscus-discussions.mjs --write --lang=vi --slug=books-in-2025
-```
+- https://onwardish.com
 
-Required token access:
+## Contact
 
-- write access to Discussions for `backluejapanit/onwardish-comments`
+- Email: tranquocbao031094@gmail.com
+- LinkedIn: https://www.linkedin.com/in/backlueinjp/
+
+## For contributors and agents
+
+Repository workflow and project instructions live in `AGENTS.md`.

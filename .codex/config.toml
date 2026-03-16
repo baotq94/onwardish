@@ -1,0 +1,23 @@
+[features]
+multi_agent = true
+
+[agents]
+max_threads = 4
+max_depth = 1
+job_max_runtime_seconds = 1200
+
+[agents.builder]
+description = "Implementation-focused agent for the Next.js app, MDX content pipeline, and small targeted code changes."
+config_file = "agents/builder.toml"
+
+[agents.reviewer]
+description = "Read-only review agent focused on correctness, regressions, security, and missing tests in the Next.js and content pipeline."
+config_file = "agents/reviewer.toml"
+
+[agents.research]
+description = "Read-only research agent that traces routes, layouts, components, content generation, and discussion sync paths."
+config_file = "agents/research.toml"
+
+[agents.release-manager]
+description = "Git delivery agent for branch naming, commit splitting, generated-file awareness, and remote push planning."
+config_file = "agents/release-manager.toml"
