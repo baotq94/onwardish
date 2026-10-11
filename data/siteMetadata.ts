@@ -20,9 +20,6 @@ const siteMetadata = {
     email: 'tranquocbao031094@gmail.com',
     linkedin: 'https://www.linkedin.com/in/backlueinJP/',
 
-    analytics: {
-        googleAnalyticsId: '',
-    },
     comment: {
         giscusConfig,
     },

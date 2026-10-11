@@ -29,7 +29,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/_error.js",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
